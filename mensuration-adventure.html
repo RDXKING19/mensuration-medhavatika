@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mensuration Adventure — MedhāVatika</title>
+<meta name="description" content="Mensuration Adventure by MedhāVatika — explore interactive stages, live measurement labs, a storybook flipbook, and master perimeter, area, surface area and volume for Grade 8.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0F1E;
+  --bg-soft:#0E1530;
+  --panel:rgba(255,255,255,.045);
+  --panel-border:rgba(255,255,255,.09);
+  --panel-solid:#121A38;
+  --ink:#EAF0FF;
+  --ink-dim:#A0ADC9;
+  --ink-faint:#717C9C;
+  --amber:#F2A93B;
+  --amber-soft:#F7C876;
+  --teal:#45D9C7;
+  --rose:#F1637A;
+  --grid-line:rgba(69,217,199,.08);
+  --radius-lg:22px;
+  --radius-md:14px;
+  --radius-sm:8px;
+  --maxw:1240px;
+  --font-display:'Space Grotesk',system-ui,sans-serif;
+  --font-body:'IBM Plex Sans',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  max-width:100vw;
+  width:100%;
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{animation-duration:.001ms !important;transition-duration:.001ms !important;}}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(69,217,199,.06), transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(242,169,59,.06), transparent 45%);
+  overflow-x:hidden;
+  max-width:100vw;
+  width:100%;
+  position:relative;
+}
+img,svg{display:block;max-width:100%;height:auto;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+input[type=range]{accent-color:var(--amber);cursor:pointer;}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 24px;width:100%;box-sizing:border-box;}
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:.88rem;
+  letter-spacing:.02em;
+  color:var(--teal);
+  display:flex;align-items:center;gap:10px;
+  font-weight:600;
+}
+.eyebrow::before{content:'';width:24px;height:2px;background:var(--teal);display:inline-block;}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.01em;color:var(--ink);}
+
+/* ---------- NAV ---------- */
+.site-nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(7,12,28,.95);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  width:100%;
+}
+.nav-inner{
+  max-width:1440px;margin:0 auto;padding:8px 18px;
+  display:flex;align-items:center;gap:10px;justify-content:space-between;
+  width:100%;box-sizing:border-box;
+}
+.brand{
+  display:inline-flex;align-items:center;gap:9px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);
+  padding:4px 12px 4px 4px;border-radius:9999px;
+  text-decoration:none;transition:all .2s ease;flex-shrink:0;
+}
+.brand:hover{
+  background:rgba(255,255,255,.08);border-color:rgba(69,217,199,.45);
+}
+.brand-logo-wrap{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,#45D9C7 0%,#10B981 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.05rem;box-shadow:0 0 10px rgba(69,217,199,.4);flex-shrink:0;
+}
+.brand-text-wrap{display:flex;flex-direction:column;line-height:1.15;}
+.brand-name{font-family:var(--font-display);font-weight:700;font-size:.98rem;color:#FFF;letter-spacing:-.01em;}
+.brand-tagline{font-family:var(--font-body);font-size:.62rem;color:#A2B2D1;font-weight:500;}
+
+.nav-links{display:flex;align-items:center;gap:5px;list-style:none;flex-shrink:1;}
+.nav-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  padding:6px 11px;border-radius:9999px;
+  font-size:.81rem;font-weight:500;color:#D8E3F8;
+  text-decoration:none;transition:all .18s ease;white-space:nowrap;
+}
+.nav-pill:hover{
+  background:rgba(255,255,255,.12);border-color:rgba(69,217,199,.5);
+  color:#FFF;transform:translateY(-1px);
+}
+.nav-pill:focus-visible{
+  outline:2px solid var(--teal);outline-offset:2px;
+}
+.nav-pill.active{
+  background:rgba(69,217,199,.18);border-color:#45D9C7;
+  color:#FFF;font-weight:600;box-shadow:0 0 10px rgba(69,217,199,.3);
+}
+.nav-badge{
+  font-family:var(--font-mono);font-size:.58rem;font-weight:800;
+  letter-spacing:.04em;padding:1px 5px;border-radius:4px;
+  text-transform:uppercase;line-height:1.1;
+}
+.badge-book,.badge-game{
+  background:rgba(242,169,59,.28);color:#FFE082;
+  border:1px solid rgba(242,169,59,.6);
+}
+
+.nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.lang-btn{
+  font-size:.82rem;font-weight:600;color:#EAF0FF;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
+  padding:7px 12px;border-radius:9999px;
+  display:inline-flex;align-items:center;gap:5px;
+  cursor:pointer;transition:all .18s ease;white-space:nowrap;
+}
+.lang-btn:hover{
+  background:rgba(255,255,255,.12);border-color:rgba(69,217,199,.5);color:#FFF;
+}
+.lang-btn:focus-visible{
+  outline:2px solid var(--teal);outline-offset:2px;
+}
+.lang-btn .chevron{font-size:.68rem;opacity:.8;}
+
+.demo-btn{
+  font-size:.86rem;font-weight:700;color:#FFF;
+  background:linear-gradient(135deg,#00B8FF 0%,#0077FF 60%,#0055EE 100%);
+  border:1px solid rgba(255,255,255,.3);
+  box-shadow:0 4px 16px rgba(0,132,255,.55), inset 0 1px 0 rgba(255,255,255,.35);
+  padding:8px 16px;border-radius:9999px;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:6px;
+  text-decoration:none;transition:all .2s ease;flex-shrink:0;
+}
+.demo-btn .demo-icon{
+  font-size:1rem;
+}
+.demo-btn:hover{
+  transform:translateY(-2px);
+  background:linear-gradient(135deg,#1AC3FF 0%,#0088FF 60%,#0066FF 100%);
+  box-shadow:0 6px 22px rgba(0,132,255,.75), inset 0 1px 0 rgba(255,255,255,.5);
+  color:#FFF;
+}
+.demo-btn:focus-visible{
+  outline:3px solid #00E5FF;outline-offset:3px;
+}
+.hamburger{
+  display:none;font-size:1.35rem;color:var(--ink);cursor:pointer;padding:5px 8px;border-radius:8px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+}
+.hamburger:focus-visible{outline:2px solid var(--teal);}
+
+@media (max-width:1240px){
+  .nav-links{
+    position:fixed;top:56px;left:0;right:0;background:#0E1530;
+    flex-direction:column;align-items:stretch;padding:18px 20px;gap:10px;
+    border-bottom:1px solid var(--panel-border);
+    transform:translateY(-10px);opacity:0;pointer-events:none;transition:.2s ease;
+    box-shadow:0 16px 36px rgba(0,0,0,.75);
+    max-height:calc(100vh - 65px);overflow-y:auto;
+  }
+  .nav-pill{justify-content:space-between;width:100%;font-size:.92rem;padding:11px 16px;}
+  .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+  .hamburger{display:block;}
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;overflow:hidden;padding:84px 0 68px;
+  background-image:
+    repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 44px),
+    repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 44px);
+}
+.hero-inner{max-width:var(--maxw);margin:0 auto;padding:0 26px;display:grid;grid-template-columns:1.08fr .92fr;gap:46px;align-items:center;}
+.hero-tag{margin-bottom:20px;}
+.hero h1{font-size:clamp(2.6rem,5.2vw,3.9rem);line-height:1.08;margin-bottom:22px;}
+.hero h1 em{font-style:normal;color:var(--amber-soft);}
+.hero p{color:var(--ink-dim);font-size:1.14rem;max-width:560px;margin-bottom:34px;line-height:1.68;}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px;}
+.btn-primary,.btn-secondary{
+  padding:14px 24px;border-radius:12px;font-weight:600;font-size:1.02rem;display:inline-flex;align-items:center;gap:10px;transition:transform .15s, box-shadow .15s;
+}
+.btn-primary{background:linear-gradient(135deg,var(--amber-soft),var(--amber));color:#0A0F1E;box-shadow:0 8px 24px -8px rgba(242,169,59,.55);}
+.btn-primary:hover{transform:translateY(-2px);}
+.btn-secondary{border:1px solid var(--panel-border);color:var(--ink);}
+.btn-secondary:hover{border-color:var(--teal);color:var(--teal);}
+.hero-stats{display:grid;grid-template-columns:repeat(4,auto);gap:32px;}
+.stat b{display:block;font-family:var(--font-display);font-size:1.95rem;color:var(--teal);}
+.stat span{font-size:.86rem;color:var(--ink-faint);font-weight:500;}
+.hero-art{position:relative;height:460px;}
+.hero-art svg{width:100%;height:100%;}
+.float-tag{
+  position:absolute;font-family:var(--font-mono);font-size:.88rem;color:var(--amber-soft);
+  background:rgba(18,26,56,.85);border:1px solid var(--panel-border);padding:7px 14px;border-radius:10px;
+  animation:floaty 5s ease-in-out infinite;box-shadow:0 8px 18px -4px rgba(0,0,0,.4);
+}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.hero-badge{
+  position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  background:var(--panel-solid);border:1px solid var(--panel-border);border-radius:14px;
+  padding:14px 24px;font-size:.92rem;color:var(--ink-dim);white-space:nowrap;
+}
+.hero-badge b{color:var(--ink);}
+@media (max-width:900px){
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-art{height:340px;order:-1;}
+  .hero-stats{grid-template-columns:repeat(2,1fr);}
+}
+
+/* ---------- SECTION LABEL ---------- */
+.section-head{max-width:760px;margin-bottom:48px;}
+.section-head h2{font-size:clamp(2rem,3.6vw,2.75rem);margin:16px 0 16px;}
+.section-head p{color:var(--ink-dim);font-size:1.08rem;line-height:1.68;}
+
+/* ---------- FLIPBOOK ---------- */
+.flipbook-section{padding:98px 0;border-top:1px solid var(--panel-border);}
+.flip-wrap{
+  display:grid;grid-template-columns:310px 1fr;gap:32px;
+  background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--radius-lg);
+  padding:28px;backdrop-filter:blur(6px);
+}
+.toc-box h5{font-family:var(--font-mono);font-size:.92rem;color:var(--teal);margin-bottom:16px;font-weight:600;}
+.toc-list{max-height:460px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;}
+.toc-item{
+  display:flex;justify-content:space-between;gap:10px;padding:11px 12px;border-radius:8px;
+  font-size:.94rem;color:var(--ink-dim);transition:.15s;
+}
+.toc-item:hover{background:rgba(255,255,255,.06);color:var(--ink);}
+.toc-item.active{background:rgba(69,217,199,.15);color:var(--teal);font-weight:600;}
+.toc-item span.tag{font-family:var(--font-mono);font-size:.76rem;color:var(--ink-faint);white-space:nowrap;}
+.flip-stage{display:flex;flex-direction:column;}
+.flip-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;}
+.flip-toolbar .tools{display:flex;gap:10px;}
+.tool-btn{width:38px;height:38px;border:1px solid var(--panel-border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;color:var(--ink-dim);transition:.15s;}
+.tool-btn:hover{color:var(--teal);border-color:var(--teal);background:rgba(69,217,199,.08);}
+.flip-page-frame{
+  position:relative;flex:1;min-height:390px;border-radius:var(--radius-md);
+  background:linear-gradient(160deg,#141D40,#0E1530);
+  border:1px solid var(--panel-border);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  perspective:1400px;
+}
+.flip-page{
+  width:90%;padding:38px;text-align:left;transition:transform .35s ease, opacity .35s ease;
+  transform-origin:left center;
+}
+.flip-page.flipping{transform:rotateY(-12deg);opacity:.4;}
+.flip-icon{font-size:3.4rem;margin-bottom:16px;}
+.flip-chapter{font-family:var(--font-mono);font-size:.88rem;color:var(--amber-soft);margin-bottom:10px;font-weight:600;}
+.flip-title{font-family:var(--font-display);font-size:1.75rem;margin-bottom:14px;color:var(--ink);}
+.flip-text{color:var(--ink);font-size:1.14rem;max-width:62ch;line-height:1.72;}
+.flip-nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px;}
+.flip-nav button{
+  border:1px solid var(--panel-border);padding:11px 20px;border-radius:12px;font-size:.96rem;font-weight:600;color:var(--ink);transition:.15s;
+}
+.flip-nav button:disabled{opacity:.35;cursor:default;}
+.flip-nav button:not(:disabled):hover{border-color:var(--teal);color:var(--teal);background:rgba(69,217,199,.08);}
+.flip-counter{font-family:var(--font-mono);font-size:.92rem;color:var(--ink-dim);font-weight:500;}
+.flip-page-frame.expanded{min-height:580px;}
+@media (max-width:820px){.flip-wrap{grid-template-columns:1fr;}.toc-list{max-height:240px;}}
+
+/* ---------- STAGE ---------- */
+.stage{padding:100px 0;border-top:1px solid var(--panel-border);}
+.stage-eyebrow{margin-bottom:18px;}
+.stage h2{font-size:clamp(2rem,3.7vw,2.75rem);margin-bottom:18px;}
+.stage-intro{color:var(--ink-dim);max-width:800px;margin-bottom:50px;font-size:1.12rem;line-height:1.68;}
+.stage-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.stage.reverse .stage-grid{grid-template-columns:1fr 1fr;}
+.stage.reverse .concept-panel{order:2;}
+.stage.reverse .sim-panel{order:1;}
+@media (max-width:960px){
+  .stage-grid{grid-template-columns:1fr;}
+  .stage.reverse .concept-panel,.stage.reverse .sim-panel{order:0;}
+}
+.concept-panel h3{font-size:1.35rem;margin-bottom:14px;}
+.concept-body{color:var(--ink-dim);font-size:1.06rem;margin-bottom:20px;line-height:1.68;}
+.formula-box{
+  background:var(--panel);border:1px solid var(--panel-border);border-left:4px solid var(--teal);
+  border-radius:var(--radius-sm);padding:18px 22px;font-family:var(--font-mono);font-size:1.06rem;
+  color:var(--amber-soft);margin-bottom:22px;overflow-x:auto;white-space:nowrap;line-height:1.6;
+}
+.formula-box small{display:block;font-family:var(--font-body);color:var(--ink-dim);font-size:.88rem;margin-top:8px;white-space:normal;line-height:1.5;}
+.bullet-list{display:flex;flex-direction:column;gap:14px;margin-bottom:24px;}
+.bullet-list li{padding-left:22px;position:relative;font-size:1.04rem;color:var(--ink-dim);line-height:1.65;}
+.bullet-list li::before{content:'';position:absolute;left:0;top:.58em;width:9px;height:9px;border-radius:2px;background:var(--amber);}
+.bullet-list b{color:var(--ink);}
+.exercise-box{
+  background:rgba(69,217,199,.06);border:1px solid rgba(69,217,199,.22);border-radius:var(--radius-md);
+  padding:22px 24px;margin-bottom:22px;
+}
+.exercise-box h4{font-family:var(--font-mono);font-size:.94rem;color:var(--teal);margin-bottom:12px;font-weight:600;}
+.exercise-box p{font-size:1.02rem;color:var(--ink-dim);margin-bottom:10px;line-height:1.65;}
+.exercise-box .sol{font-family:var(--font-mono);font-size:1.02rem;color:var(--ink);white-space:pre-line;margin-bottom:10px;line-height:1.6;}
+.exercise-box .result{font-size:1.02rem;color:var(--amber-soft);font-weight:500;}
+.mascot-tip{
+  display:flex;gap:16px;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);
+  border-radius:var(--radius-md);padding:18px 20px;
+}
+.mascot-tip .avatar{font-size:2rem;flex-shrink:0;}
+.mascot-tip p{font-size:1.02rem;color:var(--ink-dim);line-height:1.6;}
+.mascot-tip b{color:var(--ink);}
+
+.sim-panel{
+  background:var(--panel-solid);border:1px solid var(--panel-border);border-radius:var(--radius-lg);
+  padding:28px;position:sticky;top:92px;
+}
+.sim-label{font-family:var(--font-mono);font-size:.84rem;color:var(--amber-soft);margin-bottom:8px;font-weight:600;}
+.sim-panel h4{font-size:1.28rem;margin-bottom:10px;}
+.sim-desc{color:var(--ink-dim);font-size:1.0rem;margin-bottom:20px;line-height:1.6;}
+.shape-tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.shape-tab{border:1px solid var(--panel-border);padding:8px 16px;border-radius:20px;font-size:.92rem;color:var(--ink-dim);font-weight:500;transition:.15s;}
+.shape-tab.active{background:rgba(242,169,59,.18);border-color:var(--amber);color:var(--amber-soft);font-weight:600;}
+.sim-visual{
+  background:radial-gradient(circle at 50% 30%, rgba(69,217,199,.08), transparent 65%);
+  border:1px solid var(--panel-border);border-radius:var(--radius-md);
+  display:flex;align-items:center;justify-content:center;padding:14px;margin-bottom:20px;min-height:280px;
+}
+.shape-fill{fill:rgba(69,217,199,.25);stroke:var(--teal);stroke-width:2.5;}
+.dash-line{stroke:var(--amber-soft);stroke-width:1.8;stroke-dasharray:5 4;}
+.slider-row{margin-bottom:18px;}
+.slider-row .row-top{display:flex;justify-content:space-between;font-size:.94rem;color:var(--ink-dim);margin-bottom:8px;}
+.slider-row .row-top b{color:var(--ink);font-family:var(--font-mono);font-weight:600;font-size:1.02rem;}
+input[type=range]{width:100%;height:6px;}
+.sim-readouts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px;}
+.readout-card{background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--radius-sm);padding:14px 16px;}
+.readout-card .val{font-family:var(--font-display);font-size:1.5rem;color:var(--teal);font-weight:600;}
+.readout-card .lbl{font-size:.84rem;color:var(--ink-faint);margin-top:2px;font-weight:500;}
+.sim-status{margin-top:16px;font-size:1.02rem;color:var(--ink-dim);padding:12px 16px;border:1px dashed var(--panel-border);border-radius:var(--radius-sm);line-height:1.5;}
+.sim-status.success{color:var(--amber-soft);border-color:var(--amber);background:rgba(242,169,59,.12);font-weight:500;}
+.sim-actions{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
+.sim-actions button{border:1px solid var(--panel-border);padding:11px 18px;border-radius:12px;font-size:.92rem;font-weight:600;transition:.15s;}
+.sim-actions button:hover{border-color:var(--teal);color:var(--teal);background:rgba(69,217,199,.08);}
+.bar-row{margin-bottom:14px;}
+.bar-row .bar-top{display:flex;justify-content:space-between;font-size:.95rem;margin-bottom:6px;color:var(--ink-dim);}
+.bar-track{height:14px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden;}
+.bar-fill{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--teal),var(--amber-soft));transition:width .3s ease;width:0%;}
+
+/* ---------- MASTER BANNER ---------- */
+.master-banner{
+  margin:0 auto;max-width:var(--maxw);padding:0 26px;
+}
+.master-banner .inner{
+  background:linear-gradient(135deg,rgba(242,169,59,.12),rgba(69,217,199,.1));
+  border:1px solid var(--panel-border);border-radius:var(--radius-lg);
+  padding:44px 32px;text-align:center;
+}
+.master-banner .inner p{font-family:var(--font-mono);font-size:.88rem;color:var(--teal);margin-bottom:16px;letter-spacing:.03em;font-weight:600;}
+.master-eq{display:flex;justify-content:center;align-items:center;gap:22px;flex-wrap:wrap;font-family:var(--font-display);font-size:clamp(1.15rem,2.6vw,1.65rem);}
+.master-eq .term{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.master-eq .term span.icon{font-size:2.1rem;}
+.master-eq .term span.sub{font-family:var(--font-body);font-size:.82rem;color:var(--ink-faint);font-weight:500;}
+.master-eq .arrow{color:var(--amber-soft);font-size:1.4rem;}
+
+/* ---------- APPLICATIONS ---------- */
+.applications{padding:100px 0;border-top:1px solid var(--panel-border);}
+.app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.app-card{background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--radius-lg);padding:30px;}
+.app-card .icon{font-size:2.4rem;margin-bottom:18px;}
+.app-card h4{font-size:1.25rem;margin-bottom:12px;}
+.app-card p{color:var(--ink-dim);font-size:1.02rem;margin-bottom:18px;line-height:1.6;}
+.app-card ul{display:flex;flex-direction:column;gap:10px;}
+.app-card li{font-size:.96rem;color:var(--ink-dim);padding-left:18px;position:relative;line-height:1.55;}
+.app-card li::before{content:'';position:absolute;left:0;top:.52em;width:7px;height:7px;background:var(--teal);border-radius:50%;}
+@media (max-width:900px){.app-grid{grid-template-columns:1fr;}}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--panel-border);padding:76px 0 34px;background:var(--bg-soft);}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:54px;}
+.footer-brand p{color:var(--ink-dim);font-size:.95rem;margin-top:16px;max-width:300px;line-height:1.6;}
+.footer-col h5{font-family:var(--font-mono);font-size:.86rem;color:var(--teal);margin-bottom:18px;font-weight:600;}
+.footer-col a,.footer-col p{display:block;color:var(--ink-dim);font-size:.94rem;margin-bottom:12px;line-height:1.5;}
+.footer-col a:hover{color:var(--teal);}
+.social-row{display:flex;gap:12px;margin-top:18px;}
+.social-row a{width:38px;height:38px;border:1px solid var(--panel-border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;}
+.footer-bottom{border-top:1px solid var(--panel-border);padding-top:26px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:.88rem;color:var(--ink-faint);}
+@media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;}}
+
+/* ---------- BACK TO TOP / TOAST ---------- */
+#backTop{
+  position:fixed;bottom:28px;right:28px;width:48px;height:48px;border-radius:50%;
+  background:var(--amber);color:#0A0F1E;display:flex;align-items:center;justify-content:center;
+  font-size:1.25rem;box-shadow:0 8px 20px -6px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:.2s;z-index:40;
+}
+#backTop.show{opacity:1;pointer-events:auto;}
+#toast{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--panel-solid);border:1px solid var(--panel-border);padding:14px 24px;border-radius:14px;
+  font-size:.96rem;opacity:0;pointer-events:none;transition:.25s;z-index:60;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Main Navigation">
+  <div class="nav-inner">
+    <a href="#hero" class="brand" aria-label="MedhaVatika - A Garden of Intellect">
+      <div class="brand-logo-wrap" aria-hidden="true">🌿</div>
+      <div class="brand-text-wrap">
+        <span class="brand-name">MedhāVatika</span>
+        <span class="brand-tagline">A Garden of Intellect</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks" role="menubar">
+      <li role="none"><a href="#hero" class="nav-pill active" role="menuitem">Home</a></li>
+      <li role="none"><a href="#flipbook" class="nav-pill" role="menuitem">Medha's Story <span class="nav-badge badge-book">BOOK</span></a></li>
+      <li role="none"><a href="#ch1" class="nav-pill" role="menuitem">Foundations</a></li>
+      <li role="none"><a href="#ch2" class="nav-pill" role="menuitem">Trapezium</a></li>
+      <li role="none"><a href="#ch3" class="nav-pill" role="menuitem">Rhombus</a></li>
+      <li role="none"><a href="#ch3" class="nav-pill" role="menuitem">Kite Challenge <span class="nav-badge badge-game">GAME</span></a></li>
+      <li role="none"><a href="#ch4" class="nav-pill" role="menuitem">Surface Area</a></li>
+      <li role="none"><a href="#ch5" class="nav-pill" role="menuitem">Volume</a></li>
+      <li role="none"><a href="#applications" class="nav-pill" role="menuitem">Applications</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="lang-btn" id="langBtn" aria-label="Select Language (Current: English)" aria-haspopup="dialog">
+        <span aria-hidden="true">🌐</span>
+        <span>English</span>
+        <span class="chevron" aria-hidden="true">▾</span>
+      </button>
+      <a class="demo-btn" href="tel:8007614867" aria-label="Book a Demo - Call +91 8007614867">
+        <span class="demo-icon" aria-hidden="true">📞</span>
+        <span>Book A Demo</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="eyebrow hero-tag">MedhaLab™ · Mathematics Interactive Quest</p>
+      <h1>Mensuration<br><em>Adventure</em></h1>
+      <p>Step onto the fairground with Medha and her owl companion as ordinary shapes turn into a hands-on measuring quest. <strong>Mensuration Adventure</strong> by <em>MedhāVatika</em> turns perimeter, area, surface area and volume into a playful, interactive experience built for Grade 8 explorers.</p>
+      <div class="hero-ctas">
+        <a href="#flipbook" class="btn-primary">📖 Open Interactive Storybook →</a>
+        <a href="#ch1" class="btn-secondary">📐 Explore Lab Simulations</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>5</b><span>Interactive Stages</span></div>
+        <div class="stat"><b>6</b><span>Live Lab Simulations</span></div>
+        <div class="stat"><b>100%</b><span>Hands-On Mastery</span></div>
+        <div class="stat"><b>Grade 8</b><span>Curriculum Aligned</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="210" cy="210" r="170" fill="rgba(69,217,199,.05)" stroke="rgba(69,217,199,.18)" stroke-width="1"/>
+        <path d="M60 300 A150 150 0 0 1 360 300" fill="none" stroke="rgba(242,169,59,.35)" stroke-width="2" stroke-dasharray="4 6"/>
+        <!-- Owl -->
+        <g transform="translate(255,150)">
+          <ellipse cx="0" cy="30" rx="42" ry="48" fill="#F2A93B"/>
+          <circle cx="-16" cy="10" r="15" fill="#0A0F1E"/>
+          <circle cx="16" cy="10" r="15" fill="#0A0F1E"/>
+          <circle cx="-16" cy="10" r="6" fill="#EAF0FF"/>
+          <circle cx="16" cy="10" r="6" fill="#EAF0FF"/>
+          <polygon points="0,20 -7,32 7,32" fill="#0A0F1E"/>
+          <polygon points="-42,-6 -20,-24 -28,4" fill="#F2A93B"/>
+          <polygon points="42,-6 20,-24 28,4" fill="#F2A93B"/>
+          <rect x="-30" y="62" width="60" height="10" rx="3" fill="#45D9C7" transform="rotate(-6 0 67)"/>
+        </g>
+        <!-- Medha -->
+        <g transform="translate(140,235)">
+          <circle cx="0" cy="0" r="26" fill="#F7C876"/>
+          <path d="M-34 40 Q0 10 34 40 L34 110 L-34 110 Z" fill="#45D9C7"/>
+          <rect x="-46" y="30" width="10" height="58" rx="4" fill="#F1637A" transform="rotate(18 -46 30)"/>
+          <rect x="30" y="24" width="58" height="8" rx="3" fill="#EAF0FF" transform="rotate(-24 30 24)"/>
+        </g>
+        <text x="30" y="70" font-family="IBM Plex Mono" font-size="13" fill="#45D9C7">l × b</text>
+        <text x="330" y="330" font-family="IBM Plex Mono" font-size="13" fill="#F2A93B">πr²</text>
+        <text x="60" y="360" font-family="IBM Plex Mono" font-size="13" fill="#F1637A">a³</text>
+      </svg>
+      <span class="float-tag" style="top:6%;left:4%;">📏 cm</span>
+      <span class="float-tag" style="top:14%;right:2%;animation-delay:.8s;">🔺 area</span>
+      <span class="float-tag" style="bottom:18%;left:0;animation-delay:1.6s;">⭕ πr²</span>
+      <span class="float-tag" style="bottom:2%;right:8%;animation-delay:2.4s;">📦 volume</span>
+      <div class="hero-badge">Fairground Quest: <b>Measuring the Village Fair</b> · Status: <b style="color:var(--teal);">Active 📐</b></div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= FLIPBOOK ================= -->
+<section class="flipbook-section" id="flipbook">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">✨ Interactive Flipbook Reader</p>
+      <h2>Medha's Mensuration Adventure</h2>
+      <p>Turn through 13 illustrated storybook pages with Medha and her owl guide as a village fair turns every shape underfoot into a measuring mystery.</p>
+    </div>
+    <div class="flip-wrap">
+      <div class="toc-box">
+        <h5>📑 Table of Contents</h5>
+        <div class="toc-list" id="tocList"></div>
+      </div>
+      <div class="flip-stage">
+        <div class="flip-toolbar">
+          <span class="flip-counter" id="flipCounter">Page 1 of 13</span>
+          <div class="tools">
+            <button class="tool-btn" id="zoomOut" title="Zoom out">🔍-</button>
+            <button class="tool-btn" id="zoomIn" title="Zoom in">🔍+</button>
+            <button class="tool-btn" id="expandBtn" title="Expand">⛶</button>
+          </div>
+        </div>
+        <div class="flip-page-frame" id="flipFrame">
+          <div class="flip-page" id="flipPage">
+            <div class="flip-icon" id="flipIcon">📐</div>
+            <p class="flip-chapter" id="flipChapter">Cover</p>
+            <h3 class="flip-title" id="flipTitle"></h3>
+            <p class="flip-text" id="flipText"></p>
+          </div>
+        </div>
+        <div class="flip-nav">
+          <button id="flipPrev">◀ Previous</button>
+          <button id="flipNext">Next ▶</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STAGE 1 ================= -->
+<section class="stage" id="ch1">
+  <div class="container">
+    <p class="eyebrow stage-eyebrow">Stage 1 · Perimeter &amp; Area Foundations</p>
+    <h2>Recalling Squares, Rectangles, Triangles &amp; Circles</h2>
+    <p class="stage-intro">Before the fair can be planned, Medha must recall the basics: how far a boundary stretches (perimeter) and how much flat ground a shape actually covers (area). These four shapes are the building blocks for everything that follows.</p>
+    <div class="stage-grid">
+      <div class="concept-panel">
+        <h3>Boundary vs. Surface</h3>
+        <p class="concept-body">Perimeter is a length — it measures the distance around the outside edge, in units like cm or m. Area is a surface measurement — it measures how much flat space is enclosed, always in square units like cm² or m².</p>
+        <div class="formula-box">
+          Square: A = s² , P = 4s<br>
+          Rectangle: A = l × b , P = 2(l + b)<br>
+          Triangle: A = ½ × base × height<br>
+          Circle: A = πr² , C = 2πr
+          <small>s = side, l = length, b = breadth, r = radius. Use π ≈ 3.14 or 22/7.</small>
+        </div>
+        <ul class="bullet-list">
+          <li><b>Square &amp; rectangle:</b> everyday flat surfaces — floor tiles, notebook pages, a cricket pitch.</li>
+          <li><b>Triangle:</b> the height must always be measured perpendicular to the chosen base, not along a slanted side.</li>
+          <li><b>Circle:</b> wheels, clock faces, circular flower beds — every point on the edge is the same distance (r) from the centre.</li>
+        </ul>
+        <div class="exercise-box">
+          <h4>Solved Exercise 1.1 — Same Perimeter, Different Area</h4>
+          <p><b>Problem:</b> A square garden and a rectangular garden both have a perimeter of 40 m. The rectangle's length is 12 m. Which garden has more area?</p>
+          <p class="sol">Square: side = 40 ÷ 4 = 10 m → Area = 10 × 10 = 100 m²
+Rectangle: 2(l+b) = 40 → b = 20 − 12 = 8 m → Area = 12 × 8 = 96 m²</p>
+          <p class="result">Result: The square garden wins (100 m² vs 96 m²) — for a fixed perimeter, a square always encloses the most area among all rectangles!</p>
+        </div>
+        <div class="mascot-tip">
+          <span class="avatar">🦉</span>
+          <p><b>Owl's Lab Tip:</b> "Watch what happens to the area readout when you stretch a rectangle long and thin while keeping its perimeter idea in mind — area shrinks fast, even though the shape still looks big!"</p>
+        </div>
+      </div>
+      <div class="sim-panel">
+        <p class="sim-label">Live Measurement Lab</p>
+        <h4>Shape Area &amp; Perimeter Explorer</h4>
+        <p class="sim-desc">Pick a shape, drag its dimension sliders, and watch the figure redraw to scale with live area and perimeter readouts.</p>
+        <div class="shape-tabs">
+          <button class="shape-tab active" data-shape="square">Square</button>
+          <button class="shape-tab" data-shape="rectangle">Rectangle</button>
+          <button class="shape-tab" data-shape="triangle">Triangle</button>
+          <button class="shape-tab" data-shape="circle">Circle</button>
+        </div>
+        <div class="sim-visual"><svg id="shape1-svg" viewBox="0 0 340 280" width="100%" height="280"></svg></div>
+
+        <div class="shape-controls" data-shape="square">
+          <div class="slider-row"><div class="row-top"><span>Side (s)</span><b id="s1-square-side-val">14 cm</b></div>
+          <input type="range" id="s1-square-side" min="4" max="22" step="1" value="14"></div>
+        </div>
+        <div class="shape-controls" data-shape="rectangle" hidden>
+          <div class="slider-row"><div class="row-top"><span>Length (l)</span><b id="s1-rect-l-val">20 cm</b></div>
+          <input type="range" id="s1-rect-l" min="6" max="26" step="1" value="20"></div>
+          <div class="slider-row"><div class="row-top"><span>Breadth (b)</span><b id="s1-rect-b-val">12 cm</b></div>
+          <input type="range" id="s1-rect-b" min="4" max="18" step="1" value="12"></div>
+        </div>
+        <div class="shape-controls" data-shape="triangle" hidden>
+          <div class="slider-row"><div class="row-top"><span>Base (b)</span><b id="s1-tri-base-val">18 cm</b></div>
+          <input type="range" id="s1-tri-base" min="6" max="22" step="1" value="18"></div>
+          <div class="slider-row"><div class="row-top"><span>Height (h)</span><b id="s1-tri-h-val">12 cm</b></div>
+          <input type="range" id="s1-tri-h" min="4" max="18" step="1" value="12"></div>
+        </div>
+        <div class="shape-controls" data-shape="circle" hidden>
+          <div class="slider-row"><div class="row-top"><span>Radius (r)</span><b id="s1-circ-r-val">9 cm</b></div>
+          <input type="range" id="s1-circ-r" min="3" max="13" step="1" value="9"></div>
+        </div>
+
+        <div class="sim-readouts">
+          <div class="readout-card"><div class="val" id="s1-area">—</div><div class="lbl">Area</div></div>
+          <div class="readout-card"><div class="val" id="s1-peri">—</div><div class="lbl">Perimeter</div></div>
+        </div>
+        <div class="sim-status" id="s1-label">Square (side 14 cm)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STAGE 2 ================= -->
+<section class="stage reverse" id="ch2">
+  <div class="container">
+    <p class="eyebrow stage-eyebrow">Stage 2 · Area of Trapezium &amp; Quadrilaterals</p>
+    <h2>The Trapezium Field &amp; Splitting Quadrilaterals</h2>
+    <p class="stage-intro">The fair's food stalls sit on a plot with two parallel edges of different lengths — a trapezium. Medha discovers that any quadrilateral, however oddly shaped, can be tamed by drawing a single diagonal.</p>
+    <div class="stage-grid">
+      <div class="sim-panel">
+        <p class="sim-label">Live Measurement Lab</p>
+        <h4>Trapezium Field Builder</h4>
+        <p class="sim-desc">Drag the two parallel sides and the perpendicular height to reshape the field and see its area update instantly.</p>
+        <div class="sim-visual"><svg id="shape2-svg" viewBox="0 0 380 280" width="100%" height="280"></svg></div>
+        <div class="slider-row"><div class="row-top"><span>Parallel side a (top)</span><b id="s2-a-val">40 m</b></div>
+        <input type="range" id="s2-a" min="10" max="100" step="5" value="40"></div>
+        <div class="slider-row"><div class="row-top"><span>Parallel side b (bottom)</span><b id="s2-b-val">60 m</b></div>
+        <input type="range" id="s2-b" min="10" max="100" step="5" value="60"></div>
+        <div class="slider-row"><div class="row-top"><span>Height h (perpendicular)</span><b id="s2-h-val">25 m</b></div>
+        <input type="range" id="s2-h" min="5" max="40" step="5" value="25"></div>
+        <div class="sim-readouts">
+          <div class="readout-card"><div class="val" id="s2-area">—</div><div class="lbl">Area (m²)</div></div>
+          <div class="readout-card"><div class="val" id="s2-hectare">—</div><div class="lbl">In hectares</div></div>
+        </div>
+      </div>
+      <div class="concept-panel">
+        <h3>Parallel Sides &amp; Perpendicular Height</h3>
+        <p class="concept-body">A trapezium has exactly one pair of parallel sides. Its area is simply the average of the two parallel sides, multiplied by the perpendicular distance between them. A general quadrilateral has no such shortcut — so we split it into two triangles along a diagonal instead.</p>
+        <div class="formula-box">
+          Trapezium: A = ½ × (a + b) × h<br>
+          Quadrilateral (via diagonal d): A = ½ × d × (h₁ + h₂)
+          <small>a, b = parallel sides; h = height between them; h₁, h₂ = perpendicular offsets of the other two vertices from diagonal d.</small>
+        </div>
+        <ul class="bullet-list">
+          <li><b>Identify the parallel sides:</b> the two edges that never meet, like the sloped boundary of a field.</li>
+          <li><b>Height, not slant:</b> h is always measured straight across, perpendicular to both parallel sides.</li>
+          <li><b>Splitting a quadrilateral:</b> one diagonal turns any four-sided plot into two easy triangles whose areas simply add.</li>
+        </ul>
+        <div class="exercise-box">
+          <h4>Solved Exercise 2.1 — Trapezium-Shaped Field</h4>
+          <p><b>Problem:</b> A farmer's field is trapezium-shaped with parallel sides 60 m and 40 m, and the perpendicular distance between them is 25 m. Find its area.</p>
+          <p class="sol">A = ½ × (60 + 40) × 25 = ½ × 100 × 25 = 1250 m²</p>
+          <p class="result">Result: The field covers 1250 m² — that's 0.125 hectares (1 hectare = 10,000 m²).</p>
+        </div>
+        <div class="mascot-tip">
+          <span class="avatar">👧</span>
+          <p><b>Medhā's Observation:</b> "The slider values above match this exact problem — nudge height up or down and see the area move away from 1250 m²!"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STAGE 3 ================= -->
+<section class="stage" id="ch3">
+  <div class="container">
+    <p class="eyebrow stage-eyebrow">Stage 3 · Area of Rhombus &amp; Polygons</p>
+    <h2>Kite Diagonals &amp; Polygon Patterns</h2>
+    <p class="stage-intro">A diamond-shaped kite stall catches Medha's eye. Its diagonals cross at right angles — and that one fact unlocks a shortcut for the area of every rhombus and kite at the fair.</p>
+    <div class="stage-grid">
+      <div class="concept-panel">
+        <h3>Diagonals That Cross at Right Angles</h3>
+        <p class="concept-body">In a rhombus (and a kite), the two diagonals always bisect each other at 90°. That lets us build the shape from four identical right triangles, giving a clean shortcut formula. Regular polygons follow a similar idea — slice them from the centre into equal triangles.</p>
+        <div class="formula-box">
+          Rhombus / Kite: A = ½ × d₁ × d₂<br>
+          Regular polygon (n sides, side s): A ≈ (n × s²) ÷ (4 × tan(π/n))
+          <small>d₁, d₂ = diagonals. A polygon can always be estimated by slicing it into n congruent triangles from its centre.</small>
+        </div>
+        <ul class="bullet-list">
+          <li><b>Diagonals bisect at 90°:</b> that right angle is exactly why ½ × d₁ × d₂ works.</li>
+          <li><b>Kites and rhombi share a formula:</b> both are built from two pairs of congruent right triangles.</li>
+          <li><b>Any regular polygon</b> can be sliced from its centre into n congruent isosceles triangles to estimate area.</li>
+        </ul>
+        <div class="exercise-box">
+          <h4>Solved Exercise 3.1 — Kite-Shaped Flower Bed</h4>
+          <p><b>Problem:</b> A kite-shaped flower bed has diagonals of 16 m and 12 m. Turf costs ₹45 per m². Find the total cost.</p>
+          <p class="sol">Area = ½ × 16 × 12 = 96 m²
+Cost = 96 × ₹45 = ₹4,320</p>
+          <p class="result">Result: The gardener needs to budget ₹4,320 for turf.</p>
+        </div>
+        <div class="mascot-tip">
+          <span class="avatar">🦉</span>
+          <p><b>Owl's Wisdom:</b> "Try to land the challenge on exactly 96 m² — that's this exact flower bed's area!"</p>
+        </div>
+      </div>
+      <div class="sim-panel">
+        <p class="sim-label">🎯 Kite Area Challenge</p>
+        <h4>Match the Target Area</h4>
+        <p class="sim-desc">Tune the two diagonals to hit the target area shown below. Get within 3 m² for a perfect match!</p>
+        <div class="sim-visual"><svg id="shape3-svg" viewBox="0 0 340 300" width="100%" height="280"></svg></div>
+        <div class="slider-row"><div class="row-top"><span>Diagonal d₁ (horizontal)</span><b id="s3-d1-val">10 m</b></div>
+        <input type="range" id="s3-d1" min="4" max="24" step="1" value="10"></div>
+        <div class="slider-row"><div class="row-top"><span>Diagonal d₂ (vertical)</span><b id="s3-d2-val">10 m</b></div>
+        <input type="range" id="s3-d2" min="4" max="24" step="1" value="10"></div>
+        <div class="sim-readouts">
+          <div class="readout-card"><div class="val" id="s3-area">—</div><div class="lbl">Current Area</div></div>
+          <div class="readout-card"><div class="val" id="s3-target">96 m²</div><div class="lbl">Target Area</div></div>
+        </div>
+        <div class="sim-status" id="s3-status">Adjust the sliders to close the gap</div>
+        <div class="sim-actions">
+          <button id="s3-random">🎲 Random Challenge</button>
+          <button id="s3-reset">↺ Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STAGE 4 ================= -->
+<section class="stage reverse" id="ch4">
+  <div class="container">
+    <p class="eyebrow stage-eyebrow">Stage 4 · Surface Area of Solids</p>
+    <h2>Unfolding Nets — Surface Area of Solids</h2>
+    <p class="stage-intro">A prize box needs gift wrap and a drum stall needs fabric around its curved side. Medha learns to flatten 3D solids into 2D nets to see exactly how much material each face needs.</p>
+    <div class="stage-grid">
+      <div class="sim-panel">
+        <p class="sim-label">Live Measurement Lab</p>
+        <h4>Solid Net Unfolder</h4>
+        <p class="sim-desc">Choose a solid, adjust its dimensions, and watch its flattened net unfold with live lateral and total surface area.</p>
+        <div class="shape-tabs">
+          <button class="shape-tab active" data-shape4="cube">Cube</button>
+          <button class="shape-tab" data-shape4="cuboid">Cuboid</button>
+          <button class="shape-tab" data-shape4="cylinder">Cylinder</button>
+        </div>
+        <div class="sim-visual"><svg id="shape4-svg" viewBox="0 0 340 280" width="100%" height="280"></svg></div>
+
+        <div class="shape-controls" data-shape4="cube">
+          <div class="slider-row"><div class="row-top"><span>Side (a)</span><b id="s4-cube-a-val">6 cm</b></div>
+          <input type="range" id="s4-cube-a" min="3" max="12" step="1" value="6"></div>
+        </div>
+        <div class="shape-controls" data-shape4="cuboid" hidden>
+          <div class="slider-row"><div class="row-top"><span>Length (l)</span><b id="s4-cuboid-l-val">8 cm</b></div>
+          <input type="range" id="s4-cuboid-l" min="3" max="14" step="1" value="8"></div>
+          <div class="slider-row"><div class="row-top"><span>Breadth (b)</span><b id="s4-cuboid-b-val">5 cm</b></div>
+          <input type="range" id="s4-cuboid-b" min="3" max="10" step="1" value="5"></div>
+          <div class="slider-row"><div class="row-top"><span>Height (h)</span><b id="s4-cuboid-h-val">4 cm</b></div>
+          <input type="range" id="s4-cuboid-h" min="3" max="10" step="1" value="4"></div>
+        </div>
+        <div class="shape-controls" data-shape4="cylinder" hidden>
+          <div class="slider-row"><div class="row-top"><span>Radius (r)</span><b id="s4-cyl-r-val">4 cm</b></div>
+          <input type="range" id="s4-cyl-r" min="2" max="8" step="1" value="4"></div>
+          <div class="slider-row"><div class="row-top"><span>Height (h)</span><b id="s4-cyl-h-val">9 cm</b></div>
+          <input type="range" id="s4-cyl-h" min="3" max="14" step="1" value="9"></div>
+        </div>
+
+        <div class="sim-readouts">
+          <div class="readout-card"><div class="val" id="s4-lsa">—</div><div class="lbl">Lateral / Curved SA</div></div>
+          <div class="readout-card"><div class="val" id="s4-tsa">—</div><div class="lbl">Total Surface Area</div></div>
+        </div>
+      </div>
+      <div class="concept-panel">
+        <h3>Flat Faces vs. Every Face</h3>
+        <p class="concept-body">Lateral (or curved) surface area covers only the side walls — the faces you'd wrap with a label. Total surface area adds the top and bottom back in, which matters when you're painting, wrapping, or covering a solid completely.</p>
+        <div class="formula-box">
+          Cube: LSA = 4a² , TSA = 6a²<br>
+          Cuboid: LSA = 2h(l+b) , TSA = 2(lb+bh+hl)<br>
+          Cylinder: CSA = 2πrh , TSA = 2πr(r+h)
+          <small>a = side, l/b/h = dimensions, r = radius of cylinder base.</small>
+        </div>
+        <ul class="bullet-list">
+          <li><b>Lateral surface</b> skips the top and bottom caps — think of just the "wraparound" part.</li>
+          <li><b>Total surface</b> puts both caps back — essential for paint, wrapping paper, or sheet metal.</li>
+          <li><b>Unfolding into a net</b> is the fastest way to spot which faces repeat and which are unique.</li>
+        </ul>
+        <div class="exercise-box">
+          <h4>Solved Exercise 4.1 — Painting a Water Tank</h4>
+          <p><b>Problem:</b> A cuboidal overhead tank measures 2 m × 1.5 m × 1.2 m. Find the total surface area to be painted.</p>
+          <p class="sol">TSA = 2(lb+bh+hl) = 2(2×1.5 + 1.5×1.2 + 1.2×2)
+   = 2(3 + 1.8 + 2.4) = 2 × 7.2 = 14.4 m²</p>
+          <p class="result">Result: The painter must cover 14.4 m² of surface.</p>
+        </div>
+        <div class="mascot-tip">
+          <span class="avatar">👧</span>
+          <p><b>Medhā's Discovery:</b> "Switch to Cylinder in the lab and set r=4, h=9 — that's the drum stall's real size!"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STAGE 5 ================= -->
+<section class="stage" id="ch5">
+  <div class="container">
+    <p class="eyebrow stage-eyebrow">Stage 5 · Volume, Capacity &amp; Efficiency</p>
+    <h2>Filling Space — Volume &amp; the Best Container</h2>
+    <p class="stage-intro">At the lemonade stand, Medha wonders which container holds more for the same amount of material. Volume measures the space a solid occupies — and it decides who wins the fair's container design contest.</p>
+    <div class="stage-grid">
+      <div class="concept-panel">
+        <h3>Space Enclosed, Not Just Covered</h3>
+        <p class="concept-body">Volume measures the three-dimensional space a solid fills, in cubic units. Capacity measures how much a container can hold, usually in litres — a cube of side 10 cm holds exactly 1 litre.</p>
+        <div class="formula-box">
+          Cube: V = a³ &nbsp; Cuboid: V = l×b×h &nbsp; Cylinder: V = πr²h<br>
+          1 L = 1000 cm³ = 1000 mL &nbsp;·&nbsp; 1 m³ = 1000 L
+          <small>Always convert every dimension to the same unit before multiplying.</small>
+        </div>
+        <ul class="bullet-list">
+          <li><b>Volume</b> is measured in cubic units — cm³, m³ — because three dimensions multiply together.</li>
+          <li><b>Capacity</b> converts that same space into litres or millilitres for liquids and containers.</li>
+          <li><b>Same material, different shape:</b> a cylinder often holds more volume than a cuboid or cube built from the same amount of sheet material — that's why so many cans are cylindrical.</li>
+        </ul>
+        <div class="exercise-box">
+          <h4>Solved Exercise 5.1 — Filling a Cylindrical Tank</h4>
+          <p><b>Problem:</b> A cylindrical tank has radius 1.4 m and height 3 m. How many litres can it hold? (π ≈ 22/7)</p>
+          <p class="sol">V = πr²h = (22/7) × 1.4² × 3 = (22/7) × 1.96 × 3 = 18.48 m³
+18.48 m³ × 1000 = 18,480 L</p>
+          <p class="result">Result: The tank holds 18,480 litres of water.</p>
+        </div>
+        <div class="mascot-tip">
+          <span class="avatar">🦉</span>
+          <p><b>Owl's Diagnostic:</b> "Raise the material budget on the right without changing shape proportions, and watch every container's volume grow — but never at the same rate!"</p>
+        </div>
+      </div>
+      <div class="sim-panel">
+        <p class="sim-label">Multi-Shape Rate Analyzer</p>
+        <h4>Container Efficiency Analyzer</h4>
+        <p class="sim-desc">Fix a sheet-material budget, then tune the cylinder's radius and the cuboid's base to see which shape packs in the most volume.</p>
+        <div class="slider-row"><div class="row-top"><span>Material Budget (S)</span><b id="s5-budget-val">300 cm²</b></div>
+        <input type="range" id="s5-budget" min="150" max="500" step="10" value="300"></div>
+        <div class="slider-row"><div class="row-top"><span>Cylinder radius (r)</span><b id="s5-r-val">4 cm</b></div>
+        <input type="range" id="s5-r" min="2" max="9" step="0.5" value="4"></div>
+        <div class="slider-row"><div class="row-top"><span>Cuboid base side (x)</span><b id="s5-x-val">5 cm</b></div>
+        <input type="range" id="s5-x" min="2" max="12" step="0.5" value="5"></div>
+
+        <div class="bar-row"><div class="bar-top"><span>Cube</span><span id="s5-cube-val">—</span></div><div class="bar-track"><div class="bar-fill" id="s5-cube-bar"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span>Cuboid (square base)</span><span id="s5-cuboid-val">—</span></div><div class="bar-track"><div class="bar-fill" id="s5-cuboid-bar"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span>Cylinder</span><span id="s5-cyl-val">—</span></div><div class="bar-track"><div class="bar-fill" id="s5-cyl-bar"></div></div></div>
+
+        <div class="sim-status" id="s5-winner-box">🏆 Current Leader: <b id="s5-winner">Cube</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MASTER BANNER ================= -->
+<div class="master-banner">
+  <div class="inner">
+    <p>🌿 THE THREE PILLARS OF MENSURATION 🌿</p>
+    <div class="master-eq">
+      <div class="term"><span class="icon">📏</span>Perimeter<span class="sub">length¹ — the boundary</span></div>
+      <span class="arrow">→</span>
+      <div class="term"><span class="icon">📐</span>Area<span class="sub">length² — the surface</span></div>
+      <span class="arrow">→</span>
+      <div class="term"><span class="icon">📦</span>Volume<span class="sub">length³ — the space enclosed</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= APPLICATIONS ================= -->
+<section class="applications" id="applications">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">🌍 Real-World Impact</p>
+      <h2>Mensuration Across Careers &amp; Technology</h2>
+      <p>From reading architectural blueprints to surveying farmland and designing packaging, mensuration turns raw measurements into real decisions.</p>
+    </div>
+    <div class="app-grid">
+      <div class="app-card">
+        <div class="icon">🏗️</div>
+        <h4>Architecture &amp; Construction</h4>
+        <p>Every blueprint depends on precise area and volume calculations before a single brick is laid.</p>
+        <ul>
+          <li>Estimating tiles and flooring from room area</li>
+          <li>Calculating paint and plaster from wall surface area</li>
+          <li>Costing concrete from structural volume</li>
+          <li>Planning roof slant heights and staircases</li>
+        </ul>
+      </div>
+      <div class="app-card">
+        <div class="icon">🌾</div>
+        <h4>Agriculture &amp; Land Surveying</h4>
+        <p>Irregular fields are mapped into trapeziums and triangles to measure land and plan irrigation.</p>
+        <ul>
+          <li>Mapping field boundaries into trapeziums &amp; triangles</li>
+          <li>Estimating crop yield per hectare</li>
+          <li>Sizing irrigation canals and water tanks</li>
+          <li>Calculating seed and fertilizer quantity from land area</li>
+        </ul>
+      </div>
+      <div class="app-card">
+        <div class="icon">📦</div>
+        <h4>Packaging &amp; Product Design</h4>
+        <p>Engineers balance surface area (material cost) against volume (capacity) for every container.</p>
+        <ul>
+          <li>Designing cans and bottles that hold more for less material</li>
+          <li>Optimizing carton dimensions for shipping</li>
+          <li>Costing material from a product's unfolded net</li>
+          <li>Estimating volume in 3D-printed objects</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand"><span class="brand-mark">🌿</span><span>MedhāVatika<small>A Garden of Intellect</small></span></div>
+        <p>MedhaVatika transforms foundational STEM learning through storytelling, gamified simulations, interactive quests, and rigorous curriculum mastery.</p>
+        <div class="social-row">
+          <a href="#" title="LinkedIn">in</a>
+          <a href="#" title="YouTube">▶</a>
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">📸</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Interactive Quests</h5>
+        <a href="#hero">Mensuration Quest</a>
+        <a href="https://medhavatika-photosynthesis.vercel.app/">Photosynthesis Quest</a>
+        <a href="#">Trigonometry Quest</a>
+        <a href="#">MedhaLab™ Biology</a>
+        <a href="#">MedhaLab™ Mathematics</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company &amp; Policies</h5>
+        <a href="#">Become an Instructor</a>
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Refund Policy</a>
+        <a href="#">Affiliate Program</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact MedhāVatika</h5>
+        <p>🏢 Medhavatika Edlabs Pvt. Ltd.<br>Pune, Maharashtra, India</p>
+        <p>📞 +91 8007614867</p>
+        <p>✉️ contact@medhavatika.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Copyright © MedhāVatika Edlabs Pvt. Ltd. All rights reserved.</span>
+      <span>Designed with 💚 for curious young mathematicians worldwide</span>
+    </div>
+  </div>
+</footer>
+
+<button id="backTop" title="Back to top">↑</button>
+<div id="toast"></div>
+
+<script>
+/* ---------------- NAV ---------------- */
+const hamburger=document.getElementById('hamburger');
+const navLinks=document.getElementById('navLinks');
+hamburger.addEventListener('click',()=>{
+  const isOpen=navLinks.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded',isOpen?'true':'false');
+});
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{
+  navLinks.classList.remove('open');
+  hamburger.setAttribute('aria-expanded','false');
+  document.querySelectorAll('.nav-links a').forEach(el=>el.classList.remove('active'));
+  a.classList.add('active');
+}));
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href');
+    const target=document.querySelector(id);
+    if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
+  });
+});
+
+/* Scroll Spy for Nav Pills */
+const sections = document.querySelectorAll('header[id], section[id]');
+window.addEventListener('scroll',()=>{
+  let current = '';
+  const scrollPos = window.scrollY + 120;
+  sections.forEach(section => {
+    const top = section.offsetTop;
+    const height = section.offsetHeight;
+    if(scrollPos >= top && scrollPos < top + height){
+      current = '#' + section.getAttribute('id');
+    }
+  });
+  if(current){
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === current);
+    });
+  }
+});
+
+const langBtn=document.getElementById('langBtn');
+langBtn.addEventListener('click',()=>{
+  showToast('हिंदी संस्करण जल्द आ रहा है! Hindi version coming soon in the full MedhaLab course.');
+});
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer=setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+const backTop=document.getElementById('backTop');
+window.addEventListener('scroll',()=>{
+  backTop.classList.toggle('show',window.scrollY>600);
+});
+backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ---------------- FLIPBOOK ---------------- */
+const pages=[
+  {chapter:'Cover',tag:'Cover',icon:'📐',title:"Medha's Mensuration Adventure",text:"A journey through perimeter, area, surface area and volume — told through one unforgettable day at the village fair."},
+  {chapter:'Prologue',tag:'Ch. 0',icon:'🎪',title:'The Village Fair Ground',text:"Medha's village is setting up its annual fair. Before a single tent can go up, someone has to measure the ground — and Medha volunteers, with her wise owl companion close behind."},
+  {chapter:'Squares & Rectangles',tag:'Ch. 1',icon:'🟦',title:'Recalling Squares & Rectangles',text:"The ticket booth is square, the food court is rectangular. Medha dusts off the old formulas — side², and length × breadth — to mark out both stalls exactly."},
+  {chapter:'Triangles & Circles',tag:'Ch. 1',icon:'🔺',title:'Triangular Flags & the Wheel of Fortune',text:"Bunting flags are triangular and the fair's lucky wheel is a perfect circle. Medha measures a flag's area with ½×base×height, then times the wheel's spin using 2πr."},
+  {chapter:'The Trapezium Field',tag:'Ch. 2',icon:'🔷',title:'The Trapezium Field',text:"The food stalls sit on a sloped plot — wider at one end than the other. Medha learns this shape is a trapezium, and that averaging its two parallel sides unlocks its area."},
+  {chapter:'Splitting Quadrilaterals',tag:'Ch. 2',icon:'✂️',title:'Splitting Quadrilaterals into Triangles',text:"One tent's plot has four completely different sides. Medha draws a single diagonal, splits it into two triangles, and adds their areas together to solve the mystery."},
+  {chapter:'The Rhombus Kite',tag:'Ch. 3',icon:'🪁',title:'The Rhombus Kite Stall',text:"A diamond-shaped kite stall catches Medha's eye. Its diagonals cross at a perfect right angle — the secret behind the neat ½×d₁×d₂ shortcut."},
+  {chapter:'Regular Polygons',tag:'Ch. 3',icon:'⬡',title:'The Hexagonal Gazebo',text:"The fair's centrepiece is a six-sided gazebo. Medha slices it like a pizza into six identical triangles from the centre to estimate its full area."},
+  {chapter:'Unfolding the Cube',tag:'Ch. 4',icon:'🎁',title:'Unfolding the Prize Box',text:"A cube-shaped prize box needs gift wrap. Medha flattens it into a cross-shaped net of six squares to see exactly how much paper is needed."},
+  {chapter:'Cylinder Nets',tag:'Ch. 4',icon:'🥁',title:'Wrapping the Drum Stall',text:"The drum stall is a cylinder. Its curved side unrolls into a plain rectangle, with two circles left over for the top and bottom — CSA and TSA finally make sense."},
+  {chapter:'Filling Containers',tag:'Ch. 5',icon:'🥤',title:'The Lemonade Stand Challenge',text:"Which container holds more lemonade — a cuboidal cooler or a cylindrical jug made from the same amount of material? Medha discovers that shape changes everything."},
+  {chapter:'Real-World Blueprints',tag:'Apps',icon:'🌍',title:'Beyond the Fair — Blueprints & Fields',text:"Zooming out, Medha sees the same ideas everywhere: architects measuring buildings, farmers surveying fields, engineers designing the cans on every stall's shelf."},
+  {chapter:'Mastery Certificate',tag:'End',icon:'🏆',title:'Quest Mastery Certificate',text:"From the ticket booth's square to the drum stall's cylinder, Medha has measured the entire fair — and earned her Mensuration Mastery badge!"}
+];
+let currentPage=0,zoomLevel=1;
+const tocList=document.getElementById('tocList');
+pages.forEach((p,i)=>{
+  const div=document.createElement('div');
+  div.className='toc-item';
+  div.innerHTML=`<span>Page ${i+1}: ${p.title}</span><span class="tag">${p.tag}</span>`;
+  div.addEventListener('click',()=>renderPage(i));
+  tocList.appendChild(div);
+});
+function renderPage(i){
+  currentPage=Math.max(0,Math.min(pages.length-1,i));
+  const p=pages[currentPage];
+  const flipPage=document.getElementById('flipPage');
+  flipPage.classList.add('flipping');
+  setTimeout(()=>{
+    document.getElementById('flipIcon').textContent=p.icon;
+    document.getElementById('flipChapter').textContent=`${p.chapter} · ${p.tag}`;
+    document.getElementById('flipTitle').textContent=p.title;
+    document.getElementById('flipText').textContent=p.text;
+    flipPage.classList.remove('flipping');
+  },160);
+  document.getElementById('flipCounter').textContent=`Page ${currentPage+1} of ${pages.length}`;
+  document.querySelectorAll('.toc-item').forEach((el,idx)=>el.classList.toggle('active',idx===currentPage));
+  document.getElementById('flipPrev').disabled=currentPage===0;
+  document.getElementById('flipNext').disabled=currentPage===pages.length-1;
+}
+document.getElementById('flipPrev').addEventListener('click',()=>renderPage(currentPage-1));
+document.getElementById('flipNext').addEventListener('click',()=>renderPage(currentPage+1));
+document.getElementById('zoomIn').addEventListener('click',()=>{ zoomLevel=Math.min(1.4,zoomLevel+.2); document.getElementById('flipPage').style.transform=`scale(${zoomLevel})`; });
+document.getElementById('zoomOut').addEventListener('click',()=>{ zoomLevel=Math.max(.8,zoomLevel-.2); document.getElementById('flipPage').style.transform=`scale(${zoomLevel})`; });
+document.getElementById('expandBtn').addEventListener('click',()=>document.getElementById('flipFrame').classList.toggle('expanded'));
+renderPage(0);
+
+/* ---------------- helper ---------------- */
+function val(id){return parseFloat(document.getElementById(id).value);}
+function setText(id,text){document.getElementById(id).textContent=text;}
+
+/* ---------------- STAGE 1: shape explorer ---------------- */
+let currentShape1='square';
+document.querySelectorAll('.shape-tab[data-shape]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.shape-tab[data-shape]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentShape1=btn.dataset.shape;
+    document.querySelectorAll('.shape-controls[data-shape]').forEach(g=>g.hidden=g.dataset.shape!==currentShape1);
+    drawShape1();
+  });
+});
+['s1-square-side','s1-rect-l','s1-rect-b','s1-tri-base','s1-tri-h','s1-circ-r'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',()=>{
+    setText(id+'-val', document.getElementById(id).value+' cm');
+    drawShape1();
+  });
+});
+function drawShape1(){
+  const svg=document.getElementById('shape1-svg');
+  const scale=10.5, cx=170, cy=140;
+  let html='',area=0,peri=0,label='';
+  if(currentShape1==='square'){
+    const s=val('s1-square-side'); const w=s*scale; const x=cx-w/2,y=cy-w/2;
+    html=`<rect x="${x}" y="${y}" width="${w}" height="${w}" class="shape-fill"/>
+          <text x="${cx}" y="${y+w+22}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">side = ${s} cm</text>`;
+    area=s*s; peri=4*s; label=`Square (side ${s} cm)`;
+  } else if(currentShape1==='rectangle'){
+    const l=val('s1-rect-l'), b=val('s1-rect-b');
+    const w=l*scale,h=b*scale,x=cx-w/2,y=cy-h/2;
+    html=`<rect x="${x}" y="${y}" width="${w}" height="${h}" class="shape-fill"/>
+          <text x="${cx}" y="${y+h+22}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">l = ${l} cm</text>
+          <text x="${x-10}" y="${cy+5}" fill="#45D9C7" font-family="var(--font-mono)" font-size="13" font-weight="600" text-anchor="end">b = ${b} cm</text>`;
+    area=l*b; peri=2*(l+b); label=`Rectangle (${l}×${b} cm)`;
+  } else if(currentShape1==='triangle'){
+    const b=val('s1-tri-base'), h=val('s1-tri-h');
+    const bw=b*scale, bh=h*scale;
+    const x0=cx-bw/2, y0=cy+bh/2, x1=cx+bw/2, apex=[cx,cy-bh/2];
+    html=`<polygon points="${x0},${y0} ${x1},${y0} ${apex[0]},${apex[1]}" class="shape-fill"/>
+          <line x1="${apex[0]}" y1="${apex[1]}" x2="${apex[0]}" y2="${y0}" class="dash-line"/>
+          <text x="${cx}" y="${y0+22}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">base = ${b} cm</text>
+          <text x="${cx+8}" y="${cy}" fill="#45D9C7" font-family="var(--font-mono)" font-size="13" font-weight="600">h = ${h} cm</text>`;
+    area=0.5*b*h;
+    const half=b/2, slant=Math.sqrt(half*half+h*h);
+    peri=b+2*slant;
+    label=`Triangle (base ${b} cm, height ${h} cm)`;
+  } else {
+    const r=val('s1-circ-r'); const R=r*scale;
+    html=`<circle cx="${cx}" cy="${cy}" r="${R}" class="shape-fill"/><line x1="${cx}" y1="${cy}" x2="${cx+R}" y2="${cy}" class="dash-line"/>
+          <circle cx="${cx}" cy="${cy}" r="3.5" fill="#F7C876"/>
+          <text x="${cx+R/2}" y="${cy-10}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">r = ${r} cm</text>`;
+    area=Math.PI*r*r; peri=2*Math.PI*r; label=`Circle (radius ${r} cm)`;
+  }
+  svg.innerHTML=html;
+  setText('s1-area', area.toFixed(2)+' cm²');
+  setText('s1-peri', peri.toFixed(2)+' cm'+(currentShape1==='circle'?' (circumf.)':''));
+  setText('s1-label', label);
+}
+drawShape1();
+
+/* ---------------- STAGE 2: trapezium ---------------- */
+['s2-a','s2-b','s2-h'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',()=>{
+    setText(id+'-val', document.getElementById(id).value+' m');
+    drawTrap();
+  });
+});
+function drawTrap(){
+  const a=val('s2-a'), b=val('s2-b'), h=val('s2-h');
+  const scaleX=2.8, scaleY=4.2, cx=190, baseY=235;
+  const topY=baseY-h*scaleY;
+  const bw=b*scaleX, aw=a*scaleX;
+  const blx=cx-bw/2, brx=cx+bw/2, tlx=cx-aw/2, trx=cx+aw/2;
+  document.getElementById('shape2-svg').innerHTML=`
+    <polygon points="${blx},${baseY} ${brx},${baseY} ${trx},${topY} ${tlx},${topY}" class="shape-fill"/>
+    <line x1="${cx}" y1="${baseY}" x2="${cx}" y2="${topY}" class="dash-line"/>
+    <text x="${cx}" y="${topY-12}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">a = ${a} m</text>
+    <text x="${cx}" y="${baseY+24}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">b = ${b} m</text>
+    <text x="${cx+10}" y="${(baseY+topY)/2}" fill="#45D9C7" font-family="var(--font-mono)" font-size="13" font-weight="600">h = ${h} m</text>`;
+  const area=0.5*(a+b)*h;
+  setText('s2-area', area.toFixed(1)+' m²');
+  setText('s2-hectare', (area/10000).toFixed(4)+' ha');
+}
+drawTrap();
+
+/* ---------------- STAGE 3: kite challenge ---------------- */
+let s3Target=96;
+['s3-d1','s3-d2'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',()=>{
+    setText(id+'-val', document.getElementById(id).value+' m');
+    drawKite();
+  });
+});
+function drawKite(){
+  const d1=val('s3-d1'), d2=val('s3-d2');
+  const scale=9.5, cx=170, cy=145;
+  const hw=d1*scale/2, hh=d2*scale/2;
+  const top=[cx,cy-hh], right=[cx+hw,cy], bottom=[cx,cy+hh], left=[cx-hw,cy];
+  document.getElementById('shape3-svg').innerHTML=`
+    <polygon points="${top} ${right} ${bottom} ${left}" class="shape-fill"/>
+    <line x1="${left[0]}" y1="${left[1]}" x2="${right[0]}" y2="${right[1]}" class="dash-line"/>
+    <line x1="${top[0]}" y1="${top[1]}" x2="${bottom[0]}" y2="${bottom[1]}" class="dash-line"/>
+    <text x="${cx}" y="${cy-hh-12}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">d₂ = ${d2} m</text>
+    <text x="${cx+hw+10}" y="${cy+5}" fill="#45D9C7" font-family="var(--font-mono)" font-size="13" font-weight="600">d₁ = ${d1} m</text>`;
+  const area=0.5*d1*d2;
+  const err=Math.abs(s3Target-area);
+  setText('s3-area', area.toFixed(1)+' m²');
+  const statusEl=document.getElementById('s3-status');
+  if(err<=3){ statusEl.textContent='⭐ Perfect Match! Area = '+area.toFixed(1)+' m²'; statusEl.classList.add('success'); }
+  else { const pct=Math.max(0,100-(err/s3Target)*100); statusEl.textContent=pct.toFixed(0)+'% match — off by '+err.toFixed(1)+' m²'; statusEl.classList.remove('success'); }
+}
+document.getElementById('s3-random').addEventListener('click',()=>{
+  const rd1=Math.floor(Math.random()*18)+6, rd2=Math.floor(Math.random()*18)+6;
+  s3Target=Math.round(0.5*rd1*rd2);
+  setText('s3-target', s3Target+' m²');
+  drawKite();
+});
+document.getElementById('s3-reset').addEventListener('click',()=>{
+  document.getElementById('s3-d1').value=10; document.getElementById('s3-d2').value=10;
+  setText('s3-d1-val','10 m'); setText('s3-d2-val','10 m');
+  s3Target=96; setText('s3-target','96 m²');
+  drawKite();
+});
+drawKite();
+
+/* ---------------- STAGE 4: solid net unfolder ---------------- */
+let currentShape4='cube';
+document.querySelectorAll('.shape-tab[data-shape4]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.shape-tab[data-shape4]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentShape4=btn.dataset.shape4;
+    document.querySelectorAll('.shape-controls[data-shape4]').forEach(g=>g.hidden=g.dataset.shape4!==currentShape4);
+    drawSolid();
+  });
+});
+['s4-cube-a','s4-cuboid-l','s4-cuboid-b','s4-cuboid-h','s4-cyl-r','s4-cyl-h'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',()=>{
+    setText(id+'-val', document.getElementById(id).value+' cm');
+    drawSolid();
+  });
+});
+function cuboidNetSVG(l,b,h,scale,pad){
+  const Lb=b*scale, Ll=l*scale, Lh=h*scale;
+  const totalW=2*Lb+2*Ll, totalH=Lh+2*Lb;
+  const xLeft=pad, xFront=pad+Lb, xRight=pad+Lb+Ll, xBack=pad+2*Lb+Ll;
+  const yMid=pad+Lb;
+  let s='';
+  s+=`<rect x="${xLeft}" y="${yMid}" width="${Lb}" height="${Lh}" class="shape-fill"/>`;
+  s+=`<rect x="${xFront}" y="${yMid}" width="${Ll}" height="${Lh}" class="shape-fill"/>`;
+  s+=`<rect x="${xRight}" y="${yMid}" width="${Lb}" height="${Lh}" class="shape-fill"/>`;
+  s+=`<rect x="${xBack}" y="${yMid}" width="${Ll}" height="${Lh}" class="shape-fill"/>`;
+  s+=`<rect x="${xFront}" y="${pad}" width="${Ll}" height="${Lb}" class="shape-fill"/>`;
+  s+=`<rect x="${xFront}" y="${yMid+Lh}" width="${Ll}" height="${Lb}" class="shape-fill"/>`;
+  return {svg:s, w:totalW+pad*2, h:totalH+pad*2};
+}
+function cylinderNetSVG(r,h,scale,pad){
+  const rectW=2*Math.PI*r*scale, rectH=h*scale, circD=2*r*scale;
+  const totalW=Math.max(rectW,circD);
+  const rectX=pad+(totalW-rectW)/2, circX=pad+(totalW-circD)/2;
+  const circ1Y=pad, rectY=pad+circD+10, circ2Y=rectY+rectH+10;
+  let s='';
+  s+=`<ellipse cx="${circX+circD/2}" cy="${circ1Y+circD/2}" rx="${circD/2}" ry="${circD/2}" class="shape-fill"/>`;
+  s+=`<rect x="${rectX}" y="${rectY}" width="${rectW}" height="${rectH}" class="shape-fill"/>`;
+  s+=`<ellipse cx="${circX+circD/2}" cy="${circ2Y+circD/2}" rx="${circD/2}" ry="${circD/2}" class="shape-fill"/>`;
+  return {svg:s, w:totalW+pad*2, h:circ2Y+circD+pad};
+}
+function drawSolid(){
+  const svg=document.getElementById('shape4-svg');
+  let lsa=0,tsa=0,result;
+  if(currentShape4==='cube'){
+    const a=val('s4-cube-a');
+    result=cuboidNetSVG(a,a,a,18,16);
+    lsa=4*a*a; tsa=6*a*a;
+  } else if(currentShape4==='cuboid'){
+    const l=val('s4-cuboid-l'), b=val('s4-cuboid-b'), h=val('s4-cuboid-h');
+    result=cuboidNetSVG(l,b,h,14,16);
+    lsa=2*h*(l+b); tsa=2*(l*b+b*h+h*l);
+  } else {
+    const r=val('s4-cyl-r'), h=val('s4-cyl-h');
+    result=cylinderNetSVG(r,h,11.5,16);
+    lsa=2*Math.PI*r*h; tsa=2*Math.PI*r*(r+h);
+  }
+  svg.setAttribute('viewBox', `0 0 ${result.w} ${result.h}`);
+  svg.innerHTML=result.svg;
+  setText('s4-lsa', lsa.toFixed(1)+' cm²');
+  setText('s4-tsa', tsa.toFixed(1)+' cm²');
+}
+drawSolid();
+
+/* ---------------- STAGE 5: container efficiency ---------------- */
+['s5-budget','s5-r','s5-x'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',()=>{
+    setText(id+'-val', document.getElementById(id).value+(id==='s5-budget'?' cm²':' cm'));
+    updateEfficiency();
+  });
+});
+function updateEfficiency(){
+  const S=val('s5-budget'), r=val('s5-r'), x=val('s5-x');
+  const aCube=Math.sqrt(S/6), vCube=Math.pow(aCube,3);
+  const hCyl=(S-2*Math.PI*r*r)/(2*Math.PI*r);
+  const vCyl= hCyl>0 ? Math.PI*r*r*hCyl : 0;
+  const hCub=(S-2*x*x)/(4*x);
+  const vCub= hCub>0 ? x*x*hCub : 0;
+  const maxV=Math.max(vCube,vCyl,vCub,1);
+  document.getElementById('s5-cube-bar').style.width=(vCube/maxV*100)+'%';
+  document.getElementById('s5-cuboid-bar').style.width=(vCub/maxV*100)+'%';
+  document.getElementById('s5-cyl-bar').style.width=(vCyl/maxV*100)+'%';
+  setText('s5-cube-val', vCube.toFixed(0)+' cm³');
+  setText('s5-cuboid-val', hCub>0 ? vCub.toFixed(0)+' cm³' : 'not feasible');
+  setText('s5-cyl-val', hCyl>0 ? vCyl.toFixed(0)+' cm³' : 'not feasible');
+  let winner='Cube';
+  if(vCyl>=vCube && vCyl>=vCub) winner='Cylinder';
+  else if(vCub>=vCube && vCub>=vCyl) winner='Cuboid';
+  setText('s5-winner', winner);
+}
+updateEfficiency();
+</script>
+</body>
+</html>
