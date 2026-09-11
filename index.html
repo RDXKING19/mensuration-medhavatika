@@ -213,23 +213,50 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.01e
 .hero-stats{display:grid;grid-template-columns:repeat(4,auto);gap:32px;}
 .stat b{display:block;font-family:var(--font-display);font-size:1.95rem;color:var(--teal);}
 .stat span{font-size:.86rem;color:var(--ink-faint);font-weight:500;}
-.hero-art{position:relative;height:460px;}
-.hero-art svg{width:100%;height:100%;}
+.hero-art{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+}
+.hero-img-wrap{
+  position:relative;
+  width:100%;
+  max-width:480px;
+  aspect-ratio:1/1;
+  border-radius:24px;
+  overflow:hidden;
+  border:2px solid rgba(69,217,199,.4);
+  box-shadow:0 24px 60px -10px rgba(0,0,0,.75), 0 0 40px -5px rgba(69,217,199,.35);
+  background:var(--panel-solid);
+}
+.hero-img-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .4s ease;
+}
+.hero-img-wrap:hover img{
+  transform:scale(1.03);
+}
 .float-tag{
   position:absolute;font-family:var(--font-mono);font-size:.88rem;color:var(--amber-soft);
-  background:rgba(18,26,56,.85);border:1px solid var(--panel-border);padding:7px 14px;border-radius:10px;
-  animation:floaty 5s ease-in-out infinite;box-shadow:0 8px 18px -4px rgba(0,0,0,.4);
+  background:rgba(10,15,30,.88);backdrop-filter:blur(10px);border:1px solid rgba(242,169,59,.4);padding:7px 14px;border-radius:12px;
+  animation:floaty 5s ease-in-out infinite;box-shadow:0 8px 20px -4px rgba(0,0,0,.6);z-index:2;
 }
 @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
 .hero-badge{
-  position:absolute;left:50%;bottom:0;transform:translateX(-50%);
-  background:var(--panel-solid);border:1px solid var(--panel-border);border-radius:14px;
-  padding:14px 24px;font-size:.92rem;color:var(--ink-dim);white-space:nowrap;
+  position:absolute;left:50%;bottom:-16px;transform:translateX(-50%);
+  background:rgba(14,21,48,.92);backdrop-filter:blur(12px);border:1px solid rgba(69,217,199,.4);border-radius:14px;
+  padding:12px 22px;font-size:.88rem;color:var(--ink-dim);white-space:nowrap;box-shadow:0 12px 30px rgba(0,0,0,.6);z-index:3;
 }
 .hero-badge b{color:var(--ink);}
 @media (max-width:900px){
   .hero-inner{grid-template-columns:1fr;}
-  .hero-art{height:340px;order:-1;}
+  .hero-art{order:-1;margin-bottom:20px;}
+  .hero-img-wrap{max-width:380px;}
   .hero-stats{grid-template-columns:repeat(2,1fr);}
 }
 
@@ -471,36 +498,13 @@ footer{border-top:1px solid var(--panel-border);padding:76px 0 34px;background:v
       </div>
     </div>
     <div class="hero-art">
-      <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="210" cy="210" r="170" fill="rgba(69,217,199,.05)" stroke="rgba(69,217,199,.18)" stroke-width="1"/>
-        <path d="M60 300 A150 150 0 0 1 360 300" fill="none" stroke="rgba(242,169,59,.35)" stroke-width="2" stroke-dasharray="4 6"/>
-        <!-- Owl -->
-        <g transform="translate(255,150)">
-          <ellipse cx="0" cy="30" rx="42" ry="48" fill="#F2A93B"/>
-          <circle cx="-16" cy="10" r="15" fill="#0A0F1E"/>
-          <circle cx="16" cy="10" r="15" fill="#0A0F1E"/>
-          <circle cx="-16" cy="10" r="6" fill="#EAF0FF"/>
-          <circle cx="16" cy="10" r="6" fill="#EAF0FF"/>
-          <polygon points="0,20 -7,32 7,32" fill="#0A0F1E"/>
-          <polygon points="-42,-6 -20,-24 -28,4" fill="#F2A93B"/>
-          <polygon points="42,-6 20,-24 28,4" fill="#F2A93B"/>
-          <rect x="-30" y="62" width="60" height="10" rx="3" fill="#45D9C7" transform="rotate(-6 0 67)"/>
-        </g>
-        <!-- Medha -->
-        <g transform="translate(140,235)">
-          <circle cx="0" cy="0" r="26" fill="#F7C876"/>
-          <path d="M-34 40 Q0 10 34 40 L34 110 L-34 110 Z" fill="#45D9C7"/>
-          <rect x="-46" y="30" width="10" height="58" rx="4" fill="#F1637A" transform="rotate(18 -46 30)"/>
-          <rect x="30" y="24" width="58" height="8" rx="3" fill="#EAF0FF" transform="rotate(-24 30 24)"/>
-        </g>
-        <text x="30" y="70" font-family="IBM Plex Mono" font-size="13" fill="#45D9C7">l × b</text>
-        <text x="330" y="330" font-family="IBM Plex Mono" font-size="13" fill="#F2A93B">πr²</text>
-        <text x="60" y="360" font-family="IBM Plex Mono" font-size="13" fill="#F1637A">a³</text>
-      </svg>
-      <span class="float-tag" style="top:6%;left:4%;">📏 cm</span>
-      <span class="float-tag" style="top:14%;right:2%;animation-delay:.8s;">🔺 area</span>
-      <span class="float-tag" style="bottom:18%;left:0;animation-delay:1.6s;">⭕ πr²</span>
-      <span class="float-tag" style="bottom:2%;right:8%;animation-delay:2.4s;">📦 volume</span>
+      <div class="hero-img-wrap">
+        <img src="assets/mensuration-hero.jpg" alt="Medha and her owl companion exploring the Geometry Fairground" width="480" height="480" loading="eager">
+      </div>
+      <span class="float-tag" style="top:4%;left:0;">📏 Fairground Quest</span>
+      <span class="float-tag" style="top:12%;right:-10px;animation-delay:.8s;">📐 3D Geometry</span>
+      <span class="float-tag" style="bottom:18%;left:-12px;animation-delay:1.6s;">🦉 Owl Mentor</span>
+      <span class="float-tag" style="bottom:6%;right:0;animation-delay:2.4s;">📦 Area &amp; Volume</span>
       <div class="hero-badge">Fairground Quest: <b>Measuring the Village Fair</b> · Status: <b style="color:var(--teal);">Active 📐</b></div>
     </div>
   </div>
