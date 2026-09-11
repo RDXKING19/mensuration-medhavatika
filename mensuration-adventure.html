@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mensuration Adventure — MedhāVatika</title>
-<meta name="description" content="Mensuration Adventure by MedhāVatika — explore interactive stages, live measurement labs, a storybook flipbook, and master perimeter, area, surface area and volume for Grade 8.">
+<title>क्षेत्रमिती साहस — MedhāVatika | Mensuration Adventure</title>
+<meta name="description" content="MedhāVatika प्रस्तुत क्षेत्रमिती साहस — इयत्ता ८ वी साठी परस्परसंवादी टप्पे, थेट लॅब प्रयोग, १३ पानांचे सचित्र फ्लिपबुक आणि परिमिती, क्षेत्रफळ, पृष्ठफळ व घनफळाचे प्रात्यक्षिक शिक्षण.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0A0F1E;
@@ -27,8 +27,8 @@
   --radius-md:14px;
   --radius-sm:8px;
   --maxw:1240px;
-  --font-display:'Space Grotesk',system-ui,sans-serif;
-  --font-body:'IBM Plex Sans',system-ui,sans-serif;
+  --font-display:'Space Grotesk','Noto Sans Devanagari',system-ui,sans-serif;
+  --font-body:'IBM Plex Sans','Noto Sans Devanagari',system-ui,sans-serif;
   --font-mono:'IBM Plex Mono',ui-monospace,monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -134,11 +134,17 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.01e
 }
 
 .nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+
+/* Language Dropdown */
+.lang-dropdown-wrapper{
+  position:relative;
+  display:inline-block;
+}
 .lang-btn{
   font-size:.82rem;font-weight:600;color:#EAF0FF;
   background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);
   padding:7px 12px;border-radius:9999px;
-  display:inline-flex;align-items:center;gap:5px;
+  display:inline-flex;align-items:center;gap:6px;
   cursor:pointer;transition:all .18s ease;white-space:nowrap;
 }
 .lang-btn:hover{
@@ -147,7 +153,36 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.01e
 .lang-btn:focus-visible{
   outline:2px solid var(--teal);outline-offset:2px;
 }
-.lang-btn .chevron{font-size:.68rem;opacity:.8;}
+.lang-btn .chevron{font-size:.68rem;opacity:.8;transition:transform .2s ease;}
+.lang-dropdown-wrapper.open .lang-btn .chevron{transform:rotate(180deg);}
+
+.lang-menu{
+  position:absolute;top:calc(100% + 8px);right:0;
+  background:#0E1530;
+  border:1px solid rgba(69,217,199,.35);
+  border-radius:14px;
+  box-shadow:0 12px 32px rgba(0,0,0,.7);
+  padding:6px;
+  display:none;flex-direction:column;gap:4px;
+  min-width:160px;
+  z-index:100;
+  backdrop-filter:blur(20px);
+}
+.lang-dropdown-wrapper.open .lang-menu{display:flex;}
+.lang-item{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 12px;border-radius:8px;
+  font-size:.86rem;font-weight:600;color:#D8E3F8;
+  cursor:pointer;transition:all .15s ease;
+  background:none;border:none;width:100%;text-align:left;
+}
+.lang-item:hover{
+  background:rgba(69,217,199,.15);color:#FFF;
+}
+.lang-item.active{
+  background:rgba(69,217,199,.22);color:#45D9C7;
+  border:1px solid rgba(69,217,199,.4);
+}
 
 .demo-btn{
   font-size:.86rem;font-weight:700;color:#FFF;
@@ -158,9 +193,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.01e
   display:inline-flex;align-items:center;gap:6px;
   text-decoration:none;transition:all .2s ease;flex-shrink:0;
 }
-.demo-btn .demo-icon{
-  font-size:1rem;
-}
+.demo-btn .demo-icon{font-size:1rem;}
 .demo-btn:hover{
   transform:translateY(-2px);
   background:linear-gradient(135deg,#1AC3FF 0%,#0088FF 60%,#0066FF 100%);
@@ -199,7 +232,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.01e
 }
 .hero-inner{max-width:var(--maxw);margin:0 auto;padding:0 26px;display:grid;grid-template-columns:1.08fr .92fr;gap:46px;align-items:center;}
 .hero-tag{margin-bottom:20px;}
-.hero h1{font-size:clamp(2.6rem,5.2vw,3.9rem);line-height:1.08;margin-bottom:22px;}
+.hero h1{font-size:clamp(2.4rem,4.8vw,3.8rem);line-height:1.12;margin-bottom:22px;}
 .hero h1 em{font-style:normal;color:var(--amber-soft);}
 .hero p{color:var(--ink-dim);font-size:1.14rem;max-width:560px;margin-bottom:34px;line-height:1.68;}
 .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px;}
@@ -218,18 +251,16 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.01e
   display:flex;
   align-items:center;
   justify-content:center;
-  width:100%;
 }
 .hero-img-wrap{
-  position:relative;
   width:100%;
   max-width:480px;
   aspect-ratio:1/1;
-  border-radius:24px;
+  border-radius:28px;
   overflow:hidden;
-  border:2px solid rgba(69,217,199,.4);
-  box-shadow:0 24px 60px -10px rgba(0,0,0,.75), 0 0 40px -5px rgba(69,217,199,.35);
-  background:var(--panel-solid);
+  border:2px solid rgba(69,217,199,.25);
+  box-shadow:0 20px 50px -10px rgba(0,0,0,.8), 0 0 35px rgba(69,217,199,.15);
+  background:radial-gradient(circle at center, #121A38 0%, #080C1B 100%);
 }
 .hero-img-wrap img{
   width:100%;
@@ -242,161 +273,201 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.01e
   transform:scale(1.03);
 }
 .float-tag{
-  position:absolute;font-family:var(--font-mono);font-size:.88rem;color:var(--amber-soft);
-  background:rgba(10,15,30,.88);backdrop-filter:blur(10px);border:1px solid rgba(242,169,59,.4);padding:7px 14px;border-radius:12px;
-  animation:floaty 5s ease-in-out infinite;box-shadow:0 8px 20px -4px rgba(0,0,0,.6);z-index:2;
+  position:absolute;background:rgba(14,21,48,.92);backdrop-filter:blur(10px);
+  border:1px solid var(--panel-border);padding:8px 14px;border-radius:10px;
+  font-family:var(--font-mono);font-size:.82rem;color:var(--ink);box-shadow:0 8px 20px rgba(0,0,0,.4);
+  animation:float 4s ease-in-out infinite;
 }
-@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
 .hero-badge{
-  position:absolute;left:50%;bottom:-16px;transform:translateX(-50%);
-  background:rgba(14,21,48,.92);backdrop-filter:blur(12px);border:1px solid rgba(69,217,199,.4);border-radius:14px;
-  padding:12px 22px;font-size:.88rem;color:var(--ink-dim);white-space:nowrap;box-shadow:0 12px 30px rgba(0,0,0,.6);z-index:3;
+  position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
+  background:var(--panel-solid);border:1px solid var(--panel-border);
+  padding:9px 18px;border-radius:999px;font-size:.88rem;white-space:nowrap;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
 }
-.hero-badge b{color:var(--ink);}
-@media (max-width:900px){
-  .hero-inner{grid-template-columns:1fr;}
-  .hero-art{order:-1;margin-bottom:20px;}
-  .hero-img-wrap{max-width:380px;}
-  .hero-stats{grid-template-columns:repeat(2,1fr);}
+@media (max-width:980px){
+  .hero-inner{grid-template-columns:1fr;gap:40px;}
+  .hero-art{max-width:440px;margin:0 auto;}
+  .hero-stats{grid-template-columns:repeat(2,1fr);gap:20px;}
 }
 
-/* ---------- SECTION LABEL ---------- */
-.section-head{max-width:760px;margin-bottom:48px;}
-.section-head h2{font-size:clamp(2rem,3.6vw,2.75rem);margin:16px 0 16px;}
-.section-head p{color:var(--ink-dim);font-size:1.08rem;line-height:1.68;}
+/* ---------- FLIPBOOK SECTION ---------- */
+.flipbook-section{padding:90px 0;border-top:1px solid var(--panel-border);background:linear-gradient(180deg,transparent,#0E1530 50%,transparent);}
+.section-head{text-align:center;max-width:760px;margin:0 auto 52px;}
+.section-head .eyebrow{justify-content:center;margin-bottom:12px;}
+.section-head .eyebrow::before{display:none;}
+.section-head h2{font-size:clamp(2.1rem,3.8vw,2.8rem);margin-bottom:16px;}
+.section-head p{color:var(--ink-dim);font-size:1.08rem;}
 
-/* ---------- FLIPBOOK ---------- */
-.flipbook-section{padding:98px 0;border-top:1px solid var(--panel-border);}
 .flip-wrap{
-  display:grid;grid-template-columns:310px 1fr;gap:32px;
-  background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--radius-lg);
-  padding:28px;backdrop-filter:blur(6px);
+  display:grid;grid-template-columns:300px 1fr;gap:32px;
+  background:var(--panel);border:1px solid var(--panel-border);
+  border-radius:var(--radius-lg);padding:28px;
 }
-.toc-box h5{font-family:var(--font-mono);font-size:.92rem;color:var(--teal);margin-bottom:16px;font-weight:600;}
-.toc-list{max-height:460px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;}
+.toc-box{background:var(--panel-solid);border:1px solid var(--panel-border);border-radius:var(--radius-md);padding:18px;max-height:540px;overflow-y:auto;}
+.toc-box h5{font-family:var(--font-mono);font-size:.85rem;color:var(--teal);margin-bottom:12px;font-weight:600;}
+.toc-list{display:flex;flex-direction:column;gap:6px;}
 .toc-item{
-  display:flex;justify-content:space-between;gap:10px;padding:11px 12px;border-radius:8px;
-  font-size:.94rem;color:var(--ink-dim);transition:.15s;
+  padding:9px 12px;border-radius:8px;font-size:.88rem;color:var(--ink-dim);
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  cursor:pointer;transition:background .15s, color .15s;
 }
-.toc-item:hover{background:rgba(255,255,255,.06);color:var(--ink);}
+.toc-item:hover{background:rgba(255,255,255,.05);color:var(--ink);}
 .toc-item.active{background:rgba(69,217,199,.15);color:var(--teal);font-weight:600;}
-.toc-item span.tag{font-family:var(--font-mono);font-size:.76rem;color:var(--ink-faint);white-space:nowrap;}
-.flip-stage{display:flex;flex-direction:column;}
-.flip-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;}
-.flip-toolbar .tools{display:flex;gap:10px;}
-.tool-btn{width:38px;height:38px;border:1px solid var(--panel-border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;color:var(--ink-dim);transition:.15s;}
-.tool-btn:hover{color:var(--teal);border-color:var(--teal);background:rgba(69,217,199,.08);}
+.toc-item .tag{font-family:var(--font-mono);font-size:.74rem;color:var(--ink-faint);}
+.toc-item.active .tag{color:var(--teal);}
+
+.flip-stage{display:flex;flex-direction:column;gap:18px;}
+.flip-toolbar{display:flex;justify-content:space-between;align-items:center;padding:0 6px;}
+.flip-counter{font-family:var(--font-mono);font-size:.9rem;color:var(--amber-soft);font-weight:600;}
+.flip-toolbar .tools{display:flex;gap:8px;}
+.tool-btn{
+  background:var(--panel-solid);border:1px solid var(--panel-border);
+  color:var(--ink);padding:7px 12px;border-radius:8px;font-size:.85rem;font-weight:500;
+  transition:border-color .15s, background .15s;
+}
+.tool-btn:hover{border-color:var(--teal);background:rgba(69,217,199,.1);}
+
 .flip-page-frame{
-  position:relative;flex:1;min-height:390px;border-radius:var(--radius-md);
-  background:linear-gradient(160deg,#141D40,#0E1530);
-  border:1px solid var(--panel-border);
-  display:flex;align-items:center;justify-content:center;overflow:hidden;
-  perspective:1400px;
+  background:#070B17;border:1px solid var(--panel-border);
+  border-radius:var(--radius-md);min-height:390px;padding:36px;
+  display:flex;flex-direction:column;justify-content:center;position:relative;
+  box-shadow:inset 0 0 60px rgba(0,0,0,.6);
+  perspective:1200px;
 }
 .flip-page{
-  width:90%;padding:38px;text-align:left;transition:transform .35s ease, opacity .35s ease;
+  transition:transform .35s ease, opacity .35s ease;
   transform-origin:left center;
 }
-.flip-page.flipping{transform:rotateY(-12deg);opacity:.4;}
-.flip-icon{font-size:3.4rem;margin-bottom:16px;}
-.flip-chapter{font-family:var(--font-mono);font-size:.88rem;color:var(--amber-soft);margin-bottom:10px;font-weight:600;}
-.flip-title{font-family:var(--font-display);font-size:1.75rem;margin-bottom:14px;color:var(--ink);}
-.flip-text{color:var(--ink);font-size:1.14rem;max-width:62ch;line-height:1.72;}
-.flip-nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px;}
+.flip-page.flipping{transform:rotateY(-30deg) scale(.96);opacity:0;}
+.flip-icon{font-size:3.2rem;margin-bottom:14px;}
+.flip-chapter{font-family:var(--font-mono);font-size:.85rem;color:var(--teal);margin-bottom:8px;font-weight:600;}
+.flip-title{font-size:1.85rem;line-height:1.22;margin-bottom:16px;color:var(--ink);}
+.flip-text{color:var(--ink-dim);font-size:1.15rem;line-height:1.75;max-width:700px;}
+
+.flip-nav{display:flex;justify-content:space-between;align-items:center;gap:14px;}
 .flip-nav button{
-  border:1px solid var(--panel-border);padding:11px 20px;border-radius:12px;font-size:.96rem;font-weight:600;color:var(--ink);transition:.15s;
+  flex:1;background:var(--panel-solid);border:1px solid var(--panel-border);
+  padding:13px;border-radius:10px;font-weight:600;font-size:.98rem;color:var(--ink);
+  transition:all .15s;
 }
-.flip-nav button:disabled{opacity:.35;cursor:default;}
-.flip-nav button:not(:disabled):hover{border-color:var(--teal);color:var(--teal);background:rgba(69,217,199,.08);}
-.flip-counter{font-family:var(--font-mono);font-size:.92rem;color:var(--ink-dim);font-weight:500;}
-.flip-page-frame.expanded{min-height:580px;}
-@media (max-width:820px){.flip-wrap{grid-template-columns:1fr;}.toc-list{max-height:240px;}}
+.flip-nav button:hover:not(:disabled){border-color:var(--amber);background:rgba(242,169,59,.1);color:var(--amber-soft);}
+.flip-nav button:disabled{opacity:.35;cursor:not-allowed;}
 
-/* ---------- STAGE ---------- */
-.stage{padding:100px 0;border-top:1px solid var(--panel-border);}
-.stage-eyebrow{margin-bottom:18px;}
-.stage h2{font-size:clamp(2rem,3.7vw,2.75rem);margin-bottom:18px;}
-.stage-intro{color:var(--ink-dim);max-width:800px;margin-bottom:50px;font-size:1.12rem;line-height:1.68;}
-.stage-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
-.stage.reverse .stage-grid{grid-template-columns:1fr 1fr;}
-.stage.reverse .concept-panel{order:2;}
-.stage.reverse .sim-panel{order:1;}
-@media (max-width:960px){
-  .stage-grid{grid-template-columns:1fr;}
-  .stage.reverse .concept-panel,.stage.reverse .sim-panel{order:0;}
+@media (max-width:880px){
+  .flip-wrap{grid-template-columns:1fr;}
+  .toc-box{max-height:220px;}
 }
-.concept-panel h3{font-size:1.35rem;margin-bottom:14px;}
-.concept-body{color:var(--ink-dim);font-size:1.06rem;margin-bottom:20px;line-height:1.68;}
+
+/* ---------- STAGES (LEARNING CHAPTERS) ---------- */
+.stage{padding:94px 0;border-top:1px solid var(--panel-border);}
+.stage-eyebrow{margin-bottom:14px;}
+.stage h2{font-size:clamp(2rem,3.6vw,2.7rem);margin-bottom:16px;}
+.stage-intro{color:var(--ink-dim);font-size:1.14rem;max-width:820px;margin-bottom:48px;line-height:1.7;}
+
+.stage-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:start;}
+.stage.reverse .stage-grid{grid-template-columns:.95fr 1.05fr;}
+.stage.reverse .sim-panel{order:-1;}
+@media (max-width:980px){
+  .stage-grid, .stage.reverse .stage-grid{grid-template-columns:1fr;}
+  .stage.reverse .sim-panel{order:0;}
+}
+
+.concept-panel{display:flex;flex-direction:column;gap:22px;}
+.concept-panel h3{font-size:1.55rem;color:var(--amber-soft);}
+.concept-body{color:var(--ink-dim);font-size:1.08rem;line-height:1.75;}
 .formula-box{
-  background:var(--panel);border:1px solid var(--panel-border);border-left:4px solid var(--teal);
-  border-radius:var(--radius-sm);padding:18px 22px;font-family:var(--font-mono);font-size:1.06rem;
-  color:var(--amber-soft);margin-bottom:22px;overflow-x:auto;white-space:nowrap;line-height:1.6;
+  background:var(--panel-solid);border:1px solid var(--panel-border);
+  border-left:4px solid var(--teal);padding:18px 22px;border-radius:var(--radius-sm);
+  font-family:var(--font-mono);font-size:1.05rem;color:var(--ink);line-height:1.8;
 }
-.formula-box small{display:block;font-family:var(--font-body);color:var(--ink-dim);font-size:.88rem;margin-top:8px;white-space:normal;line-height:1.5;}
-.bullet-list{display:flex;flex-direction:column;gap:14px;margin-bottom:24px;}
-.bullet-list li{padding-left:22px;position:relative;font-size:1.04rem;color:var(--ink-dim);line-height:1.65;}
-.bullet-list li::before{content:'';position:absolute;left:0;top:.58em;width:9px;height:9px;border-radius:2px;background:var(--amber);}
-.bullet-list b{color:var(--ink);}
-.exercise-box{
-  background:rgba(69,217,199,.06);border:1px solid rgba(69,217,199,.22);border-radius:var(--radius-md);
-  padding:22px 24px;margin-bottom:22px;
-}
-.exercise-box h4{font-family:var(--font-mono);font-size:.94rem;color:var(--teal);margin-bottom:12px;font-weight:600;}
-.exercise-box p{font-size:1.02rem;color:var(--ink-dim);margin-bottom:10px;line-height:1.65;}
-.exercise-box .sol{font-family:var(--font-mono);font-size:1.02rem;color:var(--ink);white-space:pre-line;margin-bottom:10px;line-height:1.6;}
-.exercise-box .result{font-size:1.02rem;color:var(--amber-soft);font-weight:500;}
-.mascot-tip{
-  display:flex;gap:16px;align-items:flex-start;background:var(--panel);border:1px solid var(--panel-border);
-  border-radius:var(--radius-md);padding:18px 20px;
-}
-.mascot-tip .avatar{font-size:2rem;flex-shrink:0;}
-.mascot-tip p{font-size:1.02rem;color:var(--ink-dim);line-height:1.6;}
-.mascot-tip b{color:var(--ink);}
+.formula-box small{display:block;font-family:var(--font-body);font-size:.85rem;color:var(--ink-faint);margin-top:8px;}
+.bullet-list{display:flex;flex-direction:column;gap:12px;}
+.bullet-list li{position:relative;padding-left:24px;color:var(--ink-dim);font-size:1.02rem;line-height:1.6;}
+.bullet-list li::before{content:'▸';position:absolute;left:0;color:var(--amber);font-size:1.1rem;}
+.bullet-list li b{color:var(--ink);}
 
+.exercise-box{
+  background:rgba(69,217,199,.05);border:1px dashed rgba(69,217,199,.3);
+  border-radius:var(--radius-md);padding:22px;
+}
+.exercise-box h4{font-size:1.12rem;color:var(--teal);margin-bottom:10px;}
+.exercise-box p{color:var(--ink-dim);font-size:1rem;margin-bottom:10px;line-height:1.65;}
+.exercise-box .sol{font-family:var(--font-mono);font-size:.95rem;color:var(--amber-soft);background:rgba(0,0,0,.3);padding:10px 14px;border-radius:6px;margin:8px 0 12px;white-space:pre-line;}
+.exercise-box .result{color:var(--ink);font-weight:600;font-size:1.02rem;}
+
+.mascot-tip{
+  display:flex;gap:16px;align-items:flex-start;
+  background:var(--panel);border:1px solid var(--panel-border);
+  padding:16px 20px;border-radius:var(--radius-md);
+}
+.mascot-tip .avatar{font-size:2.2rem;flex-shrink:0;}
+.mascot-tip p{font-size:.98rem;color:var(--ink-dim);line-height:1.6;}
+.mascot-tip p b{color:var(--amber-soft);}
+
+/* ---------- SIMULATION LAB PANELS ---------- */
 .sim-panel{
-  background:var(--panel-solid);border:1px solid var(--panel-border);border-radius:var(--radius-lg);
-  padding:28px;position:sticky;top:92px;
+  background:var(--panel-solid);border:1px solid var(--panel-border);
+  border-radius:var(--radius-lg);padding:28px;display:flex;flex-direction:column;gap:20px;
+  box-shadow:0 12px 36px rgba(0,0,0,.45);
 }
-.sim-label{font-family:var(--font-mono);font-size:.84rem;color:var(--amber-soft);margin-bottom:8px;font-weight:600;}
-.sim-panel h4{font-size:1.28rem;margin-bottom:10px;}
-.sim-desc{color:var(--ink-dim);font-size:1.0rem;margin-bottom:20px;line-height:1.6;}
-.shape-tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
-.shape-tab{border:1px solid var(--panel-border);padding:8px 16px;border-radius:20px;font-size:.92rem;color:var(--ink-dim);font-weight:500;transition:.15s;}
-.shape-tab.active{background:rgba(242,169,59,.18);border-color:var(--amber);color:var(--amber-soft);font-weight:600;}
+.sim-label{font-family:var(--font-mono);font-size:.82rem;color:var(--teal);letter-spacing:.05em;text-transform:uppercase;font-weight:600;}
+.sim-panel h4{font-size:1.35rem;}
+.sim-desc{color:var(--ink-faint);font-size:.92rem;line-height:1.55;}
+
 .sim-visual{
-  background:radial-gradient(circle at 50% 30%, rgba(69,217,199,.08), transparent 65%);
-  border:1px solid var(--panel-border);border-radius:var(--radius-md);
-  display:flex;align-items:center;justify-content:center;padding:14px;margin-bottom:20px;min-height:280px;
+  background:#070B17;border:1px solid var(--panel-border);
+  border-radius:var(--radius-md);min-height:280px;display:flex;align-items:center;justify-content:center;
+  padding:16px;position:relative;overflow:hidden;
 }
-.shape-fill{fill:rgba(69,217,199,.25);stroke:var(--teal);stroke-width:2.5;}
-.dash-line{stroke:var(--amber-soft);stroke-width:1.8;stroke-dasharray:5 4;}
-.slider-row{margin-bottom:18px;}
-.slider-row .row-top{display:flex;justify-content:space-between;font-size:.94rem;color:var(--ink-dim);margin-bottom:8px;}
-.slider-row .row-top b{color:var(--ink);font-family:var(--font-mono);font-weight:600;font-size:1.02rem;}
-input[type=range]{width:100%;height:6px;}
-.sim-readouts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px;}
-.readout-card{background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--radius-sm);padding:14px 16px;}
-.readout-card .val{font-family:var(--font-display);font-size:1.5rem;color:var(--teal);font-weight:600;}
-.readout-card .lbl{font-size:.84rem;color:var(--ink-faint);margin-top:2px;font-weight:500;}
-.sim-status{margin-top:16px;font-size:1.02rem;color:var(--ink-dim);padding:12px 16px;border:1px dashed var(--panel-border);border-radius:var(--radius-sm);line-height:1.5;}
-.sim-status.success{color:var(--amber-soft);border-color:var(--amber);background:rgba(242,169,59,.12);font-weight:500;}
-.sim-actions{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;}
-.sim-actions button{border:1px solid var(--panel-border);padding:11px 18px;border-radius:12px;font-size:.92rem;font-weight:600;transition:.15s;}
-.sim-actions button:hover{border-color:var(--teal);color:var(--teal);background:rgba(69,217,199,.08);}
-.bar-row{margin-bottom:14px;}
-.bar-row .bar-top{display:flex;justify-content:space-between;font-size:.95rem;margin-bottom:6px;color:var(--ink-dim);}
-.bar-track{height:14px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden;}
-.bar-fill{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--teal),var(--amber-soft));transition:width .3s ease;width:0%;}
+.sim-visual svg{max-width:100%;max-height:280px;}
+.shape-fill{fill:rgba(69,217,199,.18);stroke:#45D9C7;stroke-width:2.5;transition:all .2s;}
+.shape-fill-alt{fill:rgba(242,169,59,.18);stroke:#F2A93B;stroke-width:2.5;transition:all .2s;}
+.dash-line{stroke:rgba(255,255,255,.5);stroke-dasharray:5 4;stroke-width:1.5;}
+
+.shape-tabs{display:flex;gap:8px;background:rgba(0,0,0,.35);padding:4px;border-radius:10px;}
+.shape-tab{flex:1;padding:8px;border-radius:7px;font-size:.88rem;font-weight:600;color:var(--ink-dim);text-align:center;transition:all .15s;}
+.shape-tab:hover{color:var(--ink);background:rgba(255,255,255,.05);}
+.shape-tab.active{background:var(--teal);color:#0A0F1E;}
+
+.slider-row{display:flex;flex-direction:column;gap:6px;}
+.slider-row .row-top{display:flex;justify-content:space-between;align-items:center;font-size:.92rem;}
+.slider-row .row-top span{color:var(--ink-dim);}
+.slider-row .row-top b{font-family:var(--font-mono);color:var(--amber-soft);font-size:1rem;}
+.slider-row input[type=range]{width:100%;height:6px;border-radius:3px;background:rgba(255,255,255,.1);outline:none;}
+
+.sim-readouts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.readout-card{background:rgba(0,0,0,.4);border:1px solid var(--panel-border);padding:14px;border-radius:10px;text-align:center;}
+.readout-card .val{font-family:var(--font-mono);font-size:1.35rem;color:var(--teal);font-weight:600;}
+.readout-card .lbl{font-size:.82rem;color:var(--ink-faint);margin-top:2px;}
+
+.sim-actions{display:flex;gap:10px;}
+.sim-actions button{
+  flex:1;padding:10px;border-radius:8px;font-size:.88rem;font-weight:600;
+  background:rgba(255,255,255,.06);border:1px solid var(--panel-border);color:var(--ink);
+  transition:all .15s;
+}
+.sim-actions button:hover{background:rgba(255,255,255,.12);border-color:var(--teal);}
+.sim-status{
+  font-family:var(--font-mono);font-size:.88rem;color:var(--ink-dim);
+  background:rgba(0,0,0,.35);padding:10px 14px;border-radius:8px;text-align:center;
+}
+.sim-status.success{color:#45D9C7;background:rgba(69,217,199,.15);border:1px solid var(--teal);}
+
+/* Efficiency Bars (Stage 5) */
+.bar-row{display:flex;flex-direction:column;gap:6px;}
+.bar-top{display:flex;justify-content:space-between;font-size:.88rem;}
+.bar-top span:first-child{color:var(--ink-dim);}
+.bar-top span:last-child{font-family:var(--font-mono);color:var(--ink);font-weight:600;}
+.bar-track{height:12px;background:rgba(0,0,0,.4);border-radius:6px;overflow:hidden;border:1px solid var(--panel-border);}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--amber));width:0%;transition:width .3s ease;}
 
 /* ---------- MASTER BANNER ---------- */
 .master-banner{
-  margin:0 auto;max-width:var(--maxw);padding:0 26px;
+  padding:50px 0;background:linear-gradient(135deg,rgba(69,217,199,.12),rgba(242,169,59,.12));
+  border-top:1px solid var(--panel-border);border-bottom:1px solid var(--panel-border);
 }
-.master-banner .inner{
-  background:linear-gradient(135deg,rgba(242,169,59,.12),rgba(69,217,199,.1));
-  border:1px solid var(--panel-border);border-radius:var(--radius-lg);
-  padding:44px 32px;text-align:center;
-}
+.master-banner .inner{max-width:var(--maxw);margin:0 auto;padding:0 24px;text-align:center;}
 .master-banner .inner p{font-family:var(--font-mono);font-size:.88rem;color:var(--teal);margin-bottom:16px;letter-spacing:.03em;font-weight:600;}
 .master-eq{display:flex;justify-content:center;align-items:center;gap:22px;flex-wrap:wrap;font-family:var(--font-display);font-size:clamp(1.15rem,2.6vw,1.65rem);}
 .master-eq .term{display:flex;flex-direction:column;align-items:center;gap:8px;}
@@ -437,75 +508,85 @@ footer{border-top:1px solid var(--panel-border);padding:76px 0 34px;background:v
 #backTop.show{opacity:1;pointer-events:auto;}
 #toast{
   position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:var(--panel-solid);border:1px solid var(--panel-border);padding:14px 24px;border-radius:14px;
-  font-size:.96rem;opacity:0;pointer-events:none;transition:.25s;z-index:60;
+  background:var(--panel-solid);border:1px solid var(--teal);padding:14px 24px;border-radius:14px;
+  font-size:.96rem;opacity:0;pointer-events:none;transition:.25s;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.6);
+  color:#FFF;font-weight:500;
 }
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
 
+<!-- ================= NAVBAR ================= -->
 <nav class="site-nav" aria-label="Main Navigation">
   <div class="nav-inner">
     <a href="#hero" class="brand" aria-label="MedhaVatika - A Garden of Intellect">
       <div class="brand-logo-wrap" aria-hidden="true">🌿</div>
       <div class="brand-text-wrap">
         <span class="brand-name">MedhāVatika</span>
-        <span class="brand-tagline">A Garden of Intellect</span>
+        <span class="brand-tagline" data-i18n="brand_tagline">A Garden of Intellect</span>
       </div>
     </a>
     <ul class="nav-links" id="navLinks" role="menubar">
-      <li role="none"><a href="#hero" class="nav-pill active" role="menuitem">Home</a></li>
-      <li role="none"><a href="#flipbook" class="nav-pill" role="menuitem">Medha's Story <span class="nav-badge badge-book">BOOK</span></a></li>
-      <li role="none"><a href="#ch1" class="nav-pill" role="menuitem">Foundations</a></li>
-      <li role="none"><a href="#ch2" class="nav-pill" role="menuitem">Trapezium</a></li>
-      <li role="none"><a href="#ch3" class="nav-pill" role="menuitem">Rhombus</a></li>
-      <li role="none"><a href="#ch3" class="nav-pill" role="menuitem">Kite Challenge <span class="nav-badge badge-game">GAME</span></a></li>
-      <li role="none"><a href="#ch4" class="nav-pill" role="menuitem">Surface Area</a></li>
-      <li role="none"><a href="#ch5" class="nav-pill" role="menuitem">Volume</a></li>
-      <li role="none"><a href="#applications" class="nav-pill" role="menuitem">Applications</a></li>
+      <li role="none"><a href="#hero" class="nav-pill active" role="menuitem" data-i18n="nav_home">Home</a></li>
+      <li role="none"><a href="#flipbook" class="nav-pill" role="menuitem"><span data-i18n="nav_story">Medha's Story</span> <span class="nav-badge badge-book" data-i18n="badge_book">BOOK</span></a></li>
+      <li role="none"><a href="#ch1" class="nav-pill" role="menuitem" data-i18n="nav_foundations">Foundations</a></li>
+      <li role="none"><a href="#ch2" class="nav-pill" role="menuitem" data-i18n="nav_trapezium">Trapezium</a></li>
+      <li role="none"><a href="#ch3" class="nav-pill" role="menuitem" data-i18n="nav_rhombus">Rhombus</a></li>
+      <li role="none"><a href="#ch3" class="nav-pill" role="menuitem"><span data-i18n="nav_kite">Kite Challenge</span> <span class="nav-badge badge-game" data-i18n="badge_game">GAME</span></a></li>
+      <li role="none"><a href="#ch4" class="nav-pill" role="menuitem" data-i18n="nav_surface">Surface Area</a></li>
+      <li role="none"><a href="#ch5" class="nav-pill" role="menuitem" data-i18n="nav_volume">Volume</a></li>
+      <li role="none"><a href="#applications" class="nav-pill" role="menuitem" data-i18n="nav_applications">Applications</a></li>
     </ul>
     <div class="nav-right">
-      <button class="lang-btn" id="langBtn" aria-label="Select Language (Current: English)" aria-haspopup="dialog">
-        <span aria-hidden="true">🌐</span>
-        <span>English</span>
-        <span class="chevron" aria-hidden="true">▾</span>
-      </button>
-      <a class="demo-btn" href="tel:8007614867" aria-label="Book a Demo - Call +91 8007614867">
+      <div class="lang-dropdown-wrapper" id="langDropdown">
+        <button class="lang-btn" id="langBtn" aria-label="Select Language (भाषा निवडा)" aria-haspopup="true" aria-expanded="false">
+          <span aria-hidden="true">🌐</span>
+          <span id="langCurrentLabel">मराठी</span>
+          <span class="chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="lang-menu" id="langMenu" role="menu">
+          <button class="lang-item active" data-lang="mr" role="menuitem">🇮🇳 मराठी (Marathi)</button>
+          <button class="lang-item" data-lang="en" role="menuitem">🇬🇧 English</button>
+          <button class="lang-item" data-lang="hi" role="menuitem">🇮🇳 हिंदी (Hindi)</button>
+        </div>
+      </div>
+      <a class="demo-btn" href="tel:8007614867" aria-label="Book a Demo - Call +91 8007614867" id="demoBtn">
         <span class="demo-icon" aria-hidden="true">📞</span>
-        <span>Book A Demo</span>
+        <span data-i18n="demo_btn">Book A Demo</span>
       </a>
       <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">☰</button>
     </div>
   </div>
 </nav>
 
+<!-- ================= HERO ================= -->
 <header class="hero" id="hero">
   <div class="hero-inner">
     <div>
-      <p class="eyebrow hero-tag">MedhaLab™ · Mathematics Interactive Quest</p>
-      <h1>Mensuration<br><em>Adventure</em></h1>
-      <p>Step onto the fairground with Medha and her owl companion as ordinary shapes turn into a hands-on measuring quest. <strong>Mensuration Adventure</strong> by <em>MedhāVatika</em> turns perimeter, area, surface area and volume into a playful, interactive experience built for Grade 8 explorers.</p>
+      <p class="eyebrow hero-tag" data-i18n="hero_eyebrow">MedhaLab™ · Mathematics Interactive Quest</p>
+      <h1 data-i18n="hero_title">Mensuration<br><em>Adventure</em></h1>
+      <p data-i18n="hero_desc">Step onto the fairground with Medha and her owl companion as ordinary shapes turn into a hands-on measuring quest. <strong>Mensuration Adventure</strong> by <em>MedhāVatika</em> turns perimeter, area, surface area and volume into a playful, interactive experience built for Grade 8 explorers.</p>
       <div class="hero-ctas">
-        <a href="#flipbook" class="btn-primary">📖 Open Interactive Storybook →</a>
-        <a href="#ch1" class="btn-secondary">📐 Explore Lab Simulations</a>
+        <a href="#flipbook" class="btn-primary" data-i18n="hero_cta1">📖 Open Interactive Storybook →</a>
+        <a href="#ch1" class="btn-secondary" data-i18n="hero_cta2">📐 Explore Lab Simulations</a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><b>5</b><span>Interactive Stages</span></div>
-        <div class="stat"><b>6</b><span>Live Lab Simulations</span></div>
-        <div class="stat"><b>100%</b><span>Hands-On Mastery</span></div>
-        <div class="stat"><b>Grade 8</b><span>Curriculum Aligned</span></div>
+        <div class="stat"><b>5</b><span data-i18n="stat_stages">Interactive Stages</span></div>
+        <div class="stat"><b>6</b><span data-i18n="stat_sims">Live Lab Simulations</span></div>
+        <div class="stat"><b>100%</b><span data-i18n="stat_hands_on">Hands-On Mastery</span></div>
+        <div class="stat"><b data-i18n="stat_grade_val">Grade 8</b><span data-i18n="stat_grade_lbl">Curriculum Aligned</span></div>
       </div>
     </div>
     <div class="hero-art">
       <div class="hero-img-wrap">
         <img src="assets/mensuration-hero.jpg" alt="Medha and her owl companion exploring the Geometry Fairground" width="480" height="480" loading="eager">
       </div>
-      <span class="float-tag" style="top:4%;left:0;">📏 Fairground Quest</span>
-      <span class="float-tag" style="top:12%;right:-10px;animation-delay:.8s;">📐 3D Geometry</span>
-      <span class="float-tag" style="bottom:18%;left:-12px;animation-delay:1.6s;">🦉 Owl Mentor</span>
-      <span class="float-tag" style="bottom:6%;right:0;animation-delay:2.4s;">📦 Area &amp; Volume</span>
-      <div class="hero-badge">Fairground Quest: <b>Measuring the Village Fair</b> · Status: <b style="color:var(--teal);">Active 📐</b></div>
+      <span class="float-tag" style="top:4%;left:0;" data-i18n="hero_float1">📏 Fairground Quest</span>
+      <span class="float-tag" style="top:12%;right:-10px;animation-delay:.8s;" data-i18n="hero_float2">📐 3D Geometry</span>
+      <span class="float-tag" style="bottom:18%;left:-12px;animation-delay:1.6s;" data-i18n="hero_float3">🦉 Owl Mentor</span>
+      <span class="float-tag" style="bottom:6%;right:0;animation-delay:2.4s;" data-i18n="hero_float4">📦 Area &amp; Volume</span>
+      <div class="hero-badge" data-i18n="hero_badge">Fairground Quest: <b>Measuring the Village Fair</b> · Status: <b style="color:var(--teal);">Active 📐</b></div>
     </div>
   </div>
 </header>
@@ -514,13 +595,13 @@ footer{border-top:1px solid var(--panel-border);padding:76px 0 34px;background:v
 <section class="flipbook-section" id="flipbook">
   <div class="container">
     <div class="section-head">
-      <p class="eyebrow">✨ Interactive Flipbook Reader</p>
-      <h2>Medha's Mensuration Adventure</h2>
-      <p>Turn through 13 illustrated storybook pages with Medha and her owl guide as a village fair turns every shape underfoot into a measuring mystery.</p>
+      <p class="eyebrow" data-i18n="flip_eyebrow">✨ Interactive Flipbook Reader</p>
+      <h2 data-i18n="flip_h2">Medha's Mensuration Adventure</h2>
+      <p data-i18n="flip_desc">Turn through 13 illustrated storybook pages with Medha and her owl guide as a village fair turns every shape underfoot into a measuring mystery.</p>
     </div>
     <div class="flip-wrap">
       <div class="toc-box">
-        <h5>📑 Table of Contents</h5>
+        <h5 data-i18n="toc_title">📑 Table of Contents</h5>
         <div class="toc-list" id="tocList"></div>
       </div>
       <div class="flip-stage">
@@ -541,8 +622,8 @@ footer{border-top:1px solid var(--panel-border);padding:76px 0 34px;background:v
           </div>
         </div>
         <div class="flip-nav">
-          <button id="flipPrev">◀ Previous</button>
-          <button id="flipNext">Next ▶</button>
+          <button id="flipPrev" data-i18n="flip_prev">◀ Previous</button>
+          <button id="flipNext" data-i18n="flip_next">Next ▶</button>
         </div>
       </div>
     </div>
@@ -552,14 +633,14 @@ footer{border-top:1px solid var(--panel-border);padding:76px 0 34px;background:v
 <!-- ================= STAGE 1 ================= -->
 <section class="stage" id="ch1">
   <div class="container">
-    <p class="eyebrow stage-eyebrow">Stage 1 · Perimeter &amp; Area Foundations</p>
-    <h2>Recalling Squares, Rectangles, Triangles &amp; Circles</h2>
-    <p class="stage-intro">Before the fair can be planned, Medha must recall the basics: how far a boundary stretches (perimeter) and how much flat ground a shape actually covers (area). These four shapes are the building blocks for everything that follows.</p>
+    <p class="eyebrow stage-eyebrow" data-i18n="s1_eyebrow">Stage 1 · Perimeter &amp; Area Foundations</p>
+    <h2 data-i18n="s1_h2">Recalling Squares, Rectangles, Triangles &amp; Circles</h2>
+    <p class="stage-intro" data-i18n="s1_intro">Before the fair can be planned, Medha must recall the basics: how far a boundary stretches (perimeter) and how much flat ground a shape actually covers (area). These four shapes are the building blocks for everything that follows.</p>
     <div class="stage-grid">
       <div class="concept-panel">
-        <h3>Boundary vs. Surface</h3>
-        <p class="concept-body">Perimeter is a length — it measures the distance around the outside edge, in units like cm or m. Area is a surface measurement — it measures how much flat space is enclosed, always in square units like cm² or m².</p>
-        <div class="formula-box">
+        <h3 data-i18n="s1_c_h3">Boundary vs. Surface</h3>
+        <p class="concept-body" data-i18n="s1_c_body">Perimeter is a length — it measures the distance around the outside edge, in units like cm or m. Area is a surface measurement — it measures how much flat space is enclosed, always in square units like cm² or m².</p>
+        <div class="formula-box" data-i18n="s1_formula">
           Square: A = s² , P = 4s<br>
           Rectangle: A = l × b , P = 2(l + b)<br>
           Triangle: A = ½ × base × height<br>
@@ -567,58 +648,58 @@ footer{border-top:1px solid var(--panel-border);padding:76px 0 34px;background:v
           <small>s = side, l = length, b = breadth, r = radius. Use π ≈ 3.14 or 22/7.</small>
         </div>
         <ul class="bullet-list">
-          <li><b>Square &amp; rectangle:</b> everyday flat surfaces — floor tiles, notebook pages, a cricket pitch.</li>
-          <li><b>Triangle:</b> the height must always be measured perpendicular to the chosen base, not along a slanted side.</li>
-          <li><b>Circle:</b> wheels, clock faces, circular flower beds — every point on the edge is the same distance (r) from the centre.</li>
+          <li data-i18n="s1_b1"><b>Square &amp; rectangle:</b> everyday flat surfaces — floor tiles, notebook pages, a cricket pitch.</li>
+          <li data-i18n="s1_b2"><b>Triangle:</b> the height must always be measured perpendicular to the chosen base, not along a slanted side.</li>
+          <li data-i18n="s1_b3"><b>Circle:</b> wheels, clock faces, circular flower beds — every point on the edge is the same distance (r) from the centre.</li>
         </ul>
         <div class="exercise-box">
-          <h4>Solved Exercise 1.1 — Same Perimeter, Different Area</h4>
-          <p><b>Problem:</b> A square garden and a rectangular garden both have a perimeter of 40 m. The rectangle's length is 12 m. Which garden has more area?</p>
-          <p class="sol">Square: side = 40 ÷ 4 = 10 m → Area = 10 × 10 = 100 m²
+          <h4 data-i18n="s1_ex_h4">Solved Exercise 1.1 — Same Perimeter, Different Area</h4>
+          <p data-i18n="s1_ex_prob"><b>Problem:</b> A square garden and a rectangular garden both have a perimeter of 40 m. The rectangle's length is 12 m. Which garden has more area?</p>
+          <p class="sol" data-i18n="s1_ex_sol">Square: side = 40 ÷ 4 = 10 m → Area = 10 × 10 = 100 m²
 Rectangle: 2(l+b) = 40 → b = 20 − 12 = 8 m → Area = 12 × 8 = 96 m²</p>
-          <p class="result">Result: The square garden wins (100 m² vs 96 m²) — for a fixed perimeter, a square always encloses the most area among all rectangles!</p>
+          <p class="result" data-i18n="s1_ex_res">Result: The square garden wins (100 m² vs 96 m²) — for a fixed perimeter, a square always encloses the most area among all rectangles!</p>
         </div>
         <div class="mascot-tip">
           <span class="avatar">🦉</span>
-          <p><b>Owl's Lab Tip:</b> "Watch what happens to the area readout when you stretch a rectangle long and thin while keeping its perimeter idea in mind — area shrinks fast, even though the shape still looks big!"</p>
+          <p data-i18n="s1_mascot"><b>Owl's Lab Tip:</b> "Watch what happens to the area readout when you stretch a rectangle long and thin while keeping its perimeter idea in mind — area shrinks fast, even though the shape still looks big!"</p>
         </div>
       </div>
       <div class="sim-panel">
-        <p class="sim-label">Live Measurement Lab</p>
-        <h4>Shape Area &amp; Perimeter Explorer</h4>
-        <p class="sim-desc">Pick a shape, drag its dimension sliders, and watch the figure redraw to scale with live area and perimeter readouts.</p>
+        <p class="sim-label" data-i18n="sim_label">Live Measurement Lab</p>
+        <h4 data-i18n="s1_sim_h4">Shape Area &amp; Perimeter Explorer</h4>
+        <p class="sim-desc" data-i18n="s1_sim_desc">Pick a shape, drag its dimension sliders, and watch the figure redraw to scale with live area and perimeter readouts.</p>
         <div class="shape-tabs">
-          <button class="shape-tab active" data-shape="square">Square</button>
-          <button class="shape-tab" data-shape="rectangle">Rectangle</button>
-          <button class="shape-tab" data-shape="triangle">Triangle</button>
-          <button class="shape-tab" data-shape="circle">Circle</button>
+          <button class="shape-tab active" data-shape="square" data-i18n="tab_square">Square</button>
+          <button class="shape-tab" data-shape="rectangle" data-i18n="tab_rectangle">Rectangle</button>
+          <button class="shape-tab" data-shape="triangle" data-i18n="tab_triangle">Triangle</button>
+          <button class="shape-tab" data-shape="circle" data-i18n="tab_circle">Circle</button>
         </div>
         <div class="sim-visual"><svg id="shape1-svg" viewBox="0 0 340 280" width="100%" height="280"></svg></div>
 
         <div class="shape-controls" data-shape="square">
-          <div class="slider-row"><div class="row-top"><span>Side (s)</span><b id="s1-square-side-val">14 cm</b></div>
+          <div class="slider-row"><div class="row-top"><span data-i18n="lbl_side">Side (s)</span><b id="s1-square-side-val">14 cm</b></div>
           <input type="range" id="s1-square-side" min="4" max="22" step="1" value="14"></div>
         </div>
         <div class="shape-controls" data-shape="rectangle" hidden>
-          <div class="slider-row"><div class="row-top"><span>Length (l)</span><b id="s1-rect-l-val">20 cm</b></div>
+          <div class="slider-row"><div class="row-top"><span data-i18n="lbl_length">Length (l)</span><b id="s1-rect-l-val">20 cm</b></div>
           <input type="range" id="s1-rect-l" min="6" max="26" step="1" value="20"></div>
-          <div class="slider-row"><div class="row-top"><span>Breadth (b)</span><b id="s1-rect-b-val">12 cm</b></div>
+          <div class="slider-row"><div class="row-top"><span data-i18n="lbl_breadth">Breadth (b)</span><b id="s1-rect-b-val">12 cm</b></div>
           <input type="range" id="s1-rect-b" min="4" max="18" step="1" value="12"></div>
         </div>
         <div class="shape-controls" data-shape="triangle" hidden>
-          <div class="slider-row"><div class="row-top"><span>Base (b)</span><b id="s1-tri-base-val">18 cm</b></div>
+          <div class="slider-row"><div class="row-top"><span data-i18n="lbl_base">Base (b)</span><b id="s1-tri-base-val">18 cm</b></div>
           <input type="range" id="s1-tri-base" min="6" max="22" step="1" value="18"></div>
-          <div class="slider-row"><div class="row-top"><span>Height (h)</span><b id="s1-tri-h-val">12 cm</b></div>
+          <div class="slider-row"><div class="row-top"><span data-i18n="lbl_height">Height (h)</span><b id="s1-tri-h-val">12 cm</b></div>
           <input type="range" id="s1-tri-h" min="4" max="18" step="1" value="12"></div>
         </div>
         <div class="shape-controls" data-shape="circle" hidden>
-          <div class="slider-row"><div class="row-top"><span>Radius (r)</span><b id="s1-circ-r-val">9 cm</b></div>
+          <div class="slider-row"><div class="row-top"><span data-i18n="lbl_radius">Radius (r)</span><b id="s1-circ-r-val">9 cm</b></div>
           <input type="range" id="s1-circ-r" min="3" max="13" step="1" value="9"></div>
         </div>
 
         <div class="sim-readouts">
-          <div class="readout-card"><div class="val" id="s1-area">—</div><div class="lbl">Area</div></div>
-          <div class="readout-card"><div class="val" id="s1-peri">—</div><div class="lbl">Perimeter</div></div>
+          <div class="readout-card"><div class="val" id="s1-area">—</div><div class="lbl" data-i18n="lbl_area">Area</div></div>
+          <div class="readout-card"><div class="val" id="s1-peri">—</div><div class="lbl" data-i18n="lbl_perimeter">Perimeter</div></div>
         </div>
         <div class="sim-status" id="s1-label">Square (side 14 cm)</div>
       </div>
@@ -629,48 +710,48 @@ Rectangle: 2(l+b) = 40 → b = 20 − 12 = 8 m → Area = 12 × 8 = 96 m²</p>
 <!-- ================= STAGE 2 ================= -->
 <section class="stage reverse" id="ch2">
   <div class="container">
-    <p class="eyebrow stage-eyebrow">Stage 2 · Area of Trapezium &amp; Quadrilaterals</p>
-    <h2>The Trapezium Field &amp; Splitting Quadrilaterals</h2>
-    <p class="stage-intro">The fair's food stalls sit on a plot with two parallel edges of different lengths — a trapezium. Medha discovers that any quadrilateral, however oddly shaped, can be tamed by drawing a single diagonal.</p>
+    <p class="eyebrow stage-eyebrow" data-i18n="s2_eyebrow">Stage 2 · Area of Trapezium &amp; Quadrilaterals</p>
+    <h2 data-i18n="s2_h2">The Trapezium Field &amp; Splitting Quadrilaterals</h2>
+    <p class="stage-intro" data-i18n="s2_intro">The fair's food stalls sit on a plot with two parallel edges of different lengths — a trapezium. Medha discovers that any quadrilateral, however oddly shaped, can be tamed by drawing a single diagonal.</p>
     <div class="stage-grid">
       <div class="sim-panel">
-        <p class="sim-label">Live Measurement Lab</p>
-        <h4>Trapezium Field Builder</h4>
-        <p class="sim-desc">Drag the two parallel sides and the perpendicular height to reshape the field and see its area update instantly.</p>
+        <p class="sim-label" data-i18n="sim_label">Live Measurement Lab</p>
+        <h4 data-i18n="s2_sim_h4">Trapezium Field Builder</h4>
+        <p class="sim-desc" data-i18n="s2_sim_desc">Drag the two parallel sides and the perpendicular height to reshape the field and see its area update instantly.</p>
         <div class="sim-visual"><svg id="shape2-svg" viewBox="0 0 380 280" width="100%" height="280"></svg></div>
-        <div class="slider-row"><div class="row-top"><span>Parallel side a (top)</span><b id="s2-a-val">40 m</b></div>
+        <div class="slider-row"><div class="row-top"><span data-i18n="s2_lbl_a">Parallel side a (top)</span><b id="s2-a-val">40 m</b></div>
         <input type="range" id="s2-a" min="10" max="100" step="5" value="40"></div>
-        <div class="slider-row"><div class="row-top"><span>Parallel side b (bottom)</span><b id="s2-b-val">60 m</b></div>
+        <div class="slider-row"><div class="row-top"><span data-i18n="s2_lbl_b">Parallel side b (bottom)</span><b id="s2-b-val">60 m</b></div>
         <input type="range" id="s2-b" min="10" max="100" step="5" value="60"></div>
-        <div class="slider-row"><div class="row-top"><span>Height h (perpendicular)</span><b id="s2-h-val">25 m</b></div>
+        <div class="slider-row"><div class="row-top"><span data-i18n="s2_lbl_h">Height h (perpendicular)</span><b id="s2-h-val">25 m</b></div>
         <input type="range" id="s2-h" min="5" max="40" step="5" value="25"></div>
         <div class="sim-readouts">
-          <div class="readout-card"><div class="val" id="s2-area">—</div><div class="lbl">Area (m²)</div></div>
-          <div class="readout-card"><div class="val" id="s2-hectare">—</div><div class="lbl">In hectares</div></div>
+          <div class="readout-card"><div class="val" id="s2-area">—</div><div class="lbl" data-i18n="lbl_area_sqm">Area (m²)</div></div>
+          <div class="readout-card"><div class="val" id="s2-hectare">—</div><div class="lbl" data-i18n="lbl_hectares">In hectares</div></div>
         </div>
       </div>
       <div class="concept-panel">
-        <h3>Parallel Sides &amp; Perpendicular Height</h3>
-        <p class="concept-body">A trapezium has exactly one pair of parallel sides. Its area is simply the average of the two parallel sides, multiplied by the perpendicular distance between them. A general quadrilateral has no such shortcut — so we split it into two triangles along a diagonal instead.</p>
-        <div class="formula-box">
+        <h3 data-i18n="s2_c_h3">Parallel Sides &amp; Perpendicular Height</h3>
+        <p class="concept-body" data-i18n="s2_c_body">A trapezium has exactly one pair of parallel sides. Its area is simply the average of the two parallel sides, multiplied by the perpendicular distance between them. A general quadrilateral has no such shortcut — so we split it into two triangles along a diagonal instead.</p>
+        <div class="formula-box" data-i18n="s2_formula">
           Trapezium: A = ½ × (a + b) × h<br>
           Quadrilateral (via diagonal d): A = ½ × d × (h₁ + h₂)
           <small>a, b = parallel sides; h = height between them; h₁, h₂ = perpendicular offsets of the other two vertices from diagonal d.</small>
         </div>
         <ul class="bullet-list">
-          <li><b>Identify the parallel sides:</b> the two edges that never meet, like the sloped boundary of a field.</li>
-          <li><b>Height, not slant:</b> h is always measured straight across, perpendicular to both parallel sides.</li>
-          <li><b>Splitting a quadrilateral:</b> one diagonal turns any four-sided plot into two easy triangles whose areas simply add.</li>
+          <li data-i18n="s2_b1"><b>Identify the parallel sides:</b> the two edges that never meet, like the sloped boundary of a field.</li>
+          <li data-i18n="s2_b2"><b>Height, not slant:</b> h is always measured straight across, perpendicular to both parallel sides.</li>
+          <li data-i18n="s2_b3"><b>Splitting a quadrilateral:</b> one diagonal turns any four-sided plot into two easy triangles whose areas simply add.</li>
         </ul>
         <div class="exercise-box">
-          <h4>Solved Exercise 2.1 — Trapezium-Shaped Field</h4>
-          <p><b>Problem:</b> A farmer's field is trapezium-shaped with parallel sides 60 m and 40 m, and the perpendicular distance between them is 25 m. Find its area.</p>
-          <p class="sol">A = ½ × (60 + 40) × 25 = ½ × 100 × 25 = 1250 m²</p>
-          <p class="result">Result: The field covers 1250 m² — that's 0.125 hectares (1 hectare = 10,000 m²).</p>
+          <h4 data-i18n="s2_ex_h4">Solved Exercise 2.1 — Trapezium-Shaped Field</h4>
+          <p data-i18n="s2_ex_prob"><b>Problem:</b> A farmer's field is trapezium-shaped with parallel sides 60 m and 40 m, and the perpendicular distance between them is 25 m. Find its area.</p>
+          <p class="sol" data-i18n="s2_ex_sol">A = ½ × (60 + 40) × 25 = ½ × 100 × 25 = 1250 m²</p>
+          <p class="result" data-i18n="s2_ex_res">Result: The field covers 1250 m² — that's 0.125 hectares (1 hectare = 10,000 m²).</p>
         </div>
         <div class="mascot-tip">
           <span class="avatar">👧</span>
-          <p><b>Medhā's Observation:</b> "The slider values above match this exact problem — nudge height up or down and see the area move away from 1250 m²!"</p>
+          <p data-i18n="s2_mascot"><b>Medhā's Observation:</b> "The slider values above match this exact problem — nudge height up or down and see the area move away from 1250 m²!"</p>
         </div>
       </div>
     </div>
@@ -680,52 +761,52 @@ Rectangle: 2(l+b) = 40 → b = 20 − 12 = 8 m → Area = 12 × 8 = 96 m²</p>
 <!-- ================= STAGE 3 ================= -->
 <section class="stage" id="ch3">
   <div class="container">
-    <p class="eyebrow stage-eyebrow">Stage 3 · Area of Rhombus &amp; Polygons</p>
-    <h2>Kite Diagonals &amp; Polygon Patterns</h2>
-    <p class="stage-intro">A diamond-shaped kite stall catches Medha's eye. Its diagonals cross at right angles — and that one fact unlocks a shortcut for the area of every rhombus and kite at the fair.</p>
+    <p class="eyebrow stage-eyebrow" data-i18n="s3_eyebrow">Stage 3 · Area of Rhombus &amp; Polygons</p>
+    <h2 data-i18n="s3_h2">Kite Diagonals &amp; Polygon Patterns</h2>
+    <p class="stage-intro" data-i18n="s3_intro">A diamond-shaped kite stall catches Medha's eye. Its diagonals cross at right angles — and that one fact unlocks a shortcut for the area of every rhombus and kite at the fair.</p>
     <div class="stage-grid">
       <div class="concept-panel">
-        <h3>Diagonals That Cross at Right Angles</h3>
-        <p class="concept-body">In a rhombus (and a kite), the two diagonals always bisect each other at 90°. That lets us build the shape from four identical right triangles, giving a clean shortcut formula. Regular polygons follow a similar idea — slice them from the centre into equal triangles.</p>
-        <div class="formula-box">
+        <h3 data-i18n="s3_c_h3">Diagonals That Cross at Right Angles</h3>
+        <p class="concept-body" data-i18n="s3_c_body">In a rhombus (and a kite), the two diagonals always bisect each other at 90°. That lets us build the shape from four identical right triangles, giving a clean shortcut formula. Regular polygons follow a similar idea — slice them from the centre into equal triangles.</p>
+        <div class="formula-box" data-i18n="s3_formula">
           Rhombus / Kite: A = ½ × d₁ × d₂<br>
           Regular polygon (n sides, side s): A ≈ (n × s²) ÷ (4 × tan(π/n))
           <small>d₁, d₂ = diagonals. A polygon can always be estimated by slicing it into n congruent triangles from its centre.</small>
         </div>
         <ul class="bullet-list">
-          <li><b>Diagonals bisect at 90°:</b> that right angle is exactly why ½ × d₁ × d₂ works.</li>
-          <li><b>Kites and rhombi share a formula:</b> both are built from two pairs of congruent right triangles.</li>
-          <li><b>Any regular polygon</b> can be sliced from its centre into n congruent isosceles triangles to estimate area.</li>
+          <li data-i18n="s3_b1"><b>Diagonals bisect at 90°:</b> that right angle is exactly why ½ × d₁ × d₂ works.</li>
+          <li data-i18n="s3_b2"><b>Kites and rhombi share a formula:</b> both are built from two pairs of congruent right triangles.</li>
+          <li data-i18n="s3_b3"><b>Any regular polygon</b> can be sliced from its centre into n congruent isosceles triangles to estimate area.</li>
         </ul>
         <div class="exercise-box">
-          <h4>Solved Exercise 3.1 — Kite-Shaped Flower Bed</h4>
-          <p><b>Problem:</b> A kite-shaped flower bed has diagonals of 16 m and 12 m. Turf costs ₹45 per m². Find the total cost.</p>
-          <p class="sol">Area = ½ × 16 × 12 = 96 m²
+          <h4 data-i18n="s3_ex_h4">Solved Exercise 3.1 — Kite-Shaped Flower Bed</h4>
+          <p data-i18n="s3_ex_prob"><b>Problem:</b> A kite-shaped flower bed has diagonals of 16 m and 12 m. Turf costs ₹45 per m². Find the total cost.</p>
+          <p class="sol" data-i18n="s3_ex_sol">Area = ½ × 16 × 12 = 96 m²
 Cost = 96 × ₹45 = ₹4,320</p>
-          <p class="result">Result: The gardener needs to budget ₹4,320 for turf.</p>
+          <p class="result" data-i18n="s3_ex_res">Result: The gardener needs to budget ₹4,320 for turf.</p>
         </div>
         <div class="mascot-tip">
           <span class="avatar">🦉</span>
-          <p><b>Owl's Wisdom:</b> "Try to land the challenge on exactly 96 m² — that's this exact flower bed's area!"</p>
+          <p data-i18n="s3_mascot"><b>Owl's Wisdom:</b> "Try to land the challenge on exactly 96 m² — that's this exact flower bed's area!"</p>
         </div>
       </div>
       <div class="sim-panel">
-        <p class="sim-label">🎯 Kite Area Challenge</p>
-        <h4>Match the Target Area</h4>
-        <p class="sim-desc">Tune the two diagonals to hit the target area shown below. Get within 3 m² for a perfect match!</p>
+        <p class="sim-label" data-i18n="s3_sim_label">🎯 Kite Area Challenge</p>
+        <h4 data-i18n="s3_sim_h4">Match the Target Area</h4>
+        <p class="sim-desc" data-i18n="s3_sim_desc">Tune the two diagonals to hit the target area shown below. Get within 3 m² for a perfect match!</p>
         <div class="sim-visual"><svg id="shape3-svg" viewBox="0 0 340 300" width="100%" height="280"></svg></div>
-        <div class="slider-row"><div class="row-top"><span>Diagonal d₁ (horizontal)</span><b id="s3-d1-val">10 m</b></div>
+        <div class="slider-row"><div class="row-top"><span data-i18n="s3_lbl_d1">Diagonal d₁ (horizontal)</span><b id="s3-d1-val">10 m</b></div>
         <input type="range" id="s3-d1" min="4" max="24" step="1" value="10"></div>
-        <div class="slider-row"><div class="row-top"><span>Diagonal d₂ (vertical)</span><b id="s3-d2-val">10 m</b></div>
+        <div class="slider-row"><div class="row-top"><span data-i18n="s3_lbl_d2">Diagonal d₂ (vertical)</span><b id="s3-d2-val">10 m</b></div>
         <input type="range" id="s3-d2" min="4" max="24" step="1" value="10"></div>
         <div class="sim-readouts">
-          <div class="readout-card"><div class="val" id="s3-area">—</div><div class="lbl">Current Area</div></div>
-          <div class="readout-card"><div class="val" id="s3-target">96 m²</div><div class="lbl">Target Area</div></div>
+          <div class="readout-card"><div class="val" id="s3-area">—</div><div class="lbl" data-i18n="s3_lbl_cur">Current Area</div></div>
+          <div class="readout-card"><div class="val" id="s3-target">96 m²</div><div class="lbl" data-i18n="s3_lbl_tgt">Target Area</div></div>
         </div>
-        <div class="sim-status" id="s3-status">Adjust the sliders to close the gap</div>
+        <div class="sim-status" id="s3-status" data-i18n="s3_status_init">Adjust the sliders to close the gap</div>
         <div class="sim-actions">
-          <button id="s3-random">🎲 Random Challenge</button>
-          <button id="s3-reset">↺ Reset</button>
+          <button id="s3-random" data-i18n="btn_random">🎲 Random Challenge</button>
+          <button id="s3-reset" data-i18n="btn_reset">↺ Reset</button>
         </div>
       </div>
     </div>
@@ -735,69 +816,69 @@ Cost = 96 × ₹45 = ₹4,320</p>
 <!-- ================= STAGE 4 ================= -->
 <section class="stage reverse" id="ch4">
   <div class="container">
-    <p class="eyebrow stage-eyebrow">Stage 4 · Surface Area of Solids</p>
-    <h2>Unfolding Nets — Surface Area of Solids</h2>
-    <p class="stage-intro">A prize box needs gift wrap and a drum stall needs fabric around its curved side. Medha learns to flatten 3D solids into 2D nets to see exactly how much material each face needs.</p>
+    <p class="eyebrow stage-eyebrow" data-i18n="s4_eyebrow">Stage 4 · Surface Area of Solids</p>
+    <h2 data-i18n="s4_h2">Unfolding Nets — Surface Area of Solids</h2>
+    <p class="stage-intro" data-i18n="s4_intro">A prize box needs gift wrap and a drum stall needs fabric around its curved side. Medha learns to flatten 3D solids into 2D nets to see exactly how much material each face needs.</p>
     <div class="stage-grid">
       <div class="sim-panel">
-        <p class="sim-label">Live Measurement Lab</p>
-        <h4>Solid Net Unfolder</h4>
-        <p class="sim-desc">Choose a solid, adjust its dimensions, and watch its flattened net unfold with live lateral and total surface area.</p>
+        <p class="sim-label" data-i18n="sim_label">Live Measurement Lab</p>
+        <h4 data-i18n="s4_sim_h4">Solid Net Unfolder</h4>
+        <p class="sim-desc" data-i18n="s4_sim_desc">Choose a solid, adjust its dimensions, and watch its flattened net unfold with live lateral and total surface area.</p>
         <div class="shape-tabs">
-          <button class="shape-tab active" data-shape4="cube">Cube</button>
-          <button class="shape-tab" data-shape4="cuboid">Cuboid</button>
-          <button class="shape-tab" data-shape4="cylinder">Cylinder</button>
+          <button class="shape-tab active" data-shape4="cube" data-i18n="tab_cube">Cube</button>
+          <button class="shape-tab" data-shape4="cuboid" data-i18n="tab_cuboid">Cuboid</button>
+          <button class="shape-tab" data-shape4="cylinder" data-i18n="tab_cylinder">Cylinder</button>
         </div>
         <div class="sim-visual"><svg id="shape4-svg" viewBox="0 0 340 280" width="100%" height="280"></svg></div>
 
         <div class="shape-controls" data-shape4="cube">
-          <div class="slider-row"><div class="row-top"><span>Side (a)</span><b id="s4-cube-a-val">6 cm</b></div>
+          <div class="slider-row"><div class="row-top"><span data-i18n="lbl_side_a">Side (a)</span><b id="s4-cube-a-val">6 cm</b></div>
           <input type="range" id="s4-cube-a" min="3" max="12" step="1" value="6"></div>
         </div>
         <div class="shape-controls" data-shape4="cuboid" hidden>
-          <div class="slider-row"><div class="row-top"><span>Length (l)</span><b id="s4-cuboid-l-val">8 cm</b></div>
+          <div class="slider-row"><div class="row-top"><span data-i18n="lbl_length">Length (l)</span><b id="s4-cuboid-l-val">8 cm</b></div>
           <input type="range" id="s4-cuboid-l" min="3" max="14" step="1" value="8"></div>
-          <div class="slider-row"><div class="row-top"><span>Breadth (b)</span><b id="s4-cuboid-b-val">5 cm</b></div>
+          <div class="slider-row"><div class="row-top"><span data-i18n="lbl_breadth">Breadth (b)</span><b id="s4-cuboid-b-val">5 cm</b></div>
           <input type="range" id="s4-cuboid-b" min="3" max="10" step="1" value="5"></div>
-          <div class="slider-row"><div class="row-top"><span>Height (h)</span><b id="s4-cuboid-h-val">4 cm</b></div>
+          <div class="slider-row"><div class="row-top"><span data-i18n="lbl_height">Height (h)</span><b id="s4-cuboid-h-val">4 cm</b></div>
           <input type="range" id="s4-cuboid-h" min="3" max="10" step="1" value="4"></div>
         </div>
         <div class="shape-controls" data-shape4="cylinder" hidden>
-          <div class="slider-row"><div class="row-top"><span>Radius (r)</span><b id="s4-cyl-r-val">4 cm</b></div>
+          <div class="slider-row"><div class="row-top"><span data-i18n="lbl_radius">Radius (r)</span><b id="s4-cyl-r-val">4 cm</b></div>
           <input type="range" id="s4-cyl-r" min="2" max="8" step="1" value="4"></div>
-          <div class="slider-row"><div class="row-top"><span>Height (h)</span><b id="s4-cyl-h-val">9 cm</b></div>
+          <div class="slider-row"><div class="row-top"><span data-i18n="lbl_height">Height (h)</span><b id="s4-cyl-h-val">9 cm</b></div>
           <input type="range" id="s4-cyl-h" min="3" max="14" step="1" value="9"></div>
         </div>
 
         <div class="sim-readouts">
-          <div class="readout-card"><div class="val" id="s4-lsa">—</div><div class="lbl">Lateral / Curved SA</div></div>
-          <div class="readout-card"><div class="val" id="s4-tsa">—</div><div class="lbl">Total Surface Area</div></div>
+          <div class="readout-card"><div class="val" id="s4-lsa">—</div><div class="lbl" data-i18n="s4_lbl_lsa">Lateral / Curved SA</div></div>
+          <div class="readout-card"><div class="val" id="s4-tsa">—</div><div class="lbl" data-i18n="s4_lbl_tsa">Total Surface Area</div></div>
         </div>
       </div>
       <div class="concept-panel">
-        <h3>Flat Faces vs. Every Face</h3>
-        <p class="concept-body">Lateral (or curved) surface area covers only the side walls — the faces you'd wrap with a label. Total surface area adds the top and bottom back in, which matters when you're painting, wrapping, or covering a solid completely.</p>
-        <div class="formula-box">
+        <h3 data-i18n="s4_c_h3">Flat Faces vs. Every Face</h3>
+        <p class="concept-body" data-i18n="s4_c_body">Lateral (or curved) surface area covers only the side walls — the faces you'd wrap with a label. Total surface area adds the top and bottom back in, which matters when you're painting, wrapping, or covering a solid completely.</p>
+        <div class="formula-box" data-i18n="s4_formula">
           Cube: LSA = 4a² , TSA = 6a²<br>
           Cuboid: LSA = 2h(l+b) , TSA = 2(lb+bh+hl)<br>
           Cylinder: CSA = 2πrh , TSA = 2πr(r+h)
           <small>a = side, l/b/h = dimensions, r = radius of cylinder base.</small>
         </div>
         <ul class="bullet-list">
-          <li><b>Lateral surface</b> skips the top and bottom caps — think of just the "wraparound" part.</li>
-          <li><b>Total surface</b> puts both caps back — essential for paint, wrapping paper, or sheet metal.</li>
-          <li><b>Unfolding into a net</b> is the fastest way to spot which faces repeat and which are unique.</li>
+          <li data-i18n="s4_b1"><b>Lateral surface</b> skips the top and bottom caps — think of just the "wraparound" part.</li>
+          <li data-i18n="s4_b2"><b>Total surface</b> puts both caps back — essential for paint, wrapping paper, or sheet metal.</li>
+          <li data-i18n="s4_b3"><b>Unfolding into a net</b> is the fastest way to spot which faces repeat and which are unique.</li>
         </ul>
         <div class="exercise-box">
-          <h4>Solved Exercise 4.1 — Painting a Water Tank</h4>
-          <p><b>Problem:</b> A cuboidal overhead tank measures 2 m × 1.5 m × 1.2 m. Find the total surface area to be painted.</p>
-          <p class="sol">TSA = 2(lb+bh+hl) = 2(2×1.5 + 1.5×1.2 + 1.2×2)
+          <h4 data-i18n="s4_ex_h4">Solved Exercise 4.1 — Painting a Water Tank</h4>
+          <p data-i18n="s4_ex_prob"><b>Problem:</b> A cuboidal overhead tank measures 2 m × 1.5 m × 1.2 m. Find the total surface area to be painted.</p>
+          <p class="sol" data-i18n="s4_ex_sol">TSA = 2(lb+bh+hl) = 2(2×1.5 + 1.5×1.2 + 1.2×2)
    = 2(3 + 1.8 + 2.4) = 2 × 7.2 = 14.4 m²</p>
-          <p class="result">Result: The painter must cover 14.4 m² of surface.</p>
+          <p class="result" data-i18n="s4_ex_res">Result: The painter must cover 14.4 m² of surface.</p>
         </div>
         <div class="mascot-tip">
           <span class="avatar">👧</span>
-          <p><b>Medhā's Discovery:</b> "Switch to Cylinder in the lab and set r=4, h=9 — that's the drum stall's real size!"</p>
+          <p data-i18n="s4_mascot"><b>Medhā's Discovery:</b> "Switch to Cylinder in the lab and set r=4, h=9 — that's the drum stall's real size!"</p>
         </div>
       </div>
     </div>
@@ -807,51 +888,51 @@ Cost = 96 × ₹45 = ₹4,320</p>
 <!-- ================= STAGE 5 ================= -->
 <section class="stage" id="ch5">
   <div class="container">
-    <p class="eyebrow stage-eyebrow">Stage 5 · Volume, Capacity &amp; Efficiency</p>
-    <h2>Filling Space — Volume &amp; the Best Container</h2>
-    <p class="stage-intro">At the lemonade stand, Medha wonders which container holds more for the same amount of material. Volume measures the space a solid occupies — and it decides who wins the fair's container design contest.</p>
+    <p class="eyebrow stage-eyebrow" data-i18n="s5_eyebrow">Stage 5 · Volume, Capacity &amp; Efficiency</p>
+    <h2 data-i18n="s5_h2">Filling Space — Volume &amp; the Best Container</h2>
+    <p class="stage-intro" data-i18n="s5_intro">At the lemonade stand, Medha wonders which container holds more for the same amount of material. Volume measures the space a solid occupies — and it decides who wins the fair's container design contest.</p>
     <div class="stage-grid">
       <div class="concept-panel">
-        <h3>Space Enclosed, Not Just Covered</h3>
-        <p class="concept-body">Volume measures the three-dimensional space a solid fills, in cubic units. Capacity measures how much a container can hold, usually in litres — a cube of side 10 cm holds exactly 1 litre.</p>
-        <div class="formula-box">
+        <h3 data-i18n="s5_c_h3">Space Enclosed, Not Just Covered</h3>
+        <p class="concept-body" data-i18n="s5_c_body">Volume measures the three-dimensional space a solid fills, in cubic units. Capacity measures how much a container can hold, usually in litres — a cube of side 10 cm holds exactly 1 litre.</p>
+        <div class="formula-box" data-i18n="s5_formula">
           Cube: V = a³ &nbsp; Cuboid: V = l×b×h &nbsp; Cylinder: V = πr²h<br>
           1 L = 1000 cm³ = 1000 mL &nbsp;·&nbsp; 1 m³ = 1000 L
           <small>Always convert every dimension to the same unit before multiplying.</small>
         </div>
         <ul class="bullet-list">
-          <li><b>Volume</b> is measured in cubic units — cm³, m³ — because three dimensions multiply together.</li>
-          <li><b>Capacity</b> converts that same space into litres or millilitres for liquids and containers.</li>
-          <li><b>Same material, different shape:</b> a cylinder often holds more volume than a cuboid or cube built from the same amount of sheet material — that's why so many cans are cylindrical.</li>
+          <li data-i18n="s5_b1"><b>Volume</b> is measured in cubic units — cm³, m³ — because three dimensions multiply together.</li>
+          <li data-i18n="s5_b2"><b>Capacity</b> converts that same space into litres or millilitres for liquids and containers.</li>
+          <li data-i18n="s5_b3"><b>Same material, different shape:</b> a cylinder often holds more volume than a cuboid or cube built from the same amount of sheet material — that's why so many cans are cylindrical.</li>
         </ul>
         <div class="exercise-box">
-          <h4>Solved Exercise 5.1 — Filling a Cylindrical Tank</h4>
-          <p><b>Problem:</b> A cylindrical tank has radius 1.4 m and height 3 m. How many litres can it hold? (π ≈ 22/7)</p>
-          <p class="sol">V = πr²h = (22/7) × 1.4² × 3 = (22/7) × 1.96 × 3 = 18.48 m³
+          <h4 data-i18n="s5_ex_h4">Solved Exercise 5.1 — Filling a Cylindrical Tank</h4>
+          <p data-i18n="s5_ex_prob"><b>Problem:</b> A cylindrical tank has radius 1.4 m and height 3 m. How many litres can it hold? (π ≈ 22/7)</p>
+          <p class="sol" data-i18n="s5_ex_sol">V = πr²h = (22/7) × 1.4² × 3 = (22/7) × 1.96 × 3 = 18.48 m³
 18.48 m³ × 1000 = 18,480 L</p>
-          <p class="result">Result: The tank holds 18,480 litres of water.</p>
+          <p class="result" data-i18n="s5_ex_res">Result: The tank holds 18,480 litres of water.</p>
         </div>
         <div class="mascot-tip">
           <span class="avatar">🦉</span>
-          <p><b>Owl's Diagnostic:</b> "Raise the material budget on the right without changing shape proportions, and watch every container's volume grow — but never at the same rate!"</p>
+          <p data-i18n="s5_mascot"><b>Owl's Diagnostic:</b> "Raise the material budget on the right without changing shape proportions, and watch every container's volume grow — but never at the same rate!"</p>
         </div>
       </div>
       <div class="sim-panel">
-        <p class="sim-label">Multi-Shape Rate Analyzer</p>
-        <h4>Container Efficiency Analyzer</h4>
-        <p class="sim-desc">Fix a sheet-material budget, then tune the cylinder's radius and the cuboid's base to see which shape packs in the most volume.</p>
-        <div class="slider-row"><div class="row-top"><span>Material Budget (S)</span><b id="s5-budget-val">300 cm²</b></div>
+        <p class="sim-label" data-i18n="s5_sim_label">Multi-Shape Rate Analyzer</p>
+        <h4 data-i18n="s5_sim_h4">Container Efficiency Analyzer</h4>
+        <p class="sim-desc" data-i18n="s5_sim_desc">Fix a sheet-material budget, then tune the cylinder's radius and the cuboid's base to see which shape packs in the most volume.</p>
+        <div class="slider-row"><div class="row-top"><span data-i18n="s5_lbl_budget">Material Budget (S)</span><b id="s5-budget-val">300 cm²</b></div>
         <input type="range" id="s5-budget" min="150" max="500" step="10" value="300"></div>
-        <div class="slider-row"><div class="row-top"><span>Cylinder radius (r)</span><b id="s5-r-val">4 cm</b></div>
+        <div class="slider-row"><div class="row-top"><span data-i18n="s5_lbl_r">Cylinder radius (r)</span><b id="s5-r-val">4 cm</b></div>
         <input type="range" id="s5-r" min="2" max="9" step="0.5" value="4"></div>
-        <div class="slider-row"><div class="row-top"><span>Cuboid base side (x)</span><b id="s5-x-val">5 cm</b></div>
+        <div class="slider-row"><div class="row-top"><span data-i18n="s5_lbl_x">Cuboid base side (x)</span><b id="s5-x-val">5 cm</b></div>
         <input type="range" id="s5-x" min="2" max="12" step="0.5" value="5"></div>
 
-        <div class="bar-row"><div class="bar-top"><span>Cube</span><span id="s5-cube-val">—</span></div><div class="bar-track"><div class="bar-fill" id="s5-cube-bar"></div></div></div>
-        <div class="bar-row"><div class="bar-top"><span>Cuboid (square base)</span><span id="s5-cuboid-val">—</span></div><div class="bar-track"><div class="bar-fill" id="s5-cuboid-bar"></div></div></div>
-        <div class="bar-row"><div class="bar-top"><span>Cylinder</span><span id="s5-cyl-val">—</span></div><div class="bar-track"><div class="bar-fill" id="s5-cyl-bar"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span data-i18n="tab_cube">Cube</span><span id="s5-cube-val">—</span></div><div class="bar-track"><div class="bar-fill" id="s5-cube-bar"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span data-i18n="s5_lbl_cuboid_sq">Cuboid (square base)</span><span id="s5-cuboid-val">—</span></div><div class="bar-track"><div class="bar-fill" id="s5-cuboid-bar"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span data-i18n="tab_cylinder">Cylinder</span><span id="s5-cyl-val">—</span></div><div class="bar-track"><div class="bar-fill" id="s5-cyl-bar"></div></div></div>
 
-        <div class="sim-status" id="s5-winner-box">🏆 Current Leader: <b id="s5-winner">Cube</b></div>
+        <div class="sim-status" id="s5-winner-box"><span data-i18n="s5_leader">🏆 Current Leader:</span> <b id="s5-winner">Cube</b></div>
       </div>
     </div>
   </div>
@@ -860,13 +941,13 @@ Cost = 96 × ₹45 = ₹4,320</p>
 <!-- ================= MASTER BANNER ================= -->
 <div class="master-banner">
   <div class="inner">
-    <p>🌿 THE THREE PILLARS OF MENSURATION 🌿</p>
+    <p data-i18n="banner_p">🌿 THE THREE PILLARS OF MENSURATION 🌿</p>
     <div class="master-eq">
-      <div class="term"><span class="icon">📏</span>Perimeter<span class="sub">length¹ — the boundary</span></div>
+      <div class="term"><span class="icon">📏</span><span data-i18n="term_p_title">Perimeter</span><span class="sub" data-i18n="term_p_sub">length¹ — the boundary</span></div>
       <span class="arrow">→</span>
-      <div class="term"><span class="icon">📐</span>Area<span class="sub">length² — the surface</span></div>
+      <div class="term"><span class="icon">📐</span><span data-i18n="term_a_title">Area</span><span class="sub" data-i18n="term_a_sub">length² — the surface</span></div>
       <span class="arrow">→</span>
-      <div class="term"><span class="icon">📦</span>Volume<span class="sub">length³ — the space enclosed</span></div>
+      <div class="term"><span class="icon">📦</span><span data-i18n="term_v_title">Volume</span><span class="sub" data-i18n="term_v_sub">length³ — the space enclosed</span></div>
     </div>
   </div>
 </div>
@@ -875,54 +956,55 @@ Cost = 96 × ₹45 = ₹4,320</p>
 <section class="applications" id="applications">
   <div class="container">
     <div class="section-head">
-      <p class="eyebrow">🌍 Real-World Impact</p>
-      <h2>Mensuration Across Careers &amp; Technology</h2>
-      <p>From reading architectural blueprints to surveying farmland and designing packaging, mensuration turns raw measurements into real decisions.</p>
+      <p class="eyebrow" data-i18n="app_eyebrow">🌍 Real-World Impact</p>
+      <h2 data-i18n="app_h2">Mensuration Across Careers &amp; Technology</h2>
+      <p data-i18n="app_desc">From reading architectural blueprints to surveying farmland and designing packaging, mensuration turns raw measurements into real decisions.</p>
     </div>
     <div class="app-grid">
       <div class="app-card">
         <div class="icon">🏗️</div>
-        <h4>Architecture &amp; Construction</h4>
-        <p>Every blueprint depends on precise area and volume calculations before a single brick is laid.</p>
+        <h4 data-i18n="app1_title">Architecture &amp; Construction</h4>
+        <p data-i18n="app1_p">Every blueprint depends on precise area and volume calculations before a single brick is laid.</p>
         <ul>
-          <li>Estimating tiles and flooring from room area</li>
-          <li>Calculating paint and plaster from wall surface area</li>
-          <li>Costing concrete from structural volume</li>
-          <li>Planning roof slant heights and staircases</li>
+          <li data-i18n="app1_li1">Estimating tiles and flooring from room area</li>
+          <li data-i18n="app1_li2">Calculating paint and plaster from wall surface area</li>
+          <li data-i18n="app1_li3">Costing concrete from structural volume</li>
+          <li data-i18n="app1_li4">Planning roof slant heights and staircases</li>
         </ul>
       </div>
       <div class="app-card">
         <div class="icon">🌾</div>
-        <h4>Agriculture &amp; Land Surveying</h4>
-        <p>Irregular fields are mapped into trapeziums and triangles to measure land and plan irrigation.</p>
+        <h4 data-i18n="app2_title">Agriculture &amp; Land Surveying</h4>
+        <p data-i18n="app2_p">Irregular fields are mapped into trapeziums and triangles to measure land and plan irrigation.</p>
         <ul>
-          <li>Mapping field boundaries into trapeziums &amp; triangles</li>
-          <li>Estimating crop yield per hectare</li>
-          <li>Sizing irrigation canals and water tanks</li>
-          <li>Calculating seed and fertilizer quantity from land area</li>
+          <li data-i18n="app2_li1">Mapping field boundaries into trapeziums &amp; triangles</li>
+          <li data-i18n="app2_li2">Estimating crop yield per hectare</li>
+          <li data-i18n="app2_li3">Sizing irrigation canals and water tanks</li>
+          <li data-i18n="app2_li4">Calculating seed and fertilizer quantity from land area</li>
         </ul>
       </div>
       <div class="app-card">
         <div class="icon">📦</div>
-        <h4>Packaging &amp; Product Design</h4>
-        <p>Engineers balance surface area (material cost) against volume (capacity) for every container.</p>
+        <h4 data-i18n="app3_title">Packaging &amp; Product Design</h4>
+        <p data-i18n="app3_p">Engineers balance surface area (material cost) against volume (capacity) for every container.</p>
         <ul>
-          <li>Designing cans and bottles that hold more for less material</li>
-          <li>Optimizing carton dimensions for shipping</li>
-          <li>Costing material from a product's unfolded net</li>
-          <li>Estimating volume in 3D-printed objects</li>
+          <li data-i18n="app3_li1">Designing cans and bottles that hold more for less material</li>
+          <li data-i18n="app3_li2">Optimizing carton dimensions for shipping</li>
+          <li data-i18n="app3_li3">Costing material from a product's unfolded net</li>
+          <li data-i18n="app3_li4">Estimating volume in 3D-printed objects</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ================= FOOTER ================= -->
 <footer>
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="brand"><span class="brand-mark">🌿</span><span>MedhāVatika<small>A Garden of Intellect</small></span></div>
-        <p>MedhaVatika transforms foundational STEM learning through storytelling, gamified simulations, interactive quests, and rigorous curriculum mastery.</p>
+        <div class="brand"><span class="brand-mark">🌿</span><span>MedhāVatika<small data-i18n="brand_tagline">A Garden of Intellect</small></span></div>
+        <p data-i18n="footer_about">MedhaVatika transforms foundational STEM learning through storytelling, gamified simulations, interactive quests, and rigorous curriculum mastery.</p>
         <div class="social-row">
           <a href="#" title="LinkedIn">in</a>
           <a href="#" title="YouTube">▶</a>
@@ -931,31 +1013,31 @@ Cost = 96 × ₹45 = ₹4,320</p>
         </div>
       </div>
       <div class="footer-col">
-        <h5>Interactive Quests</h5>
-        <a href="#hero">Mensuration Quest</a>
-        <a href="https://medhavatika-photosynthesis.vercel.app/">Photosynthesis Quest</a>
-        <a href="#">Trigonometry Quest</a>
-        <a href="#">MedhaLab™ Biology</a>
-        <a href="#">MedhaLab™ Mathematics</a>
+        <h5 data-i18n="footer_col1_title">Interactive Quests</h5>
+        <a href="#hero" data-i18n="footer_link_m">Mensuration Quest</a>
+        <a href="https://medhavatika-photosynthesis.vercel.app/" data-i18n="footer_link_p">Photosynthesis Quest</a>
+        <a href="#" data-i18n="footer_link_t">Trigonometry Quest</a>
+        <a href="#" data-i18n="footer_link_bio">MedhaLab™ Biology</a>
+        <a href="#" data-i18n="footer_link_math">MedhaLab™ Mathematics</a>
       </div>
       <div class="footer-col">
-        <h5>Company &amp; Policies</h5>
-        <a href="#">Become an Instructor</a>
-        <a href="#">Terms &amp; Conditions</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Refund Policy</a>
-        <a href="#">Affiliate Program</a>
+        <h5 data-i18n="footer_col2_title">Company &amp; Policies</h5>
+        <a href="#" data-i18n="footer_link_c1">Become an Instructor</a>
+        <a href="#" data-i18n="footer_link_c2">Terms &amp; Conditions</a>
+        <a href="#" data-i18n="footer_link_c3">Privacy Policy</a>
+        <a href="#" data-i18n="footer_link_c4">Refund Policy</a>
+        <a href="#" data-i18n="footer_link_c5">Affiliate Program</a>
       </div>
       <div class="footer-col">
-        <h5>Contact MedhāVatika</h5>
-        <p>🏢 Medhavatika Edlabs Pvt. Ltd.<br>Pune, Maharashtra, India</p>
+        <h5 data-i18n="footer_col3_title">Contact MedhāVatika</h5>
+        <p data-i18n="footer_contact_addr">🏢 Medhavatika Edlabs Pvt. Ltd.<br>Pune, Maharashtra, India</p>
         <p>📞 +91 8007614867</p>
         <p>✉️ contact@medhavatika.com</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>Copyright © MedhāVatika Edlabs Pvt. Ltd. All rights reserved.</span>
-      <span>Designed with 💚 for curious young mathematicians worldwide</span>
+      <span data-i18n="footer_copy">Copyright © MedhāVatika Edlabs Pvt. Ltd. All rights reserved.</span>
+      <span data-i18n="footer_made">Designed with 💚 for curious young mathematicians worldwide</span>
     </div>
   </div>
 </footer>
@@ -963,15 +1045,681 @@ Cost = 96 × ₹45 = ₹4,320</p>
 <button id="backTop" title="Back to top">↑</button>
 <div id="toast"></div>
 
+<!-- ================= JAVASCRIPT ================= -->
 <script>
-/* ---------------- NAV ---------------- */
-const hamburger=document.getElementById('hamburger');
-const navLinks=document.getElementById('navLinks');
-hamburger.addEventListener('click',()=>{
-  const isOpen=navLinks.classList.toggle('open');
-  hamburger.setAttribute('aria-expanded',isOpen?'true':'false');
+/* ---------------- TRANSLATIONS ---------------- */
+const I18N = {
+  mr: {
+    lang_name: 'मराठी',
+    page_title: 'क्षेत्रमिती साहस — MedhāVatika',
+    brand_tagline: 'ज्ञानाची समृद्ध वाटिका',
+    nav_home: 'मुख्यपृष्ठ',
+    nav_story: "मेधाची गोष्ट",
+    badge_book: 'पुस्तक',
+    nav_foundations: 'मूलभूत संकल्पना',
+    nav_trapezium: 'समलंब चौकोन',
+    nav_rhombus: 'समभुज चौकोन',
+    nav_kite: 'पतंग आव्हान',
+    badge_game: 'खेळ',
+    nav_surface: 'पृष्ठफळ',
+    nav_volume: 'घनफळ',
+    nav_applications: 'उपयोजन',
+    demo_btn: 'डेमो बुक करा',
+
+    hero_eyebrow: 'मेधालॅब™ · गणित परस्परसंवादी मोहीम',
+    hero_title: 'क्षेत्रमिती<br><em>साहस</em>',
+    hero_desc: 'मेधा आणि तिच्या हुशार घुबड मित्रासह जत्रेच्या मैदानात उतरा, जिथे साधे आकार थेट प्रात्यक्षिक मोजणीच्या मोहिमेत बदलतात. <strong>मेधावाटिका</strong>चे <em>क्षेत्रमिती साहस</em> हे इयत्ता ८ वीच्या विद्यार्थ्यांसाठी परिमिती, क्षेत्रफळ, पृष्ठफळ आणि घनफळ शिकवणारी एक खेळकर, संवादात्मक सफर आहे.',
+    hero_cta1: '📖 परस्परसंवादी कथा उघडा →',
+    hero_cta2: '📐 लॅब सिम्युलेशन एक्सप्लोर करा',
+    stat_stages: 'परस्परसंवादी टप्पे',
+    stat_sims: 'थेट लॅब प्रयोग',
+    stat_hands_on: 'प्रात्यक्षिक प्रभुत्व',
+    stat_grade_val: 'इयत्ता ८ वी',
+    stat_grade_lbl: 'अभ्यासक्रम संलग्न',
+    hero_float1: '📏 जत्रेची मोहीम',
+    hero_float2: '📐 ३D भूमिती',
+    hero_float3: '🦉 घुबड मार्गदर्शक',
+    hero_float4: '📦 क्षेत्रफळ व घनफळ',
+    hero_badge: 'जत्रेचे आव्हान: <b>गावातील जत्रेचे मोजमाप</b> · स्थिती: <b style="color:var(--teal);">सक्रिय 📐</b>',
+
+    flip_eyebrow: '✨ परस्परसंवादी फ्लिपबुक वाचक',
+    flip_h2: 'मेधाचे क्षेत्रमिती साहस',
+    flip_desc: 'मेधा आणि तिच्या हुशार घुबड मित्रासह १३ सचित्र कथा पानांवरून प्रवास करा, जिथे जत्रेतील प्रत्येक वस्तूतून गणिताचे रहस्य उलगडते.',
+    toc_title: '📑 अनुक्रमणिका',
+    flip_prev: '◀ मागील',
+    flip_next: 'पुढील ▶',
+    page_label: 'पृष्ठ',
+    of_label: 'पैकी',
+
+    s1_eyebrow: 'टप्पा १ · परिमिती व क्षेत्रफळ पाया',
+    s1_h2: 'चौरस, आयत, त्रिकोण आणि वर्तुळाची उजळणी',
+    s1_intro: 'जत्रेचे नियोजन करण्यापूर्वी, मेधाला मूलभूत गोष्टींची उजळणी करावी लागेल: सीमा किती लांब आहे (परिमिती) आणि पृष्ठभागावर किती सपाट जागा व्यापली आहे (क्षेत्रफळ). हे चार आकार पुढील सर्व गणिताचा पाया आहेत.',
+    s1_c_h3: 'सीमा विरुद्ध पृष्ठभाग',
+    s1_c_body: 'परिमिती ही लांबी असते — ती बाहेरील सीमेचे अंतर (सेमी किंवा मीटरमध्ये) मोजते. क्षेत्रफळ हे पृष्ठभागाचे मापन असते — ते किती सपाट जागा व्यापली आहे (चौ.सेमी किंवा चौ.मी.मध्ये) ते मोजते.',
+    s1_formula: 'चौरस: A = s² , P = 4s<br>आयत: A = l × b , P = 2(l + b)<br>त्रिकोण: A = ½ × पाया × उंची<br>वर्तुळ: A = πr² , C = 2πr<small>s = बाजू, l = लांबी, b = रुंदी, r = त्रिज्या. π ≈ 3.14 किंवा 22/7 वापरा.</small>',
+    s1_b1: '<b>चौरस व आयत:</b> रोजच्या सपाट वस्तू — फरशा, वहीची पाने, क्रिकेटची खेळपट्टी.',
+    s1_b2: '<b>त्रिकोण:</b> उंची नेहमी निवडलेल्या पायाला लंबरूप (काटकोनात) मोजली पाहिजे, तिरप्या बाजूवर नाही.',
+    s1_b3: '<b>वर्तुळ:</b> चाके, घड्याळ, गोलाकार बाग — कडेवरील प्रत्येक बिंदू केंद्रापासून समान अंतरावर (r) असतो.',
+    s1_ex_h4: 'सोडवलेले उदाहरण १.१ — समान परिमिती, भिन्न क्षेत्रफळ',
+    s1_ex_prob: '<b>प्रश्न:</b> एका चौरसाकृती बागेची आणि एका आयताकृती बागेची परिमिती प्रत्येकी ४० मी आहे. आयताची लांबी १२ मी असल्यास कोणत्या बागेचे क्षेत्रफळ जास्त आहे?',
+    s1_ex_sol: 'चौरस: बाजू = ४० ÷ ४ = १० मी → क्षेत्रफळ = १० × १० = १०० चौ.मी.\nआयत: २(l+b) = ४० → b = २० − १२ = ८ मी → क्षेत्रफळ = १२ × ८ = ९६ चौ.मी.',
+    s1_ex_res: 'निष्कर्ष: चौरसाकृती बागेचे क्षेत्रफळ जास्त आहे (१०० चौ.मी. विरुद्ध ९६ चौ.मी.) — दिलेल्या ठराविक परिमितीसाठी, चौरस सर्व आयतांपेक्षा सर्वाधिक क्षेत्रफळ व्यापतो!',
+    s1_mascot: '<b>घुबड मित्राची टीप:</b> "जेव्हा तुम्ही परिमिती समान ठेवून आयताला लांब आणि अरुंद करता, तेव्हा क्षेत्रफळाचे निरीक्षण करा — आकार मोठा वाटला तरी क्षेत्रफळ झपाट्याने कमी होते!"',
+    sim_label: 'थेट मापन प्रयोगशाळा',
+    s1_sim_h4: 'आकार क्षेत्रफळ व परिमिती एक्सप्लोरर',
+    s1_sim_desc: 'आकार निवडा, स्लायडर फिरवा आणि आकृतीसह थेट क्षेत्रफळ व परिमितीचे मोजमाप पहा.',
+    tab_square: 'चौरस', tab_rectangle: 'आयत', tab_triangle: 'त्रिकोण', tab_circle: 'वर्तुळ',
+    lbl_side: 'बाजू (s)', lbl_length: 'लांबी (l)', lbl_breadth: 'रुंदी (b)', lbl_base: 'पाया (b)', lbl_height: 'उंची (h)', lbl_radius: 'त्रिज्या (r)',
+    lbl_area: 'क्षेत्रफळ', lbl_perimeter: 'परिमिती', lbl_circumference: 'परीघ',
+
+    s2_eyebrow: 'टप्पा २ · समलंब व सामान्य चौकोनाचे क्षेत्रफळ',
+    s2_h2: 'समलंब शेत आणि चौकोनाचे विभाजन',
+    s2_intro: 'जत्रेचे खाऊचे स्टॉल्स दोन वेगवेगळ्या लांबीच्या समांतर कडा असलेल्या जागेवर आहेत — म्हणजेच समलंब चौकोन. मेधाच्या लक्षात येते की कोणताही विषम चौकोन एका कर्णाने दोन त्रिकोणांत विभागून सहज सोडवता येतो.',
+    s2_c_h3: 'समांतर बाजू आणि लंबरूप उंची',
+    s2_c_body: 'समलंब चौकोनाला समांतर बाजूंची फक्त एक जोडी असते. त्याचे क्षेत्रफळ म्हणजे दोन समांतर बाजूंची सरासरी गुणिले त्यांच्यातील लंबरूप अंतर. सामान्य चौकोनात एक कर्ण काढून त्याचे दोन त्रिकोणांत रूपांतर केले जाते.',
+    s2_formula: 'समलंब चौकोन: A = ½ × (a + b) × h<br>सामान्य चौकोन (कर्ण d द्वारे): A = ½ × d × (h₁ + h₂)<small>a, b = समांतर बाजू; h = लंबरूप उंची; h₁, h₂ = कर्णावरील लंबरूप उंची.</small>',
+    s2_b1: '<b>समांतर बाजू ओळखा:</b> कधीही न छेदणाऱ्या दोन समोरासमोरील कडा.',
+    s2_b2: '<b>तिरपी बाजू नव्हे, तर लंबरूप उंची:</b> h हे दोन्ही समांतर बाजूंमधील सरळ काटकोनातील अंतर असते.',
+    s2_b3: '<b>चौकोनाचे विभाजन:</b> एक कर्ण कोणत्याही चार बाजूंच्या भूखंडाचे दोन सोप्या त्रिकोणांत विभाजन करतो.',
+    s2_ex_h4: 'सोडवलेले उदाहरण २.१ — समलंब आकाराचे शेत',
+    s2_ex_prob: '<b>प्रश्न:</b> एका शेतकऱ्याचे शेत समलंब चौकोनी असून त्याच्या समांतर बाजू ६० मी आणि ४० मी आहेत, आणि त्यांच्यातील लंबरूप अंतर २५ मी आहे. त्याचे क्षेत्रफळ काढा.',
+    s2_ex_sol: 'A = ½ × (६० + ४०) × २५ = ½ × १०० × २५ = १२५० चौ.मी.',
+    s2_ex_res: 'निष्कर्ष: शेताचे क्षेत्रफळ १२५० चौ.मी. (०.१२५ हेक्टर) आहे (१ हेक्टर = १०,००० चौ.मी.).',
+    s2_mascot: '<b>मेधाचे निरीक्षण:</b> "डावीकडील स्लायडर्स या उदाहरणाशी तंतोतंत जुळतात — उंची बदलून पहा क्षेत्रफळ कसे बदलते!"',
+    s2_sim_h4: 'समलंब भूखंड सिम्युलेटर',
+    s2_sim_desc: 'समांतर बाजू आणि लंबरूप उंचीचे स्लायडर हलवून थेट क्षेत्रफळ मोजा.',
+    s2_lbl_a: 'समांतर बाजू a (वरची)', s2_lbl_b: 'समांतर बाजू b (खालची)', s2_lbl_h: 'लंबरूप उंची h',
+    lbl_area_sqm: 'क्षेत्रफळ (चौ.मी.)', lbl_hectares: 'हेक्टरमध्ये',
+
+    s3_eyebrow: 'टप्पा ३ · समभुज चौकोन, पतंग व बहुभुजाकृती',
+    s3_h2: 'पतंगाचे कर्ण आणि बहुभुज नमुने',
+    s3_intro: 'हिऱ्याच्या आकाराचे पतंगाचे दुकान मेधाचे लक्ष वेधून घेते. त्याचे कर्ण एकमेकांना काटकोनात छेदतात — आणि या एका गुणधर्मामुळे समभुज चौकोन आणि पतंगाचे क्षेत्रफळ काढणे अतिशय सोपे होते.',
+    s3_c_h3: 'काटकोनात दुभागणारे कर्ण',
+    s3_c_body: 'समभुज चौकोनात (आणि पतंगामध्ये) दोन्ही कर्ण एकमेकांना काटकोनात (९०°) दुभागतात. यामुळे ४ एकरूप काटकोन त्रिकोण तयार होतात. नियमित बहुभुजाकृतींचे मध्यबिंदूपासून समान त्रिकोणांत विभाजन करून क्षेत्रफळ काढता येते.',
+    s3_formula: 'समभुज चौकोन / पतंग: A = ½ × d₁ × d₂<br>नियमित बहुभुज (n बाजू, बाजू s): A ≈ (n × s²) ÷ (4 × tan(π/n))<small>d₁, d₂ = कर्णांची लांबी. n बाजूंच्या बहुभुजाचे n समान त्रिकोणांत विभाजन होते.</small>',
+    s3_b1: '<b>कर्ण काटकोनात दुभागतात:</b> याच काटकोनामुळे ½ × d₁ × d₂ हे सूत्र तयार होते.',
+    s3_b2: '<b>पतंग व समभुज चौकोन:</b> दोघांसाठीही कर्णांचे हेच सूत्र लागू होते.',
+    s3_b3: '<b>नियमित बहुभुजाकृती:</b> मध्यबिंदूपासून n एकरूप समद्विभुज त्रिकोणांत विभागून क्षेत्रफळ मोजता येते.',
+    s3_ex_h4: 'सोडवलेले उदाहरण ३.१ — पतंगाकार फुलांचा ताटवा',
+    s3_ex_prob: '<b>प्रश्न:</b> एका पतंगाकार फुलांच्या बागेचे कर्ण १६ मी आणि १२ मी आहेत. गवत लावण्याचा दर ₹४५ प्रति चौ.मी. आहे. एकूण खर्च काढा.',
+    s3_ex_sol: 'क्षेत्रफळ = ½ × १६ × १२ = ९६ चौ.मी.\nएकूण खर्च = ९६ × ₹४५ = ₹४,३२०',
+    s3_ex_res: 'निष्कर्ष: माळ्याला गवत लावण्यासाठी एकूण ₹४,३२० खर्च येईल.',
+    s3_mascot: '<b>घुबड मित्राचा सल्ला:</b> "उजवीकडील गेममध्ये नेमके ९६ चौ.मी. क्षेत्रफळ आणून दाखवा — हेच त्या फुलांच्या बागेचे क्षेत्रफळ आहे!"',
+    s3_sim_label: '🎯 पतंग क्षेत्रफळ आव्हान',
+    s3_sim_h4: 'लक्ष्य क्षेत्रफळ गाठा',
+    s3_sim_desc: 'खाली दिलेल्या लक्ष्य क्षेत्रफळाशी जुळण्यासाठी दोन्ही कर्णांचे स्लायडर हलवा. ३ चौ.मी.च्या आत आल्यास अचूक विजय!',
+    s3_lbl_d1: 'कर्ण d₁ (आडवा)', s3_lbl_d2: 'कर्ण d₂ (उभा)',
+    s3_lbl_cur: 'सध्याचे क्षेत्रफळ', s3_lbl_tgt: 'लक्ष्य क्षेत्रफळ',
+    s3_status_init: 'अंतर कमी करण्यासाठी स्लायडर हलवा',
+    btn_random: '🎲 नवीन आव्हान', btn_reset: '↺ रीसेट',
+
+    s4_eyebrow: 'टप्पा ४ · त्रिमितीय वस्तूंचे पृष्ठफळ',
+    s4_h2: '२D घडी उघडणे — त्रिमितीय आकारांचे पृष्ठफळ',
+    s4_intro: 'बक्षीस पेटीला भेटवस्तूचा कागद लावायचा आहे आणि ढोलाच्या गोलाकार भागाला कापड लावायचे आहे. मेधा ३D घनवस्तूंची २D घडी उघडून प्रत्येक पृष्ठाचे क्षेत्रफळ कसे मोजायचे ते शिकते.',
+    s4_c_h3: 'वक्रपृष्ठफळ विरुद्ध एकूण पृष्ठफळ',
+    s4_c_body: 'वक्रपृष्ठफळ (किंवा उभे पृष्ठफळ) फक्त बाजूंच्या भिंतींचे क्षेत्रफळ मोजते. एकूण पृष्ठफळामध्ये वरचा आणि खालचा तळ देखील समाविष्ट असतो, जे पूर्ण रंगकाम किंवा कागद गुंडाळताना आवश्यक असते.',
+    s4_formula: 'घन: LSA = 4a² , TSA = 6a²<br>इष्टिकाचिती: LSA = 2h(l+b) , TSA = 2(lb+bh+hl)<br>वृत्तचिती: CSA = 2πrh , TSA = 2πr(r+h)<small>a = बाजू, l/b/h = परिमाणे, r = वृत्तचिती पायाची त्रिज्या.</small>',
+    s4_b1: '<b>वक्रपृष्ठफळ (LSA/CSA):</b> वरचा आणि खालचा तळ वगळून फक्त बाजूंचा पृष्ठभाग.',
+    s4_b2: '<b>एकूण पृष्ठफळ (TSA):</b> सर्व बाजू आणि दोन्ही तळ मिळून होणारे पूर्ण क्षेत्रफळ.',
+    s4_b3: '<b>घडी (Net):</b> ३D आकाराची २D घडी उलगडल्यास कोणती पृष्ठे पुन्हा येतात ते लगेच समजते.',
+    s4_ex_h4: 'सोडवलेले उदाहरण ४.१ — पाण्याच्या टाकीला रंग देणे',
+    s4_ex_prob: '<b>प्रश्न:</b> एका इष्टिकाचिती पाण्याच्या टाकीचे माप २ मी × १.५ मी × १.२ मी आहे. रंग देण्यासाठी तिचे एकूण पृष्ठफळ काढा.',
+    s4_ex_sol: 'TSA = २(lb+bh+hl) = २(२×१.५ + १.५×१.२ + १.२×२)\n   = २(३ + १.८ + २.४) = २ × ७.२ = १४.४ चौ.मी.',
+    s4_ex_res: 'निष्कर्ष: रंगारी व्यक्तीला १४.४ चौ.मी. पृष्ठभागावर रंग द्यावा लागेल.',
+    s4_mascot: '<b>मेधाचा शोध:</b> "लॅबमध्ये वृत्तचिती निवडा आणि r=4, h=9 ठेवा — हेच त्या ढोल स्टॉलचे खरे माप आहे!"',
+    s4_sim_h4: '३D आकार २D घडी सिम्युलेटर',
+    s4_sim_desc: 'आकार निवडा, मापे बदला आणि उलगडलेल्या घडीसह वक्रपृष्ठफळ व एकूण पृष्ठफळ पहा.',
+    tab_cube: 'घन', tab_cuboid: 'इष्टिकाचिती', tab_cylinder: 'वृत्तचिती',
+    lbl_side_a: 'बाजू (a)', s4_lbl_lsa: 'वक्र / उभे पृष्ठफळ', s4_lbl_tsa: 'एकूण पृष्ठफळ',
+
+    s5_eyebrow: 'टप्पा ५ · घनफळ, धारकता व कार्यक्षमता',
+    s5_h2: 'जागा व्यापणे — घनफळ व सर्वोत्तम पात्र',
+    s5_intro: 'लिंबू सरबतच्या स्टॉलवर मेधाला प्रश्न पडतो की समान पत्र्यापासून बनवलेले कोणते भांडे जास्त सरबत साठवेल. घनफळ हे वस्तूने व्यापलेली त्रिमितीय जागा मोजते.',
+    s5_c_h3: 'फक्त पृष्ठभाग नव्हे, तर व्यापलेली जागा',
+    s5_c_body: 'घनफळ हे वस्तूने व्यापलेली त्रिमितीय जागा मोजते (घन सेमी किंवा घन मीटरमध्ये). धारकता म्हणजे पात्रात किती द्रव साठू शकते (उदा. लिटरमध्ये) — १० सेमी बाजू असलेला घन बरोबर १ लिटर द्रव साठवतो.',
+    s5_formula: 'घन: V = a³ &nbsp; इष्टिकाचिती: V = l×b×h &nbsp; वृत्तचिती: V = πr²h<br>१ लिटर = १००० सेमी³ = १००० मिली &nbsp;·&nbsp; १ मी³ = १००० लिटर<small>गुणाकार करण्यापूर्वी नेहमी सर्व मापे एकाच एककात रूपांतरित करा.</small>',
+    s5_b1: '<b>घनफळ:</b> तिन्ही मितींचा गुणाकार असल्याने ते घन एककात (सेमी³, मी³) मोजले जाते.',
+    s5_b2: '<b>धारकता:</b> द्रवांसाठी ती जागा लिटर किंवा मिलिलिटरमध्ये रूपांतरित केली जाते.',
+    s5_b3: '<b>समान साहित्य, वेगळा आकार:</b> समान पत्र्यापासून बनवलेल्या इष्टिकाचितीपेक्षा वृत्तचिती (दंडगोल) अधिक घनफळ साठवते — म्हणूनच बहुतांश डबे दंडगोलाकार असतात.',
+    s5_ex_h4: 'सोडवलेले उदाहरण ५.१ — दंडगोलाकार टाकी भरणे',
+    s5_ex_prob: '<b>प्रश्न:</b> एका वृत्तचिती टाकीची त्रिज्या १.४ मी आणि उंची ३ मी आहे. त्यामध्ये किती लिटर पाणी मावेल? (π ≈ २२/७)',
+    s5_ex_sol: 'V = πr²h = (२२/७) × १.४² × ३ = (२२/७) × १.९६ × ३ = १८.४८ मी³\n१८.४८ मी³ × १००० = १८,४८० लिटर',
+    s5_ex_res: 'निष्कर्ष: टाकीमध्ये एकूण १८,४८० लिटर पाणी मावेल.',
+    s5_mascot: '<b>घुबड मित्राचे विश्लेषण:</b> "उजवीकडे उपलब्ध साहित्याचे प्रमाण वाढवून पहा — प्रत्येक पात्राचे घनफळ वाढेल पण वेगवेगळ्या वेगाने!"',
+    s5_sim_label: 'बहु-आकार घनफळ विश्लेषक',
+    s5_sim_h4: 'कंटेनर कार्यक्षमता विश्लेषक',
+    s5_sim_desc: 'ठराविक पत्र्याचा वापर करून, कोणत्या आकाराचे भांडे सर्वाधिक घनफळ देते ते तपासा.',
+    s5_lbl_budget: 'उपलब्ध पत्र्याचे क्षेत्रफळ (S)', s5_lbl_r: 'वृत्तचिती त्रिज्या (r)', s5_lbl_x: 'इष्टिकाचिती तळ बाजू (x)',
+    s5_lbl_cuboid_sq: 'इष्टिकाचिती (चौरस तळ)',
+    s5_leader: '🏆 सर्वाधिक क्षमता:',
+
+    banner_p: '🌿 क्षेत्रमितीचे तीन मुख्य आधारस्तंभ 🌿',
+    term_p_title: 'परिमिती', term_p_sub: 'लांबी¹ — बाह्य सीमा',
+    term_a_title: 'क्षेत्रफळ', term_a_sub: 'लांबी² — सपाट पृष्ठभाग',
+    term_v_title: 'घनफळ', term_v_sub: 'लांबी³ — व्यापलेली त्रिमितीय जागा',
+
+    app_eyebrow: '🌍 प्रत्यक्ष जीवनातील उपयोजन',
+    app_h2: 'विविध व्यवसाय आणि तंत्रज्ञानात क्षेत्रमितीचा वापर',
+    app_desc: 'वास्तुकलेचे नकाशे वाचण्यापासून ते शेतीचे भूमापन आणि पॅकेजिंग डिझाइनपर्यंत, क्षेत्रमिती मोजमापांना व्यावहारिक निर्णयांमध्ये बदलते.',
+    app1_title: 'वास्तुकला आणि बांधकाम',
+    app1_p: 'प्रत्येक नकाशा प्रत्यक्ष वीट रचण्यापूर्वी अचूक क्षेत्रफळ आणि घनफळाच्या गणितावर अवलंबून असतो.',
+    app1_li1: 'खोलीच्या क्षेत्रफळावरून फरशांचा अंदाज लावणे',
+    app1_li2: 'भिंतीच्या पृष्ठफळावरून रंग आणि सिमेंटचे प्रमाण ठरवणे',
+    app1_li3: 'काँक्रीटच्या घनफळावरून खर्चाचा अंदाज काढणे',
+    app1_li4: 'छताचा उतार आणि जिन्यांचे मोजमाप करणे',
+
+    app2_title: 'शेती आणि भूमापन',
+    app2_p: 'असममित शेतांचे समलंब आणि त्रिकोणांत विभाजन करून अचूक जमीन मोजली जाते आणि सिंचन नियोजन केले जाते.',
+    app2_li1: 'शेताच्या सीमांचे समलंब व त्रिकोणांमध्ये विभाजन',
+    app2_li2: 'प्रति हेक्टर पीक उत्पादनाचा अंदाज काढणे',
+    app2_li3: 'पाण्याचे कालवे आणि पाण्याच्या टाक्यांचे आकारमान ठरवणे',
+    app2_li4: 'जमिनीच्या क्षेत्रफळावरून बियाणे आणि खतांचे प्रमाण मोजणे',
+
+    app3_title: 'पॅकेजिंग आणि उत्पादन डिझाइन',
+    app3_p: 'अभियंते कमीत कमी पत्र्यात (पृष्ठफळ) जास्तीत जास्त माल (घनफळ) साठवण्यासाठी विविध आकारांची तुलना करतात.',
+    app3_li1: 'कमी साहित्यात जास्त साठवणूक करणारे डबे आणि बाटल्या डिझाइन करणे',
+    app3_li2: 'वाहतुकीसाठी खोक्यांचे आकारमान अनुकूल करणे',
+    app3_li3: 'उत्पादनाच्या २D घडीवरून साहित्याचा खर्च काढणे',
+    app3_li4: '३D-प्रिंटेड वस्तूंमधील घनफळाचा अंदाज लावणे',
+
+    footer_about: 'मेधावाटिका ही गोष्ट सांगून, परस्परसंवादी खेळ, लाइव्ह सिम्युलेशन आणि अभ्यासक्रम प्रभुत्वाद्वारे STEM शिक्षणात क्रांती घडवत आहे.',
+    footer_col1_title: 'परस्परसंवादी मोहिमा',
+    footer_link_m: 'क्षेत्रमिती मोहीम', footer_link_p: 'प्रकाशसंश्लेषण मोहीम', footer_link_t: 'त्रिकोणमिती मोहीम', footer_link_bio: 'मेधालॅब™ जीवशास्त्र', footer_link_math: 'मेधालॅब™ गणित',
+    footer_col2_title: 'कंपनी आणि धोरणे',
+    footer_link_c1: 'प्रशिक्षक बना', footer_link_c2: 'नियम आणि अटी', footer_link_c3: 'गोपनीयता धोरण', footer_link_c4: 'परतावा धोरण', footer_link_c5: 'सहयोगी कार्यक्रम',
+    footer_col3_title: 'मेधावाटिका संपर्क',
+    footer_contact_addr: '🏢 मेधावाटिका एडलॅब्स प्रा. लि.<br>पुणे, महाराष्ट्र, भारत',
+    footer_copy: 'कॉपीराइट © मेधावाटिका एडलॅब्स प्रा. लि. सर्व हक्क राखीव.',
+    footer_made: 'जगभरातील जिज्ञासू तरुण गणितज्ञांसाठी 💚 ने डिझाइन केलेले'
+  },
+  en: {
+    lang_name: 'English',
+    page_title: 'Mensuration Adventure — MedhāVatika',
+    brand_tagline: 'A Garden of Intellect',
+    nav_home: 'Home',
+    nav_story: "Medha's Story",
+    badge_book: 'BOOK',
+    nav_foundations: 'Foundations',
+    nav_trapezium: 'Trapezium',
+    nav_rhombus: 'Rhombus',
+    nav_kite: 'Kite Challenge',
+    badge_game: 'GAME',
+    nav_surface: 'Surface Area',
+    nav_volume: 'Volume',
+    nav_applications: 'Applications',
+    demo_btn: 'Book A Demo',
+
+    hero_eyebrow: 'MedhaLab™ · Mathematics Interactive Quest',
+    hero_title: 'Mensuration<br><em>Adventure</em>',
+    hero_desc: 'Step onto the fairground with Medha and her owl companion as ordinary shapes turn into a hands-on measuring quest. <strong>Mensuration Adventure</strong> by <em>MedhāVatika</em> turns perimeter, area, surface area and volume into a playful, interactive experience built for Grade 8 explorers.',
+    hero_cta1: '📖 Open Interactive Storybook →',
+    hero_cta2: '📐 Explore Lab Simulations',
+    stat_stages: 'Interactive Stages',
+    stat_sims: 'Live Lab Simulations',
+    stat_hands_on: 'Hands-On Mastery',
+    stat_grade_val: 'Grade 8',
+    stat_grade_lbl: 'Curriculum Aligned',
+    hero_float1: '📏 Fairground Quest',
+    hero_float2: '📐 3D Geometry',
+    hero_float3: '🦉 Owl Mentor',
+    hero_float4: '📦 Area & Volume',
+    hero_badge: 'Fairground Quest: <b>Measuring the Village Fair</b> · Status: <b style="color:var(--teal);">Active 📐</b>',
+
+    flip_eyebrow: '✨ Interactive Flipbook Reader',
+    flip_h2: "Medha's Mensuration Adventure",
+    flip_desc: 'Turn through 13 illustrated storybook pages with Medha and her owl guide as a village fair turns every shape underfoot into a measuring mystery.',
+    toc_title: '📑 Table of Contents',
+    flip_prev: '◀ Previous',
+    flip_next: 'Next ▶',
+    page_label: 'Page',
+    of_label: 'of',
+
+    s1_eyebrow: 'Stage 1 · Perimeter & Area Foundations',
+    s1_h2: 'Recalling Squares, Rectangles, Triangles & Circles',
+    s1_intro: 'Before the fair can be planned, Medha must recall the basics: how far a boundary stretches (perimeter) and how much flat ground a shape actually covers (area). These four shapes are the building blocks for everything that follows.',
+    s1_c_h3: 'Boundary vs. Surface',
+    s1_c_body: 'Perimeter is a length — it measures the distance around the outside edge, in units like cm or m. Area is a surface measurement — it measures how much flat space is enclosed, always in square units like cm² or m².',
+    s1_formula: 'Square: A = s² , P = 4s<br>Rectangle: A = l × b , P = 2(l + b)<br>Triangle: A = ½ × base × height<br>Circle: A = πr² , C = 2πr<small>s = side, l = length, b = breadth, r = radius. Use π ≈ 3.14 or 22/7.</small>',
+    s1_b1: '<b>Square & rectangle:</b> everyday flat surfaces — floor tiles, notebook pages, a cricket pitch.',
+    s1_b2: '<b>Triangle:</b> the height must always be measured perpendicular to the chosen base, not along a slanted side.',
+    s1_b3: '<b>Circle:</b> wheels, clock faces, circular flower beds — every point on the edge is the same distance (r) from the centre.',
+    s1_ex_h4: 'Solved Exercise 1.1 — Same Perimeter, Different Area',
+    s1_ex_prob: '<b>Problem:</b> A square garden and a rectangular garden both have a perimeter of 40 m. The rectangle\'s length is 12 m. Which garden has more area?',
+    s1_ex_sol: 'Square: side = 40 ÷ 4 = 10 m → Area = 10 × 10 = 100 m²\nRectangle: 2(l+b) = 40 → b = 20 − 12 = 8 m → Area = 12 × 8 = 96 m²',
+    s1_ex_res: 'Result: The square garden wins (100 m² vs 96 m²) — for a fixed perimeter, a square always encloses the most area among all rectangles!',
+    s1_mascot: '<b>Owl\'s Lab Tip:</b> "Watch what happens to the area readout when you stretch a rectangle long and thin while keeping its perimeter idea in mind — area shrinks fast, even though the shape still looks big!"',
+    sim_label: 'Live Measurement Lab',
+    s1_sim_h4: 'Shape Area & Perimeter Explorer',
+    s1_sim_desc: 'Pick a shape, drag its dimension sliders, and watch the figure redraw to scale with live area and perimeter readouts.',
+    tab_square: 'Square', tab_rectangle: 'Rectangle', tab_triangle: 'Triangle', tab_circle: 'Circle',
+    lbl_side: 'Side (s)', lbl_length: 'Length (l)', lbl_breadth: 'Breadth (b)', lbl_base: 'Base (b)', lbl_height: 'Height (h)', lbl_radius: 'Radius (r)',
+    lbl_area: 'Area', lbl_perimeter: 'Perimeter', lbl_circumference: 'Perimeter (circumf.)',
+
+    s2_eyebrow: 'Stage 2 · Area of Trapezium & Quadrilaterals',
+    s2_h2: 'The Trapezium Field & Splitting Quadrilaterals',
+    s2_intro: 'The fair\'s food stalls sit on a plot with two parallel edges of different lengths — a trapezium. Medha discovers that any quadrilateral, however oddly shaped, can be tamed by drawing a single diagonal.',
+    s2_c_h3: 'Parallel Sides & Perpendicular Height',
+    s2_c_body: 'A trapezium has exactly one pair of parallel sides. Its area is simply the average of the two parallel sides, multiplied by the perpendicular distance between them. A general quadrilateral has no such shortcut — so we split it into two triangles along a diagonal instead.',
+    s2_formula: 'Trapezium: A = ½ × (a + b) × h<br>Quadrilateral (via diagonal d): A = ½ × d × (h₁ + h₂)<small>a, b = parallel sides; h = height between them; h₁, h₂ = perpendicular offsets of the other two vertices from diagonal d.</small>',
+    s2_b1: '<b>Identify the parallel sides:</b> the two edges that never meet, like the sloped boundary of a field.',
+    s2_b2: '<b>Height, not slant:</b> h is always measured straight across, perpendicular to both parallel sides.',
+    s2_b3: '<b>Splitting a quadrilateral:</b> one diagonal turns any four-sided plot into two easy triangles whose areas simply add.',
+    s2_ex_h4: 'Solved Exercise 2.1 — Trapezium-Shaped Field',
+    s2_ex_prob: '<b>Problem:</b> A farmer\'s field is trapezium-shaped with parallel sides 60 m and 40 m, and the perpendicular distance between them is 25 m. Find its area.',
+    s2_ex_sol: 'A = ½ × (60 + 40) × 25 = ½ × 100 × 25 = 1250 m²',
+    s2_ex_res: 'Result: The field covers 1250 m² — that\'s 0.125 hectares (1 hectare = 10,000 m²).',
+    s2_mascot: '<b>Medhā\'s Observation:</b> "The slider values above match this exact problem — nudge height up or down and see the area move away from 1250 m²!"',
+    s2_sim_h4: 'Trapezium Field Builder',
+    s2_sim_desc: 'Drag the two parallel sides and the perpendicular height to reshape the field and see its area update instantly.',
+    s2_lbl_a: 'Parallel side a (top)', s2_lbl_b: 'Parallel side b (bottom)', s2_lbl_h: 'Height h (perpendicular)',
+    lbl_area_sqm: 'Area (m²)', lbl_hectares: 'In hectares',
+
+    s3_eyebrow: 'Stage 3 · Area of Rhombus & Polygons',
+    s3_h2: 'Kite Diagonals & Polygon Patterns',
+    s3_intro: 'A diamond-shaped kite stall catches Medha\'s eye. Its diagonals cross at right angles — and that one fact unlocks a shortcut for the area of every rhombus and kite at the fair.',
+    s3_c_h3: 'Diagonals That Cross at Right Angles',
+    s3_c_body: 'In a rhombus (and a kite), the two diagonals always bisect each other at 90°. That lets us build the shape from four identical right triangles, giving a clean shortcut formula. Regular polygons follow a similar idea — slice them from the centre into equal triangles.',
+    s3_formula: 'Rhombus / Kite: A = ½ × d₁ × d₂<br>Regular polygon (n sides, side s): A ≈ (n × s²) ÷ (4 × tan(π/n))<small>d₁, d₂ = diagonals. A polygon can always be estimated by slicing it into n congruent triangles from its centre.</small>',
+    s3_b1: '<b>Diagonals bisect at 90°:</b> that right angle is exactly why ½ × d₁ × d₂ works.',
+    s3_b2: '<b>Kites and rhombi share a formula:</b> both are built from two pairs of congruent right triangles.',
+    s3_b3: '<b>Any regular polygon</b> can be sliced from its centre into n congruent isosceles triangles to estimate area.',
+    s3_ex_h4: 'Solved Exercise 3.1 — Kite-Shaped Flower Bed',
+    s3_ex_prob: '<b>Problem:</b> A kite-shaped flower bed has diagonals of 16 m and 12 m. Turf costs ₹45 per m². Find the total cost.',
+    s3_ex_sol: 'Area = ½ × 16 × 12 = 96 m²\nCost = 96 × ₹45 = ₹4,320',
+    s3_ex_res: 'Result: The gardener needs to budget ₹4,320 for turf.',
+    s3_mascot: '<b>Owl\'s Wisdom:</b> "Try to land the challenge on exactly 96 m² — that\'s this exact flower bed\'s area!"',
+    s3_sim_label: '🎯 Kite Area Challenge',
+    s3_sim_h4: 'Match the Target Area',
+    s3_sim_desc: 'Tune the two diagonals to hit the target area shown below. Get within 3 m² for a perfect match!',
+    s3_lbl_d1: 'Diagonal d₁ (horizontal)', s3_lbl_d2: 'Diagonal d₂ (vertical)',
+    s3_lbl_cur: 'Current Area', s3_lbl_tgt: 'Target Area',
+    s3_status_init: 'Adjust the sliders to close the gap',
+    btn_random: '🎲 Random Challenge', btn_reset: '↺ Reset',
+
+    s4_eyebrow: 'Stage 4 · Surface Area of Solids',
+    s4_h2: 'Unfolding Nets — Surface Area of Solids',
+    s4_intro: 'A prize box needs gift wrap and a drum stall needs fabric around its curved side. Medha learns to flatten 3D solids into 2D nets to see exactly how much material each face needs.',
+    s4_c_h3: 'Flat Faces vs. Every Face',
+    s4_c_body: 'Lateral (or curved) surface area covers only the side walls — the faces you\'d wrap with a label. Total surface area adds the top and bottom back in, which matters when you\'re painting, wrapping, or covering a solid completely.',
+    s4_formula: 'Cube: LSA = 4a² , TSA = 6a²<br>Cuboid: LSA = 2h(l+b) , TSA = 2(lb+bh+hl)<br>Cylinder: CSA = 2πrh , TSA = 2πr(r+h)<small>a = side, l/b/h = dimensions, r = radius of cylinder base.</small>',
+    s4_b1: '<b>Lateral surface</b> skips the top and bottom caps — think of just the "wraparound" part.',
+    s4_b2: '<b>Total surface</b> puts both caps back — essential for paint, wrapping paper, or sheet metal.',
+    s4_b3: '<b>Unfolding into a net</b> is the fastest way to spot which faces repeat and which are unique.',
+    s4_ex_h4: 'Solved Exercise 4.1 — Painting a Water Tank',
+    s4_ex_prob: '<b>Problem:</b> A cuboidal overhead tank measures 2 m × 1.5 m × 1.2 m. Find the total surface area to be painted.',
+    s4_ex_sol: 'TSA = 2(lb+bh+hl) = 2(2×1.5 + 1.5×1.2 + 1.2×2)\n   = 2(3 + 1.8 + 2.4) = 2 × 7.2 = 14.4 m²',
+    s4_ex_res: 'Result: The painter must cover 14.4 m² of surface.',
+    s4_mascot: '<b>Medhā\'s Discovery:</b> "Switch to Cylinder in the lab and set r=4, h=9 — that\'s the drum stall\'s real size!"',
+    s4_sim_h4: 'Solid Net Unfolder',
+    s4_sim_desc: 'Choose a solid, adjust its dimensions, and watch its flattened net unfold with live lateral and total surface area.',
+    tab_cube: 'Cube', tab_cuboid: 'Cuboid', tab_cylinder: 'Cylinder',
+    lbl_side_a: 'Side (a)', s4_lbl_lsa: 'Lateral / Curved SA', s4_lbl_tsa: 'Total Surface Area',
+
+    s5_eyebrow: 'Stage 5 · Volume, Capacity & Efficiency',
+    s5_h2: 'Filling Space — Volume & the Best Container',
+    s5_intro: 'At the lemonade stand, Medha wonders which container holds more for the same amount of material. Volume measures the space a solid occupies — and it decides who wins the fair\'s container design contest.',
+    s5_c_h3: 'Space Enclosed, Not Just Covered',
+    s5_c_body: 'Volume measures the three-dimensional space a solid fills, in cubic units. Capacity measures how much a container can hold, usually in litres — a cube of side 10 cm holds exactly 1 litre.',
+    s5_formula: 'Cube: V = a³ &nbsp; Cuboid: V = l×b×h &nbsp; Cylinder: V = πr²h<br>1 L = 1000 cm³ = 1000 mL &nbsp;·&nbsp; 1 m³ = 1000 L<small>Always convert every dimension to the same unit before multiplying.</small>',
+    s5_b1: '<b>Volume</b> is measured in cubic units — cm³, m³ — because three dimensions multiply together.',
+    s5_b2: '<b>Capacity</b> converts that same space into litres or millilitres for liquids and containers.',
+    s5_b3: '<b>Same material, different shape:</b> a cylinder often holds more volume than a cuboid or cube built from the same amount of sheet material — that\'s why so many cans are cylindrical.',
+    s5_ex_h4: 'Solved Exercise 5.1 — Filling a Cylindrical Tank',
+    s5_ex_prob: '<b>Problem:</b> A cylindrical tank has radius 1.4 m and height 3 m. How many litres can it hold? (π ≈ 22/7)',
+    s5_ex_sol: 'V = πr²h = (22/7) × 1.4² × 3 = (22/7) × 1.96 × 3 = 18.48 m³\n18.48 m³ × 1000 = 18,480 L',
+    s5_ex_res: 'Result: The tank holds 18,480 litres of water.',
+    s5_mascot: '<b>Owl\'s Diagnostic:</b> "Raise the material budget on the right without changing shape proportions, and watch every container\'s volume grow — but never at the same rate!"',
+    s5_sim_label: 'Multi-Shape Rate Analyzer',
+    s5_sim_h4: 'Container Efficiency Analyzer',
+    s5_sim_desc: 'Fix a sheet-material budget, then tune the cylinder\'s radius and the cuboid\'s base to see which shape packs in the most volume.',
+    s5_lbl_budget: 'Material Budget (S)', s5_lbl_r: 'Cylinder radius (r)', s5_lbl_x: 'Cuboid base side (x)',
+    s5_lbl_cuboid_sq: 'Cuboid (square base)',
+    s5_leader: '🏆 Current Leader:',
+
+    banner_p: '🌿 THE THREE PILLARS OF MENSURATION 🌿',
+    term_p_title: 'Perimeter', term_p_sub: 'length¹ — the boundary',
+    term_a_title: 'Area', term_a_sub: 'length² — the surface',
+    term_v_title: 'Volume', term_v_sub: 'length³ — the space enclosed',
+
+    app_eyebrow: '🌍 Real-World Impact',
+    app_h2: 'Mensuration Across Careers & Technology',
+    app_desc: 'From reading architectural blueprints to surveying farmland and designing packaging, mensuration turns raw measurements into real decisions.',
+    app1_title: 'Architecture & Construction',
+    app1_p: 'Every blueprint depends on precise area and volume calculations before a single brick is laid.',
+    app1_li1: 'Estimating tiles and flooring from room area',
+    app1_li2: 'Calculating paint and plaster from wall surface area',
+    app1_li3: 'Costing concrete from structural volume',
+    app1_li4: 'Planning roof slant heights and staircases',
+
+    app2_title: 'Agriculture & Land Surveying',
+    app2_p: 'Irregular fields are mapped into trapeziums and triangles to measure land and plan irrigation.',
+    app2_li1: 'Mapping field boundaries into trapeziums & triangles',
+    app2_li2: 'Estimating crop yield per hectare',
+    app2_li3: 'Sizing irrigation canals and water tanks',
+    app2_li4: 'Calculating seed and fertilizer quantity from land area',
+
+    app3_title: 'Packaging & Product Design',
+    app3_p: 'Engineers balance surface area (material cost) against volume (capacity) for every container.',
+    app3_li1: 'Designing cans and bottles that hold more for less material',
+    app3_li2: 'Optimizing carton dimensions for shipping',
+    app3_li3: 'Costing material from a product\'s unfolded net',
+    app3_li4: 'Estimating volume in 3D-printed objects',
+
+    footer_about: 'MedhaVatika transforms foundational STEM learning through storytelling, gamified simulations, interactive quests, and rigorous curriculum mastery.',
+    footer_col1_title: 'Interactive Quests',
+    footer_link_m: 'Mensuration Quest', footer_link_p: 'Photosynthesis Quest', footer_link_t: 'Trigonometry Quest', footer_link_bio: 'MedhaLab™ Biology', footer_link_math: 'MedhaLab™ Mathematics',
+    footer_col2_title: 'Company & Policies',
+    footer_link_c1: 'Become an Instructor', footer_link_c2: 'Terms & Conditions', footer_link_c3: 'Privacy Policy', footer_link_c4: 'Refund Policy', footer_link_c5: 'Affiliate Program',
+    footer_col3_title: 'Contact MedhāVatika',
+    footer_contact_addr: '🏢 Medhavatika Edlabs Pvt. Ltd.<br>Pune, Maharashtra, India',
+    footer_copy: 'Copyright © MedhāVatika Edlabs Pvt. Ltd. All rights reserved.',
+    footer_made: 'Designed with 💚 for curious young mathematicians worldwide'
+  },
+  hi: {
+    lang_name: 'हिंदी',
+    page_title: 'क्षेत्रमिति साहसिक यात्रा — MedhāVatika',
+    brand_tagline: 'बुद्धि और ज्ञान की समृद्ध वाटिका',
+    nav_home: 'मुख्य पृष्ठ',
+    nav_story: 'मेधा की कहानी',
+    badge_book: 'किताब',
+    nav_foundations: 'मूलभूत सूत्र',
+    nav_trapezium: 'समलंब चतुर्भुज',
+    nav_rhombus: 'समचतुर्भुज',
+    nav_kite: 'पतंग चुनौती',
+    badge_game: 'खेल',
+    nav_surface: 'पृष्ठीय क्षेत्रफल',
+    nav_volume: 'आयतन',
+    nav_applications: 'व्यावहारिक उपयोग',
+    demo_btn: 'डेमो बुक करें',
+
+    hero_eyebrow: 'मेधालैब™ · गणित संवादात्मक खोज',
+    hero_title: 'क्षेत्रमिति<br><em>साहसिक यात्रा</em>',
+    hero_desc: 'मेधा और उसके बुद्धिमान उल्लू साथी के साथ मेले के मैदान में कदम रखें, जहाँ साधारण आकृतियाँ जीवंत मापन खेल बन जाती हैं। <strong>मेधावाटिका</strong> की यह खोज कक्षा ८ के छात्रों के लिए परिमाप, क्षेत्रफल, पृष्ठीय क्षेत्रफल और आयतन को अत्यंत रोचक और संवादात्मक बनाती है।',
+    hero_cta1: '📖 सचित्र कहानी खोलें →',
+    hero_cta2: '📐 लैब सिमुलेशन देखें',
+    stat_stages: 'संवादात्मक चरण',
+    stat_sims: 'लाइव लैब प्रयोग',
+    stat_hands_on: 'व्यावहारिक ज्ञान',
+    stat_grade_val: 'कक्षा ८',
+    stat_grade_lbl: 'पाठ्यक्रम आधारित',
+    hero_float1: '📏 मेले की खोज',
+    hero_float2: '📐 3D रेखागणित',
+    hero_float3: '🦉 उल्लू मार्गदर्शक',
+    hero_float4: '📦 क्षेत्रफल व आयतन',
+    hero_badge: 'मेले की खोज: <b>गाँव के मेले का मापन</b> · स्थिति: <b style="color:var(--teal);">सक्रिय 📐</b>',
+
+    flip_eyebrow: '✨ संवादात्मक फ्लिपबुक रीडर',
+    flip_h2: 'मेधा की क्षेत्रमिति साहसिक यात्रा',
+    flip_desc: 'मेधा और उसके उल्लू मार्गदर्शक के साथ १३ सचित्र कहानी पृष्ठों को पलटें, जहाँ गाँव के मेले की हर वस्तु गणितीय पहेली बन जाती है।',
+    toc_title: '📑 विषय सूची',
+    flip_prev: '◀ पिछला',
+    flip_next: 'अगला ▶',
+    page_label: 'पृष्ठ',
+    of_label: 'का',
+
+    s1_eyebrow: 'चरण १ · परिमाप और क्षेत्रफल की नींव',
+    s1_h2: 'वर्ग, आयत, त्रिभुज और वृत्त का दोहराव',
+    s1_intro: 'मेले की योजना बनाने से पहले, मेधा को बुनियादी बातें याद करनी होंगी: बाहरी सीमा कितनी लंबी है (परिमाप) और आकृति ने कितनी सपाट जमीन घेरी है (क्षेत्रफल)।',
+    s1_c_h3: 'सीमा बनाम सतह',
+    s1_c_body: 'परिमाप एक लंबाई है — यह बाहरी किनारे के चारों ओर की दूरी (सेमी या मीटर) मापता है। क्षेत्रफल एक सतह मापन है — यह मापता है कि कितनी सपाट जगह घिरी हुई है (वर्ग सेमी या वर्ग मीटर)।',
+    s1_formula: 'वर्ग: A = s² , P = 4s<br>आयत: A = l × b , P = 2(l + b)<br>त्रिभुज: A = ½ × आधार × ऊँचाई<br>वृत्त: A = πr² , C = 2πr<small>s = भुजा, l = लंबाई, b = चौड़ाई, r = त्रिज्या। π ≈ 3.14 या 22/7 का प्रयोग करें।</small>',
+    s1_b1: '<b>वर्ग व आयत:</b> दैनिक जीवन की सतहें — फर्श की टाइलें, नोटबुक के पन्ने, क्रिकेट पिच।',
+    s1_b2: '<b>त्रिभुज:</b> ऊँचाई हमेशा चुने हुए आधार पर लंबवत मापी जानी चाहिए, तिरछी भुजा पर नहीं।',
+    s1_b3: '<b>वृत्त:</b> पहिए, घड़ी, गोलाकार क्यारियाँ — किनारे का हर बिंदु केंद्र से समान दूरी (r) पर होता है।',
+    s1_ex_h4: 'हल किया गया उदाहरण १.१ — समान परिमाप, भिन्न क्षेत्रफल',
+    s1_ex_prob: '<b>समस्या:</b> एक वर्गाकार बगीचे और एक आयताकार बगीचे दोनों का परिमाप ४० मीटर है। आयत की लंबाई १२ मीटर है। किस बगीचे का क्षेत्रफल अधिक है?',
+    s1_ex_sol: 'वर्ग: भुजा = ४० ÷ ४ = १० मी → क्षेत्रफल = १० × १० = १०० वर्ग मी\nआयत: २(l+b) = ४० → b = २० − १२ = ८ मी → क्षेत्रफल = १२ × ८ = ९६ वर्ग मी',
+    s1_ex_res: 'परिणाम: वर्गाकार बगीचा जीतता है (१०० वर्ग मी बनाम ९६ वर्ग मी) — निश्चित परिमाप के लिए वर्ग हमेशा सबसे अधिक क्षेत्रफल घेरता है!',
+    s1_mascot: '<b>उल्लू की लैब टिप:</b> "जब आप परिमाप समान रखते हुए आयत को लंबा और पतला करते हैं, तो क्षेत्रफल तेजी से घटता है!"',
+    sim_label: 'लाइव मापन प्रयोगशाला',
+    s1_sim_h4: 'आकृति क्षेत्रफल व परिमाप एक्सप्लोरर',
+    s1_sim_desc: 'आकृति चुनें, स्लाइडर खींचें और लाइव क्षेत्रफल तथा परिमाप के साथ आकृति को बदलते हुए देखें।',
+    tab_square: 'वर्ग', tab_rectangle: 'आयत', tab_triangle: 'त्रिभुज', tab_circle: 'वृत्त',
+    lbl_side: 'भुजा (s)', lbl_length: 'लंबाई (l)', lbl_breadth: 'चौड़ाई (b)', lbl_base: 'आधार (b)', lbl_height: 'ऊँचाई (h)', lbl_radius: 'त्रिज्या (r)',
+    lbl_area: 'क्षेत्रफल', lbl_perimeter: 'परिमाप', lbl_circumference: 'परिधि',
+
+    s2_eyebrow: 'चरण २ · समलंब व सामान्य चतुर्भुज का क्षेत्रफल',
+    s2_h2: 'समलंब खेत और चतुर्भुज का विभाजन',
+    s2_intro: 'मेले के खान-पान के स्टॉल दो अलग-अलग लंबाई वाली समांतर भुजाओं वाली जमीन पर हैं — यानी एक समलंब चतुर्भुज। मेधा सीखती है कि किसी भी चतुर्भुज को एक विकर्ण खींचकर दो त्रिभुजों में आसानी से हल किया जा सकता है।',
+    s2_c_h3: 'समांतर भुजाएँ और लंबवत ऊँचाई',
+    s2_c_body: 'समलंब चतुर्भुज में समांतर भुजाओं का केवल एक युग्म होता है। इसका क्षेत्रफल समांतर भुजाओं के औसत को उनके बीच की लंबवत ऊँचाई से गुणा करने पर मिलता है।',
+    s2_formula: 'समलंब चतुर्भुज: A = ½ × (a + b) × h<br>सामान्य चतुर्भुज (विकर्ण d द्वारा): A = ½ × d × (h₁ + h₂)<small>a, b = समांतर भुजाएँ; h = उनके बीच लंबवत दूरी; h₁, h₂ = विकर्ण पर डाले गए लंब।</small>',
+    s2_b1: '<b>समांतर भुजाएँ पहचानें:</b> वे दो किनारे जो कभी नहीं मिलते।',
+    s2_b2: '<b>ऊँचाई, तिरछा किनारा नहीं:</b> h दोनों समांतर भुजाओं के बीच सीधी लंबवत दूरी है।',
+    s2_b3: '<b>चतुर्भुज का विभाजन:</b> एक विकर्ण किसी भी चार भुजाओं वाले भूखंड को दो आसान त्रिभुजों में बाँट देता है।',
+    s2_ex_h4: 'हल किया गया उदाहरण २.१ — समलंब आकार का खेत',
+    s2_ex_prob: '<b>समस्या:</b> एक किसान का खेत समलंब आकार का है जिसकी समांतर भुजाएँ ६० मी और ४० मी हैं, और उनके बीच की लंबवत दूरी २५ मी है। इसका क्षेत्रफल ज्ञात कीजिए।',
+    s2_ex_sol: 'A = ½ × (६० + ४०) × २५ = ½ × १०० × २५ = १२५० वर्ग मी',
+    s2_ex_res: 'परिणाम: खेत का क्षेत्रफल १२५० वर्ग मी (०.१२५ हेक्टेयर) है।',
+    s2_mascot: '<b>मेधा का अवलोकन:</b> "ऊपर दिए गए स्लाइडर इस प्रश्न से पूरी तरह मेल खाते हैं — ऊँचाई बदलकर देखें क्षेत्रफल कैसे बदलता है!"',
+    s2_sim_h4: 'समलंब भूखंड निर्माता',
+    s2_sim_desc: 'समांतर भुजाओं और लंबवत ऊँचाई को खींचकर सीधे क्षेत्रफल में बदलाव देखें।',
+    s2_lbl_a: 'समांतर भुजा a (ऊपरी)', s2_lbl_b: 'समांतर भुजा b (निचली)', s2_lbl_h: 'लंबवत ऊँचाई h',
+    lbl_area_sqm: 'क्षेत्रफल (वर्ग मी)', lbl_hectares: 'हेक्टेयर में',
+
+    s3_eyebrow: 'चरण ३ · समचतुर्भुज, पतंग व बहुभुज का क्षेत्रफल',
+    s3_h2: 'पतंग के विकर्ण और बहुभुज प्रतिरूप',
+    s3_intro: 'हीरे के आकार का पतंग का स्टॉल मेधा का ध्यान खींचता है। इसके विकर्ण समकोण पर परस्पर काटते हैं — जिससे समचतुर्भुज और पतंग का क्षेत्रफल निकालना बेहद आसान हो जाता है।',
+    s3_c_h3: 'समकोण पर प्रतिच्छेद करने वाले विकर्ण',
+    s3_c_body: 'समचतुर्भुज (और पतंग) में दोनों विकर्ण एक दूसरे को ९०° पर समद्विभाजित करते हैं। इससे ४ सर्वांगसम समकोण त्रिभुज बनते हैं। सम बहुभुज को केंद्र से समान त्रिभुजों में विभाजित करके हल किया जा सकता है।',
+    s3_formula: 'समचतुर्भुज / पतंग: A = ½ × d₁ × d₂<br>सम बहुभुज (n भुजाएँ, भुजा s): A ≈ (n × s²) ÷ (4 × tan(π/n))<small>d₁, d₂ = विकर्ण। बहुभुज को केंद्र से n सर्वांगसम त्रिभुजों में बाँटा जा सकता है।</small>',
+    s3_b1: '<b>विकर्ण ९०° पर समद्विभाजित करते हैं:</b> इसी समकोण के कारण ½ × d₁ × d₂ सूत्र काम करता है।',
+    s3_b2: '<b>पतंग और समचतुर्भुज:</b> दोनों आकृतियों के लिए विकर्णों का यही सूत्र लागू होता है।',
+    s3_b3: '<b>सम बहुभुज:</b> केंद्र से n समद्विबाहु त्रिभुजों में विभाजित कर क्षेत्रफल निकाला जा सकता है।',
+    s3_ex_h4: 'हल किया गया उदाहरण ३.१ — पतंगाकार फूलों की क्यारी',
+    s3_ex_prob: '<b>समस्या:</b> एक पतंगाकार फूलों की क्यारी के विकर्ण १६ मी और १२ मी हैं। घास लगाने की दर ₹४५ प्रति वर्ग मी है। कुल लागत ज्ञात कीजिए।',
+    s3_ex_sol: 'क्षेत्रफल = ½ × १६ × १२ = ९६ वर्ग मी\nलागत = ९६ × ₹४५ = ₹४,३२०',
+    s3_ex_res: 'परिणाम: माली को घास लगाने के लिए ₹४,३२० का बजट चाहिए।',
+    s3_mascot: '<b>उल्लू का ज्ञान:</b> "दाहिनी ओर की चुनौती में ठीक ९६ वर्ग मी क्षेत्रफल लाकर दिखाएँ — यही फूलों की क्यारी का क्षेत्रफल है!"',
+    s3_sim_label: '🎯 पतंग क्षेत्रफल चुनौती',
+    s3_sim_h4: 'लक्ष्य क्षेत्रफल से मिलान करें',
+    s3_sim_desc: 'नीचे दिए गए लक्ष्य क्षेत्रफल तक पहुँचने के लिए दोनों विकर्णों के स्लाइडर समायोजित करें!',
+    s3_lbl_d1: 'विकर्ण d₁ (क्षैतिज)', s3_lbl_d2: 'विकर्ण d₂ (ऊर्ध्वाधर)',
+    s3_lbl_cur: 'वर्तमान क्षेत्रफल', s3_lbl_tgt: 'लक्ष्य क्षेत्रफल',
+    s3_status_init: 'अंतर कम करने के लिए स्लाइडर खिसकाएँ',
+    btn_random: '🎲 नई चुनौती', btn_reset: '↺ रीसेट',
+
+    s4_eyebrow: 'चरण ४ · ठोस आकृतियों का पृष्ठीय क्षेत्रफल',
+    s4_h2: '2D जाल खोलना — ठोस आकृतियों का पृष्ठीय क्षेत्रफल',
+    s4_intro: 'उपहार के डिब्बे को रैपर से ढकना है और ढोल के घुमावदार हिस्से पर कपड़ा लपेटना है। मेधा 3D आकृतियों के 2D जाल को खोलकर प्रत्येक फलक का क्षेत्रफल निकालना सीखती है।',
+    s4_c_h3: 'पार्श्व फलक बनाम संपूर्ण फलक',
+    s4_c_body: 'पार्श्व (या वक्र) पृष्ठीय क्षेत्रफल केवल किनारे की दीवारों को मापता है। संपूर्ण पृष्ठीय क्षेत्रफल में ऊपर और नीचे का आधार भी शामिल होता है।',
+    s4_formula: 'घन: LSA = 4a² , TSA = 6a²<br>घनाभ: LSA = 2h(l+b) , TSA = 2(lb+bh+hl)<br>बेलन: CSA = 2πrh , TSA = 2πr(r+h)<small>a = भुजा, l/b/h = विमाएँ, r = बेलन के आधार की त्रिज्या।</small>',
+    s4_b1: '<b>पार्श्व पृष्ठीय क्षेत्रफल:</b> ऊपरी और निचले आधार को छोड़कर केवल चारों तरफ का भाग।',
+    s4_b2: '<b>संपूर्ण पृष्ठीय क्षेत्रफल:</b> सभी दीवारों और दोनों आधारों का कुल क्षेत्रफल।',
+    s4_b3: '<b>जाल (Net):</b> 3D आकार को सपाट खोलने से यह स्पष्ट होता है कि कौन से फलक दोहराए जाते हैं।',
+    s4_ex_h4: 'हल किया गया उदाहरण ४.१ — पानी की टंकी की रंगाई',
+    s4_ex_prob: '<b>समस्या:</b> एक घनाभाकार पानी की टंकी २ मी × १.५ मी × १.२ मी माप की है। पेंट किए जाने वाले भाग का कुल पृष्ठीय क्षेत्रफल ज्ञात कीजिए।',
+    s4_ex_sol: 'TSA = २(lb+bh+hl) = २(२×१.५ + १.५×१.२ + १.२×२)\n   = २(३ + १.८ + २.४) = २ × ७.२ = १४.४ वर्ग मी',
+    s4_ex_res: 'परिणाम: पेंटर को कुल १४.४ वर्ग मी सतह पर पेंट करना होगा।',
+    s4_mascot: '<b>मेधा की खोज:</b> "लैब में बेलन चुनें और r=4, h=9 रखें — यही ढोल स्टॉल का वास्तविक आकार है!"',
+    s4_sim_h4: 'ठोस आकृति 2D जाल सिमुलेटर',
+    s4_sim_desc: 'आकृति चुनें, माप बदलें और खुले हुए जाल के साथ पार्श्व व संपूर्ण पृष्ठीय क्षेत्रफल देखें।',
+    tab_cube: 'घन', tab_cuboid: 'घनाभ', tab_cylinder: 'बेलन',
+    lbl_side_a: 'भुजा (a)', s4_lbl_lsa: 'पार्श्व / वक्र पृष्ठीय क्षेत्रफल', s4_lbl_tsa: 'संपूर्ण पृष्ठीय क्षेत्रफल',
+
+    s5_eyebrow: 'चरण ५ · आयतन, धारिता और दक्षता',
+    s5_h2: 'स्थान घेरना — आयतन और सर्वोत्तम पात्र',
+    s5_intro: 'शिकंजी के स्टॉल पर मेधा सोचती है कि समान चादर से बना कौन सा बर्तन अधिक शिकंजी रखेगा। आयतन किसी ठोस द्वारा घेरे गए 3D स्थान को मापता है।',
+    s5_c_h3: 'केवल सतह नहीं, बल्कि घेरा गया स्थान',
+    s5_c_body: 'आयतन किसी वस्तु द्वारा घेरे गए त्रिविमीय स्थान को मापता है (घन सेमी या घन मीटर में)। धारिता यह बताती है कि बर्तन में कितना तरल आ सकता है (जैसे लीटर में) — १० सेमी भुजा वाला घन ठीक १ लीटर तरल रखता है।',
+    s5_formula: 'घन: V = a³ &nbsp; घनाभ: V = l×b×h &nbsp; बेलन: V = πr²h<br>१ लीटर = १००० सेमी³ = १००० मिली &nbsp;·&nbsp; १ मी³ = १००० लीटर<small>गुणा करने से पहले हमेशा सभी मापों को एक ही इकाई में बदलें।</small>',
+    s5_b1: '<b>आयतन:</b> तीन विमाओं के गुणनफल के कारण घन इकाइयों (सेमी³, मी³) में मापा जाता है।',
+    s5_b2: '<b>धारिता:</b> द्रवों के लिए उसी स्थान को लीटर या मिलीलीटर में व्यक्त किया जाता है।',
+    s5_b3: '<b>समान सामग्री, भिन्न आकार:</b> समान चादर से बने घनाभ की तुलना में बेलन अधिक आयतन रखता है — इसलिए अधिकांश डिब्बे बेलनाकार होते हैं।',
+    s5_ex_h4: 'हल किया गया उदाहरण ५.१ — बेलनाकार टंकी भरना',
+    s5_ex_prob: '<b>समस्या:</b> एक बेलनाकार टंकी की त्रिज्या १.४ मी और ऊँचाई ३ मी है। इसमें कितने लीटर पानी आ सकता है? (π ≈ २२/७)',
+    s5_ex_sol: 'V = πr²h = (२२/७) × १.४² × ३ = (२२/७) × १.९६ × ३ = १८.४८ मी³\n१८.४८ मी³ × १००० = १८,४८० लीटर',
+    s5_ex_res: 'परिणाम: टंकी में कुल १८,४८० लीटर पानी समा सकता है।',
+    s5_mascot: '<b>उल्लू का विश्लेषण:</b> "सामग्री का बजट बढ़ाकर देखें — हर बर्तन का आयतन बढ़ेगा लेकिन अलग-अलग गति से!"',
+    s5_sim_label: 'बहु-आकृति आयतन विश्लेषक',
+    s5_sim_h4: 'कंटेनर दक्षता विश्लेषक',
+    s5_sim_desc: 'सामग्री का एक निश्चित बजट तय करें, फिर बेलन की त्रिज्या और घनाभ का आधार बदलकर देखें कि कौन सा आकार सबसे अधिक आयतन घेरता है।',
+    s5_lbl_budget: 'उपलब्ध चादर का क्षेत्रफल (S)', s5_lbl_r: 'बेलन की त्रिज्या (r)', s5_lbl_x: 'घनाभ आधार भुजा (x)',
+    s5_lbl_cuboid_sq: 'घनाभ (वर्गाकार आधार)',
+    s5_leader: '🏆 अधिकतम धारिता:',
+
+    banner_p: '🌿 क्षेत्रमिति के तीन मुख्य आधारस्तंभ 🌿',
+    term_p_title: 'परिमाप', term_p_sub: 'लंबाई¹ — बाहरी सीमा',
+    term_a_title: 'क्षेत्रफल', term_a_sub: 'लंबाई² — सपाट सतह',
+    term_v_title: 'आयतन', term_v_sub: 'लंबाई³ — घेरा गया त्रिविमीय स्थान',
+
+    app_eyebrow: '🌍 वास्तविक जीवन में उपयोग',
+    app_h2: 'विभिन्न व्यवसायों और तकनीक में क्षेत्रमिति का महत्व',
+    app_desc: 'वास्तुकला के नक्शे पढ़ने से लेकर खेती के सर्वेक्षण और पैकेजिंग डिजाइन तक, क्षेत्रमिति कच्चे मापों को व्यावहारिक निर्णयों में बदलती है।',
+    app1_title: 'वास्तुकला और निर्माण',
+    app1_p: 'ईंट रखने से पहले हर ब्लूप्रिंट सटीक क्षेत्रफल और आयतन गणना पर निर्भर करता है।',
+    app1_li1: 'कमरे के क्षेत्रफल से फर्श की टाइलों का अनुमान',
+    app1_li2: 'दीवार के क्षेत्रफल से पेंट और प्लास्टर की गणना',
+    app1_li3: 'संरचनात्मक आयतन से कंक्रीट की लागत',
+    app1_li4: 'छत की ढलान और सीढ़ियों की योजना',
+
+    app2_title: 'कृषि और भूमि सर्वेक्षण',
+    app2_p: 'अनियमित खेतों को समलंब और त्रिभुजों में बाँटकर जमीन मापी जाती है और सिंचाई की योजना बनती है।',
+    app2_li1: 'खेत की सीमाओं को समलंब व त्रिभुजों में बाँटना',
+    app2_li2: 'प्रति हेक्टेयर फसल उत्पादन का अनुमान',
+    app2_li3: 'सिंचाई नहरों और पानी की टंकियों का आकार तय करना',
+    app2_li4: 'भूमि के क्षेत्रफल से बीज और खाद की मात्रा निकालना',
+
+    app3_title: 'पैकेजिंग और उत्पाद डिजाइन',
+    app3_p: 'इंजीनियर कम से कम सामग्री (सतह क्षेत्रफल) में अधिक से अधिक माल (आयतन) रखने के लिए आकारों की तुलना करते हैं।',
+    app3_li1: 'कम सामग्री में अधिक क्षमता वाले डिब्बे और बोतलें डिजाइन करना',
+    app3_li2: 'परिवहन के लिए कार्टन के आकार को अनुकूलित करना',
+    app3_li3: 'उत्पाद के 2D जाल से सामग्री की लागत निकालना',
+    app3_li4: '3D-प्रिंटेड वस्तुओं में आयतन का अनुमान लगाना',
+
+    footer_about: 'मेधावाटिका कहानी कहने, संवादात्मक खेल, लाइव सिमुलेशन और पाठ्यक्रम निपुणता के माध्यम से STEM शिक्षा में क्रांति ला रही है।',
+    footer_col1_title: 'संवादात्मक खोजें',
+    footer_link_m: 'क्षेत्रमिति खोज', footer_link_p: 'प्रकाश संश्लेषण खोज', footer_link_t: 'त्रिकोणमिति खोज', footer_link_bio: 'मेधालैब™ जीव विज्ञान', footer_link_math: 'मेधालैब™ गणित',
+    footer_col2_title: 'कंपनी और नीतियाँ',
+    footer_link_c1: 'प्रशिक्षक बनें', footer_link_c2: 'नियम व शर्तें', footer_link_c3: 'गोपनीयता नीति', footer_link_c4: 'रिफंड नीति', footer_link_c5: 'संबद्ध कार्यक्रम',
+    footer_col3_title: 'मेधावाटिका संपर्क',
+    footer_contact_addr: '🏢 मेधावाटिका एडलैब्स प्रा. लि.<br>पुणे, महाराष्ट्र, भारत',
+    footer_copy: 'सर्वाधिकार सुरक्षित © मेधावाटिका एडलैब्स प्रा. लि.',
+    footer_made: 'दुनिया भर के जिज्ञासु युवा गणितज्ञों के लिए 💚 से निर्मित'
+  }
+};
+
+/* ---------------- STORYBOOK PAGES ---------------- */
+const STORY_PAGES = {
+  mr: [
+    {chapter:'मुखपृष्ठ',tag:'कव्हर',icon:'📐',title:"मेधाचे क्षेत्रमिती साहस",text:"परिमिती, क्षेत्रफळ, पृष्ठफळ आणि घनफळाचा एक रोमांचक प्रवास — गावातील जत्रेच्या एका अविस्मरणीय दिवसातून शिकूया."},
+    {chapter:'प्रस्तावना',tag:'प्रकरण ०',icon:'🎪',title:'गावच्या जत्रेचे मैदान',text:"मेधाच्या गावात वार्षिक जत्रेची लगबग सुरू आहे. पहिला तंबू ठोकण्यापूर्वी जमिनीची अचूक मोजणी करणे आवश्यक आहे — आणि मेधा तिच्या हुशार घुबड मित्रासह ही जबाबदारी स्वीकारते."},
+    {chapter:'चौरस आणि आयत',tag:'प्रकरण १',icon:'🟦',title:'चौरस आणि आयताची उजळणी',text:"तिकीट खिडकी चौरसाकृती आहे आणि खाऊची गल्ली आयताकृती आहे. मेधा जुनी सूत्रे — बाजू² आणि लांबी × रुंदी — वापरून दोन्ही जागा अचूक आखून देते."},
+    {chapter:'त्रिकोण आणि वर्तुळ',tag:'प्रकरण १',icon:'🔺',title:'त्रिकोणी पताका आणि नशिबाचे चक्र',text:"जत्रेतील रंगीबेरंगी पताका त्रिकोणी आहेत आणि लकी व्हील एक परिपूर्ण वर्तुळ आहे. मेधा पताक्याचे क्षेत्रफळ ½ × पाया × उंचीने मोजते, आणि चक्राची फेरी 2πr द्वारे ठरवते."},
+    {chapter:'समलंब मैदान',tag:'प्रकरण २',icon:'🔷',title:'समलंब चौकोनी खाऊचे मैदान',text:"खाद्यपदार्थांचे स्टॉल्स एका उतरत्या जागेवर आहेत — एका टोकाला अरुंद आणि दुसऱ्या टोकाला रुंद. हा समलंब चौकोन असून, दोन समांतर बाजूंची सरासरी काढून तिने क्षेत्रफळ शोधले."},
+    {chapter:'चौकोनाचे विभाजन',tag:'प्रकरण २',icon:'✂️',title:'चौकोनाचे त्रिकोणांमध्ये विभाजन',text:"एका मोठ्या तंबूची जागा चारही वेगवेगळ्या बाजूंची आहे. मेधाने एकच कर्ण काढून त्याचे दोन त्रिकोणांत रूपांतर केले आणि दोघांच्या क्षेत्रफळांची बेरीज करून कोडं सोडवलं!"},
+    {chapter:'समभुज चौकोनी पतंग',tag:'प्रकरण ३',icon:'🪁',title:'समभुज चौकोनी पतंगाचे दुकान',text:"हिऱ्याच्या आकाराचे पतंगांचे दुकान सर्वांचे लक्ष वेधून घेते. त्याचे कर्ण एकमेकांना काटकोनात दुभागतात — या गुणधर्मावरूनच ½ × d₁ × d₂ हे सूत्र काम करते."},
+    {chapter:'नियमित बहुभुज',tag:'प्रकरण ३',icon:'⬡',title:'षटकोनी भव्य मंडप',text:"जत्रेचे मुख्य आकर्षण म्हणजे सहा बाजूंचा षटकोनी मंडप आहे. मेधाने मध्यबिंदूपासून त्याचे सहा समान त्रिकोणांत तुकडे करून पूर्ण क्षेत्रफळ सहज काढले."},
+    {chapter:'घनाची घडी उघडणे',tag:'प्रकरण ४',icon:'🎁',title:'बक्षीस पेटीचे आवरण आणि घडी',text:"घनाकार बक्षीस पेटीला भेटवस्तूचा कागद लावायचा आहे. मेधाने पेटीची घडी सपाट करून सहा चौरसांचे जाळे तयार केले, जेणेकरून नेमका किती कागद लागेल ते समजले."},
+    {chapter:'वृत्तचितीचे वक्रपृष्ठफळ',tag:'प्रकरण ४',icon:'🥁',title:'ढोल वादकांच्या दंडगोलाकार स्टॉलचे आवरण',text:"ढोल स्टॉल हा वृत्तचिती आकाराचा आहे. त्याची वक्र बाजू उलगडल्यावर एक आयत बनतो आणि वर-खाली दोन वर्तुळे उरतात — वक्रपृष्ठफळ आणि एकूण पृष्ठफळ लगेच स्पष्ट झाले!"},
+    {chapter:'पात्रांची धारकता',tag:'प्रकरण ५',icon:'🥤',title:'लिंबू सरबत स्टॉलचे आव्हान',text:"समान पत्र्यापासून बनवलेली इष्टिकाचिती आकाराची टाकी जास्त सरबत साठवेल की वृत्तचिती आकाराचा जग? मेधाच्या लक्षात आले की आकार बदलला की क्षमता पूर्ण बदलते!"},
+    {chapter:'वास्तव जगातील उपयोजन',tag:'उपयोजन',icon:'🌍',title:'जत्रेच्या पलीकडे — नकाशे आणि शेती',text:"मेधाच्या लक्षात येते की हीच क्षेत्रमिती सर्वत्र उपयोगी पडते: इमारतींचे नकाशे आखणारे वास्तुविशारद, शेती मोजणारे शेतकरी आणि डब्यांचे डिझाइन करणारे अभियंते."},
+    {chapter:'प्रावीण्य प्रमाणपत्र',tag:'पूर्णता',icon:'🏆',title:'क्षेत्रमिती साहस प्रावीण्य प्रमाणपत्र',text:"तिकीट खिडकीच्या चौरसापासून ढोलाच्या वृत्तचितीपर्यंत, मेधाने संपूर्ण जत्रेचे अचूक मोजमाप पूर्ण केले — आणि तिने क्षेत्रमिती मास्टरी बॅज जिंकला!"}
+  ],
+  en: [
+    {chapter:'Cover',tag:'Cover',icon:'📐',title:"Medha's Mensuration Adventure",text:"A journey through perimeter, area, surface area and volume — told through one unforgettable day at the village fair."},
+    {chapter:'Prologue',tag:'Ch. 0',icon:'🎪',title:'The Village Fair Ground',text:"Medha's village is setting up its annual fair. Before a single tent can go up, someone has to measure the ground — and Medha volunteers, with her wise owl companion close behind."},
+    {chapter:'Squares & Rectangles',tag:'Ch. 1',icon:'🟦',title:'Recalling Squares & Rectangles',text:"The ticket booth is square, the food court is rectangular. Medha dusts off the old formulas — side², and length × breadth — to mark out both stalls exactly."},
+    {chapter:'Triangles & Circles',tag:'Ch. 1',icon:'🔺',title:'Triangular Flags & the Wheel of Fortune',text:"Bunting flags are triangular and the fair's lucky wheel is a perfect circle. Medha measures a flag's area with ½×base×height, then times the wheel's spin using 2πr."},
+    {chapter:'The Trapezium Field',tag:'Ch. 2',icon:'🔷',title:'The Trapezium Field',text:"The food stalls sit on a sloped plot — wider at one end than the other. Medha learns this shape is a trapezium, and that averaging its two parallel sides unlocks its area."},
+    {chapter:'Splitting Quadrilaterals',tag:'Ch. 2',icon:'✂️',title:'Splitting Quadrilaterals into Triangles',text:"One tent's plot has four completely different sides. Medha draws a single diagonal, splits it into two triangles, and adds their areas together to solve the mystery."},
+    {chapter:'The Rhombus Kite',tag:'Ch. 3',icon:'🪁',title:'The Rhombus Kite Stall',text:"A diamond-shaped kite stall catches Medha's eye. Its diagonals cross at a perfect right angle — the secret behind the neat ½×d₁×d₂ shortcut."},
+    {chapter:'Regular Polygons',tag:'Ch. 3',icon:'⬡',title:'The Hexagonal Gazebo',text:"The fair's centrepiece is a six-sided gazebo. Medha slices it like a pizza into six identical triangles from the centre to estimate its full area."},
+    {chapter:'Unfolding the Cube',tag:'Ch. 4',icon:'🎁',title:'Unfolding the Prize Box',text:"A cube-shaped prize box needs gift wrap. Medha flattens it into a cross-shaped net of six squares to see exactly how much paper is needed."},
+    {chapter:'Cylinder Nets',tag:'Ch. 4',icon:'🥁',title:'Wrapping the Drum Stall',text:"The drum stall is a cylinder. Its curved side unrolls into a plain rectangle, with two circles left over for the top and bottom — CSA and TSA finally make sense."},
+    {chapter:'Filling Containers',tag:'Ch. 5',icon:'🥤',title:'The Lemonade Stand Challenge',text:"Which container holds more lemonade — a cuboidal cooler or a cylindrical jug made from the same amount of material? Medha discovers that shape changes everything."},
+    {chapter:'Real-World Blueprints',tag:'Apps',icon:'🌍',title:'Beyond the Fair — Blueprints & Fields',text:"Zooming out, Medha sees the same ideas everywhere: architects measuring buildings, farmers surveying fields, engineers designing the cans on every stall's shelf."},
+    {chapter:'Mastery Certificate',tag:'End',icon:'🏆',title:'Quest Mastery Certificate',text:"From the ticket booth's square to the drum stall's cylinder, Medha has measured the entire fair — and earned her Mensuration Mastery badge!"}
+  ],
+  hi: [
+    {chapter:'मुखपृष्ठ',tag:'कवर',icon:'📐',title:"मेधा की क्षेत्रमिति साहसिक यात्रा",text:"परिमाप, क्षेत्रफल, पृष्ठीय क्षेत्रफल और आयतन की एक रोमांचक यात्रा — गाँव के मेले के एक अविस्मरणीय दिन के माध्यम से।"},
+    {chapter:'प्रस्तावना',tag:'अध्याय ०',icon:'🎪',title:'गाँव के मेले का मैदान',text:"मेधा के गाँव में वार्षिक मेले की तैयारियाँ चल रही हैं। पहला तंबू लगाने से पहले जमीन की सटीक माप जरूरी है — और मेधा अपने बुद्धिमान उल्लू साथी के साथ यह काम संभालती है।"},
+    {chapter:'वर्ग और आयत',tag:'अध्याय १',icon:'🟦',title:'वर्ग और आयत का दोहराव',text:"टिकट खिड़की वर्गाकार है और खान-पान की गली आयताकार है। मेधा पुराने सूत्र — भुजा² और लंबाई × चौड़ाई — का उपयोग करके दोनों स्टॉलों को सही रूप से चिन्हित करती है।"},
+    {chapter:'त्रिभुज और वृत्त',tag:'अध्याय १',icon:'🔺',title:'त्रिकोणीय झंडियाँ और भाग्य का पहिया',text:"मेले की रंग-बिरंगी झंडियाँ त्रिकोणीय हैं और लकी व्हील एक पूर्ण वृत्त है। मेधा झंडी का क्षेत्रफल ½ × आधार × ऊँचाई से मापती है, और पहिये का चक्कर 2πr से तय करती है।"},
+    {chapter:'समलंब मैदान',tag:'अध्याय २',icon:'🔷',title:'समलंब चौकोर खान-पान क्षेत्र',text:"खान-पान के स्टॉल एक ढलान वाले भूखंड पर हैं — एक सिरे पर संकरा और दूसरे पर चौड़ा। यह समलंब चतुर्भुज है, और समांतर भुजाओं का औसत लेकर उसने क्षेत्रफल निकाला।"},
+    {chapter:'चतुर्भुज का विभाजन',tag:'अध्याय २',icon:'✂️',title:'चतुर्भुज का दो त्रिभुजों में विभाजन',text:"एक बड़े तंबू की चारों भुजाएँ भिन्न हैं। मेधा ने एक विकर्ण खींचकर उसे दो त्रिभुजों में बाँट दिया और दोनों का क्षेत्रफल जोड़कर पहेली हल कर दी!"},
+    {chapter:'समचतुर्भुज पतंग',tag:'अध्याय ३',icon:'🪁',title:'समचतुर्भुज पतंगों की दुकान',text:"हीरे के आकार की पतंगों की दुकान सबका ध्यान आकर्षित करती है। इसके विकर्ण समकोण पर परस्पर काटते हैं — यही ½ × d₁ × d₂ सूत्र का रहस्य है।"},
+    {chapter:'सम बहुभुज',tag:'अध्याय ३',icon:'⬡',title:'षट्कोणीय मंडप',text:"मेले का मुख्य आकर्षण छह भुजाओं वाला षट्कोणीय मंडप है। मेधा ने केंद्र से छह समान त्रिभुजों में काटकर पूरे मंडप का क्षेत्रफल आसानी से निकाल लिया।"},
+    {chapter:'घन का जाल खोलना',tag:'अध्याय ४',icon:'🎁',title:'उपहार के डिब्बे का आवरण व जाल',text:"घनाकार उपहार बॉक्स पर गिफ्ट रैपर लगाना है। मेधा ने डिब्बे को खोलकर छह वर्गों का समतल जाल बनाया, जिससे पता चला कि ठीक कितना कागज लगेगा।"},
+    {chapter:'बेलन का वक्रपृष्ठ',tag:'अध्याय ४',icon:'🥁',title:'ढोल वादकों के बेलनाकार स्टॉल का आवरण',text:"ढोल स्टॉल बेलनाकार है। इसके वक्र भाग को खोलने पर एक आयत बनता है और ऊपर-नीचे दो वृत्त — वक्र और संपूर्ण पृष्ठीय क्षेत्रफल तुरंत समझ आ गया!"},
+    {chapter:'पात्रों की धारिता',tag:'अध्याय ५',icon:'🥤',title:'शिकंजी स्टॉल की चुनौती',text:"समान चादर से बनी घनाभाकार टंकी अधिक शिकंजी रखेगी या बेलनाकार जग? मेधा को समझ आया कि आकार बदलने से धारिता पूरी बदल जाती है!"},
+    {chapter:'वास्तविक दुनिया में उपयोग',tag:'अनुप्रयोग',icon:'🌍',title:'मेले से परे — ब्लूप्रिंट और खेत',text:"मेधा देखती है कि यही क्षेत्रमिति हर जगह उपयोगी है: इमारतों के नक्शे बनाने वाले वास्तुकार, खेत नापने वाले किसान और डिब्बों का डिजाइन बनाने वाले इंजीनियर।"},
+    {chapter:'प्रवीणता प्रमाणपत्र',tag:'समापन',icon:'🏆',title:'क्षेत्रमिति साहसिक प्रवीणता प्रमाणपत्र',text:"टिकट खिड़की के वर्ग से लेकर ढोल के बेलन तक, मेधा ने पूरे मेले की सटीक नाप-जोख की — और क्षेत्रमिति मास्टरी बैज प्राप्त किया!"}
+  ]
+};
+
+let currentLang = localStorage.getItem('medha_lang') || 'mr';
+
+/* ---------------- LANGUAGE TOGGLE & APPLY ---------------- */
+function setLanguage(lang){
+  if(!I18N[lang]) lang = 'mr';
+  currentLang = lang;
+  localStorage.setItem('medha_lang', lang);
+  document.documentElement.lang = lang;
+
+  // Update navbar labels
+  document.getElementById('langCurrentLabel').textContent = I18N[lang].lang_name;
+  document.title = I18N[lang].page_title;
+
+  // Update active status in dropdown
+  document.querySelectorAll('.lang-item').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  // Update DOM elements with data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if(I18N[lang][key]){
+      el.innerHTML = I18N[lang][key];
+    }
+  });
+
+  // Re-build Flipbook TOC & Re-render current page
+  buildFlipbookTOC();
+  renderPage(currentPage);
+
+  // Redraw SVG simulations with localized units/labels
+  drawShape1();
+  drawTrap();
+  drawKite();
+  drawSolid();
+  updateEfficiency();
+
+  showToast(`🌐 भाषा: ${I18N[lang].lang_name}`);
+}
+
+/* ---------------- DROPDOWN TOGGLE ---------------- */
+const langDropdown = document.getElementById('langDropdown');
+const langBtn = document.getElementById('langBtn');
+langBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const isOpen = langDropdown.classList.toggle('open');
+  langBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 });
-document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{
+document.querySelectorAll('.lang-item').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setLanguage(btn.dataset.lang);
+    langDropdown.classList.remove('open');
+    langBtn.setAttribute('aria-expanded', 'false');
+  });
+});
+document.addEventListener('click', (e) => {
+  if(!langDropdown.contains(e.target)){
+    langDropdown.classList.remove('open');
+    langBtn.setAttribute('aria-expanded', 'false');
+  }
+});
+
+/* ---------------- NAV ---------------- */
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click',()=>{
+  const isOpen = navLinks.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click',()=>{
   navLinks.classList.remove('open');
   hamburger.setAttribute('aria-expanded','false');
   document.querySelectorAll('.nav-links a').forEach(el=>el.classList.remove('active'));
@@ -986,7 +1734,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 
-/* Scroll Spy for Nav Pills */
+/* Scroll Spy */
 const sections = document.querySelectorAll('header[id], section[id]');
 window.addEventListener('scroll',()=>{
   let current = '';
@@ -1005,216 +1753,238 @@ window.addEventListener('scroll',()=>{
   }
 });
 
-const langBtn=document.getElementById('langBtn');
-langBtn.addEventListener('click',()=>{
-  showToast('हिंदी संस्करण जल्द आ रहा है! Hindi version coming soon in the full MedhaLab course.');
-});
-
 function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;
+  const t = document.getElementById('toast');
+  t.textContent = msg;
   t.classList.add('show');
   clearTimeout(window.__toastTimer);
-  window.__toastTimer=setTimeout(()=>t.classList.remove('show'),3200);
+  window.__toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
 }
 
-const backTop=document.getElementById('backTop');
+const backTop = document.getElementById('backTop');
 window.addEventListener('scroll',()=>{
-  backTop.classList.toggle('show',window.scrollY>600);
+  backTop.classList.toggle('show', window.scrollY > 600);
 });
 backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
 /* ---------------- FLIPBOOK ---------------- */
-const pages=[
-  {chapter:'Cover',tag:'Cover',icon:'📐',title:"Medha's Mensuration Adventure",text:"A journey through perimeter, area, surface area and volume — told through one unforgettable day at the village fair."},
-  {chapter:'Prologue',tag:'Ch. 0',icon:'🎪',title:'The Village Fair Ground',text:"Medha's village is setting up its annual fair. Before a single tent can go up, someone has to measure the ground — and Medha volunteers, with her wise owl companion close behind."},
-  {chapter:'Squares & Rectangles',tag:'Ch. 1',icon:'🟦',title:'Recalling Squares & Rectangles',text:"The ticket booth is square, the food court is rectangular. Medha dusts off the old formulas — side², and length × breadth — to mark out both stalls exactly."},
-  {chapter:'Triangles & Circles',tag:'Ch. 1',icon:'🔺',title:'Triangular Flags & the Wheel of Fortune',text:"Bunting flags are triangular and the fair's lucky wheel is a perfect circle. Medha measures a flag's area with ½×base×height, then times the wheel's spin using 2πr."},
-  {chapter:'The Trapezium Field',tag:'Ch. 2',icon:'🔷',title:'The Trapezium Field',text:"The food stalls sit on a sloped plot — wider at one end than the other. Medha learns this shape is a trapezium, and that averaging its two parallel sides unlocks its area."},
-  {chapter:'Splitting Quadrilaterals',tag:'Ch. 2',icon:'✂️',title:'Splitting Quadrilaterals into Triangles',text:"One tent's plot has four completely different sides. Medha draws a single diagonal, splits it into two triangles, and adds their areas together to solve the mystery."},
-  {chapter:'The Rhombus Kite',tag:'Ch. 3',icon:'🪁',title:'The Rhombus Kite Stall',text:"A diamond-shaped kite stall catches Medha's eye. Its diagonals cross at a perfect right angle — the secret behind the neat ½×d₁×d₂ shortcut."},
-  {chapter:'Regular Polygons',tag:'Ch. 3',icon:'⬡',title:'The Hexagonal Gazebo',text:"The fair's centrepiece is a six-sided gazebo. Medha slices it like a pizza into six identical triangles from the centre to estimate its full area."},
-  {chapter:'Unfolding the Cube',tag:'Ch. 4',icon:'🎁',title:'Unfolding the Prize Box',text:"A cube-shaped prize box needs gift wrap. Medha flattens it into a cross-shaped net of six squares to see exactly how much paper is needed."},
-  {chapter:'Cylinder Nets',tag:'Ch. 4',icon:'🥁',title:'Wrapping the Drum Stall',text:"The drum stall is a cylinder. Its curved side unrolls into a plain rectangle, with two circles left over for the top and bottom — CSA and TSA finally make sense."},
-  {chapter:'Filling Containers',tag:'Ch. 5',icon:'🥤',title:'The Lemonade Stand Challenge',text:"Which container holds more lemonade — a cuboidal cooler or a cylindrical jug made from the same amount of material? Medha discovers that shape changes everything."},
-  {chapter:'Real-World Blueprints',tag:'Apps',icon:'🌍',title:'Beyond the Fair — Blueprints & Fields',text:"Zooming out, Medha sees the same ideas everywhere: architects measuring buildings, farmers surveying fields, engineers designing the cans on every stall's shelf."},
-  {chapter:'Mastery Certificate',tag:'End',icon:'🏆',title:'Quest Mastery Certificate',text:"From the ticket booth's square to the drum stall's cylinder, Medha has measured the entire fair — and earned her Mensuration Mastery badge!"}
-];
-let currentPage=0,zoomLevel=1;
-const tocList=document.getElementById('tocList');
-pages.forEach((p,i)=>{
-  const div=document.createElement('div');
-  div.className='toc-item';
-  div.innerHTML=`<span>Page ${i+1}: ${p.title}</span><span class="tag">${p.tag}</span>`;
-  div.addEventListener('click',()=>renderPage(i));
-  tocList.appendChild(div);
-});
+let currentPage = 0, zoomLevel = 1;
+const tocList = document.getElementById('tocList');
+
+function buildFlipbookTOC(){
+  const pages = STORY_PAGES[currentLang] || STORY_PAGES.mr;
+  const pLabel = I18N[currentLang].page_label || 'Page';
+  tocList.innerHTML = '';
+  pages.forEach((p,i)=>{
+    const div = document.createElement('div');
+    div.className = 'toc-item' + (i === currentPage ? ' active' : '');
+    div.innerHTML = `<span>${pLabel} ${i+1}: ${p.title}</span><span class="tag">${p.tag}</span>`;
+    div.addEventListener('click',()=>renderPage(i));
+    tocList.appendChild(div);
+  });
+}
+
 function renderPage(i){
-  currentPage=Math.max(0,Math.min(pages.length-1,i));
-  const p=pages[currentPage];
-  const flipPage=document.getElementById('flipPage');
+  const pages = STORY_PAGES[currentLang] || STORY_PAGES.mr;
+  currentPage = Math.max(0, Math.min(pages.length - 1, i));
+  const p = pages[currentPage];
+  const flipPage = document.getElementById('flipPage');
   flipPage.classList.add('flipping');
   setTimeout(()=>{
-    document.getElementById('flipIcon').textContent=p.icon;
-    document.getElementById('flipChapter').textContent=`${p.chapter} · ${p.tag}`;
-    document.getElementById('flipTitle').textContent=p.title;
-    document.getElementById('flipText').textContent=p.text;
+    document.getElementById('flipIcon').textContent = p.icon;
+    document.getElementById('flipChapter').textContent = `${p.chapter} · ${p.tag}`;
+    document.getElementById('flipTitle').textContent = p.title;
+    document.getElementById('flipText').textContent = p.text;
     flipPage.classList.remove('flipping');
-  },160);
-  document.getElementById('flipCounter').textContent=`Page ${currentPage+1} of ${pages.length}`;
-  document.querySelectorAll('.toc-item').forEach((el,idx)=>el.classList.toggle('active',idx===currentPage));
-  document.getElementById('flipPrev').disabled=currentPage===0;
-  document.getElementById('flipNext').disabled=currentPage===pages.length-1;
+  }, 160);
+
+  const pLabel = I18N[currentLang].page_label || 'Page';
+  const ofLabel = I18N[currentLang].of_label || 'of';
+  document.getElementById('flipCounter').textContent = `${pLabel} ${currentPage + 1} ${ofLabel} ${pages.length}`;
+  document.querySelectorAll('.toc-item').forEach((el,idx)=>el.classList.toggle('active', idx === currentPage));
+  document.getElementById('flipPrev').disabled = currentPage === 0;
+  document.getElementById('flipNext').disabled = currentPage === pages.length - 1;
 }
-document.getElementById('flipPrev').addEventListener('click',()=>renderPage(currentPage-1));
-document.getElementById('flipNext').addEventListener('click',()=>renderPage(currentPage+1));
-document.getElementById('zoomIn').addEventListener('click',()=>{ zoomLevel=Math.min(1.4,zoomLevel+.2); document.getElementById('flipPage').style.transform=`scale(${zoomLevel})`; });
-document.getElementById('zoomOut').addEventListener('click',()=>{ zoomLevel=Math.max(.8,zoomLevel-.2); document.getElementById('flipPage').style.transform=`scale(${zoomLevel})`; });
+
+document.getElementById('flipPrev').addEventListener('click',()=>renderPage(currentPage - 1));
+document.getElementById('flipNext').addEventListener('click',()=>renderPage(currentPage + 1));
+document.getElementById('zoomIn').addEventListener('click',()=>{ zoomLevel = Math.min(1.4, zoomLevel + .2); document.getElementById('flipPage').style.transform = `scale(${zoomLevel})`; });
+document.getElementById('zoomOut').addEventListener('click',()=>{ zoomLevel = Math.max(.8, zoomLevel - .2); document.getElementById('flipPage').style.transform = `scale(${zoomLevel})`; });
 document.getElementById('expandBtn').addEventListener('click',()=>document.getElementById('flipFrame').classList.toggle('expanded'));
-renderPage(0);
 
-/* ---------------- helper ---------------- */
-function val(id){return parseFloat(document.getElementById(id).value);}
-function setText(id,text){document.getElementById(id).textContent=text;}
+/* ---------------- HELPER ---------------- */
+function val(id){ return parseFloat(document.getElementById(id).value); }
+function setText(id, text){ document.getElementById(id).textContent = text; }
 
-/* ---------------- STAGE 1: shape explorer ---------------- */
-let currentShape1='square';
+/* ---------------- STAGE 1: SHAPE EXPLORER ---------------- */
+let currentShape1 = 'square';
 document.querySelectorAll('.shape-tab[data-shape]').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.shape-tab[data-shape]').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    currentShape1=btn.dataset.shape;
-    document.querySelectorAll('.shape-controls[data-shape]').forEach(g=>g.hidden=g.dataset.shape!==currentShape1);
+    currentShape1 = btn.dataset.shape;
+    document.querySelectorAll('.shape-controls[data-shape]').forEach(g=>g.hidden = g.dataset.shape !== currentShape1);
     drawShape1();
   });
 });
 ['s1-square-side','s1-rect-l','s1-rect-b','s1-tri-base','s1-tri-h','s1-circ-r'].forEach(id=>{
   document.getElementById(id).addEventListener('input',()=>{
-    setText(id+'-val', document.getElementById(id).value+' cm');
+    const unit = (currentLang==='en') ? ' cm' : ' सेमी';
+    setText(id+'-val', document.getElementById(id).value + unit);
     drawShape1();
   });
 });
+
 function drawShape1(){
-  const svg=document.getElementById('shape1-svg');
-  const scale=10.5, cx=170, cy=140;
-  let html='',area=0,peri=0,label='';
+  const svg = document.getElementById('shape1-svg');
+  const scale = 10.5, cx = 170, cy = 140;
+  let html = '', area = 0, peri = 0, label = '';
+  const cm = (currentLang==='en') ? 'cm' : 'सेमी';
+  const sqcm = (currentLang==='en') ? 'cm²' : 'चौ.सेमी';
+
   if(currentShape1==='square'){
-    const s=val('s1-square-side'); const w=s*scale; const x=cx-w/2,y=cy-w/2;
-    html=`<rect x="${x}" y="${y}" width="${w}" height="${w}" class="shape-fill"/>
-          <text x="${cx}" y="${y+w+22}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">side = ${s} cm</text>`;
-    area=s*s; peri=4*s; label=`Square (side ${s} cm)`;
+    const s = val('s1-square-side'); const w = s*scale; const x = cx - w/2, y = cy - w/2;
+    const sideLbl = (currentLang==='mr') ? `बाजू = ${s} ${cm}` : (currentLang==='hi') ? `भुजा = ${s} ${cm}` : `side = ${s} cm`;
+    html = `<rect x="${x}" y="${y}" width="${w}" height="${w}" class="shape-fill"/>
+            <text x="${cx}" y="${y+w+22}" fill="#F7C876" font-family="var(--font-display)" font-size="14" font-weight="600" text-anchor="middle">${sideLbl}</text>`;
+    area = s*s; peri = 4*s; 
+    label = (currentLang==='mr') ? `चौरस (बाजू ${s} ${cm})` : (currentLang==='hi') ? `वर्ग (भुजा ${s} ${cm})` : `Square (side ${s} cm)`;
   } else if(currentShape1==='rectangle'){
-    const l=val('s1-rect-l'), b=val('s1-rect-b');
-    const w=l*scale,h=b*scale,x=cx-w/2,y=cy-h/2;
-    html=`<rect x="${x}" y="${y}" width="${w}" height="${h}" class="shape-fill"/>
-          <text x="${cx}" y="${y+h+22}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">l = ${l} cm</text>
-          <text x="${x-10}" y="${cy+5}" fill="#45D9C7" font-family="var(--font-mono)" font-size="13" font-weight="600" text-anchor="end">b = ${b} cm</text>`;
-    area=l*b; peri=2*(l+b); label=`Rectangle (${l}×${b} cm)`;
+    const l = val('s1-rect-l'), b = val('s1-rect-b');
+    const w = l*scale, h = b*scale, x = cx - w/2, y = cy - h/2;
+    const lLbl = (currentLang==='mr') ? `लांबी = ${l} ${cm}` : (currentLang==='hi') ? `लंबाई = ${l} ${cm}` : `l = ${l} cm`;
+    const bLbl = (currentLang==='mr') ? `रुंदी = ${b} ${cm}` : (currentLang==='hi') ? `चौड़ाई = ${b} ${cm}` : `b = ${b} cm`;
+    html = `<rect x="${x}" y="${y}" width="${w}" height="${h}" class="shape-fill"/>
+            <text x="${cx}" y="${y+h+22}" fill="#F7C876" font-family="var(--font-display)" font-size="14" font-weight="600" text-anchor="middle">${lLbl}</text>
+            <text x="${x-10}" y="${cy+5}" fill="#45D9C7" font-family="var(--font-display)" font-size="13" font-weight="600" text-anchor="end">${bLbl}</text>`;
+    area = l*b; peri = 2*(l+b); 
+    label = (currentLang==='mr') ? `आयत (${l} × ${b} ${cm})` : (currentLang==='hi') ? `आयत (${l} × ${b} ${cm})` : `Rectangle (${l}×${b} cm)`;
   } else if(currentShape1==='triangle'){
-    const b=val('s1-tri-base'), h=val('s1-tri-h');
-    const bw=b*scale, bh=h*scale;
-    const x0=cx-bw/2, y0=cy+bh/2, x1=cx+bw/2, apex=[cx,cy-bh/2];
-    html=`<polygon points="${x0},${y0} ${x1},${y0} ${apex[0]},${apex[1]}" class="shape-fill"/>
-          <line x1="${apex[0]}" y1="${apex[1]}" x2="${apex[0]}" y2="${y0}" class="dash-line"/>
-          <text x="${cx}" y="${y0+22}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">base = ${b} cm</text>
-          <text x="${cx+8}" y="${cy}" fill="#45D9C7" font-family="var(--font-mono)" font-size="13" font-weight="600">h = ${h} cm</text>`;
-    area=0.5*b*h;
-    const half=b/2, slant=Math.sqrt(half*half+h*h);
-    peri=b+2*slant;
-    label=`Triangle (base ${b} cm, height ${h} cm)`;
+    const b = val('s1-tri-base'), h = val('s1-tri-h');
+    const bw = b*scale, bh = h*scale;
+    const x0 = cx - bw/2, y0 = cy + bh/2, x1 = cx + bw/2, apex = [cx, cy - bh/2];
+    const baseLbl = (currentLang==='mr') ? `पाया = ${b} ${cm}` : (currentLang==='hi') ? `आधार = ${b} ${cm}` : `base = ${b} cm`;
+    const hLbl = (currentLang==='mr') ? `उंची = ${h} ${cm}` : (currentLang==='hi') ? `ऊँचाई = ${h} ${cm}` : `h = ${h} cm`;
+    html = `<polygon points="${x0},${y0} ${x1},${y0} ${apex[0]},${apex[1]}" class="shape-fill"/>
+            <line x1="${apex[0]}" y1="${apex[1]}" x2="${apex[0]}" y2="${y0}" class="dash-line"/>
+            <text x="${cx}" y="${y0+22}" fill="#F7C876" font-family="var(--font-display)" font-size="14" font-weight="600" text-anchor="middle">${baseLbl}</text>
+            <text x="${cx+8}" y="${cy}" fill="#45D9C7" font-family="var(--font-display)" font-size="13" font-weight="600">${hLbl}</text>`;
+    area = 0.5*b*h;
+    const half = b/2, slant = Math.sqrt(half*half + h*h);
+    peri = b + 2*slant;
+    label = (currentLang==='mr') ? `त्रिकोण (पाया ${b} ${cm}, उंची ${h} ${cm})` : (currentLang==='hi') ? `त्रिभुज (आधार ${b} ${cm}, ऊँचाई ${h} ${cm})` : `Triangle (base ${b} cm, height ${h} cm)`;
   } else {
-    const r=val('s1-circ-r'); const R=r*scale;
-    html=`<circle cx="${cx}" cy="${cy}" r="${R}" class="shape-fill"/><line x1="${cx}" y1="${cy}" x2="${cx+R}" y2="${cy}" class="dash-line"/>
-          <circle cx="${cx}" cy="${cy}" r="3.5" fill="#F7C876"/>
-          <text x="${cx+R/2}" y="${cy-10}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">r = ${r} cm</text>`;
-    area=Math.PI*r*r; peri=2*Math.PI*r; label=`Circle (radius ${r} cm)`;
+    const r = val('s1-circ-r'); const R = r*scale;
+    const rLbl = (currentLang==='mr') ? `त्रिज्या = ${r} ${cm}` : (currentLang==='hi') ? `त्रिज्या = ${r} ${cm}` : `r = ${r} cm`;
+    html = `<circle cx="${cx}" cy="${cy}" r="${R}" class="shape-fill"/><line x1="${cx}" y1="${cy}" x2="${cx+R}" y2="${cy}" class="dash-line"/>
+            <circle cx="${cx}" cy="${cy}" r="3.5" fill="#F7C876"/>
+            <text x="${cx+R/2}" y="${cy-10}" fill="#F7C876" font-family="var(--font-display)" font-size="14" font-weight="600" text-anchor="middle">${rLbl}</text>`;
+    area = Math.PI*r*r; peri = 2*Math.PI*r; 
+    label = (currentLang==='mr') ? `वर्तुळ (त्रिज्या ${r} ${cm})` : (currentLang==='hi') ? `वृत्त (त्रिज्या ${r} ${cm})` : `Circle (radius ${r} cm)`;
   }
-  svg.innerHTML=html;
-  setText('s1-area', area.toFixed(2)+' cm²');
-  setText('s1-peri', peri.toFixed(2)+' cm'+(currentShape1==='circle'?' (circumf.)':''));
+  svg.innerHTML = html;
+  setText('s1-area', area.toFixed(2) + ' ' + sqcm);
+  const circSuffix = currentShape1==='circle' ? ((currentLang==='mr') ? ' (परीघ)' : (currentLang==='hi') ? ' (परिधि)' : ' (circumf.)') : '';
+  setText('s1-peri', peri.toFixed(2) + ' ' + cm + circSuffix);
   setText('s1-label', label);
 }
-drawShape1();
 
-/* ---------------- STAGE 2: trapezium ---------------- */
+/* ---------------- STAGE 2: TRAPEZIUM ---------------- */
 ['s2-a','s2-b','s2-h'].forEach(id=>{
   document.getElementById(id).addEventListener('input',()=>{
-    setText(id+'-val', document.getElementById(id).value+' m');
+    const unit = (currentLang==='en') ? ' m' : ' मी';
+    setText(id+'-val', document.getElementById(id).value + unit);
     drawTrap();
   });
 });
 function drawTrap(){
-  const a=val('s2-a'), b=val('s2-b'), h=val('s2-h');
-  const scaleX=2.8, scaleY=4.2, cx=190, baseY=235;
-  const topY=baseY-h*scaleY;
-  const bw=b*scaleX, aw=a*scaleX;
-  const blx=cx-bw/2, brx=cx+bw/2, tlx=cx-aw/2, trx=cx+aw/2;
-  document.getElementById('shape2-svg').innerHTML=`
+  const a = val('s2-a'), b = val('s2-b'), h = val('s2-h');
+  const scaleX = 2.8, scaleY = 4.2, cx = 190, baseY = 235;
+  const topY = baseY - h*scaleY;
+  const bw = b*scaleX, aw = a*scaleX;
+  const blx = cx - bw/2, brx = cx + bw/2, tlx = cx - aw/2, trx = cx + aw/2;
+  const m = (currentLang==='en') ? 'm' : 'मी';
+  const sqm = (currentLang==='en') ? 'm²' : 'चौ.मी.';
+  const ha = (currentLang==='en') ? 'ha' : 'हेक्टर';
+
+  document.getElementById('shape2-svg').innerHTML = `
     <polygon points="${blx},${baseY} ${brx},${baseY} ${trx},${topY} ${tlx},${topY}" class="shape-fill"/>
     <line x1="${cx}" y1="${baseY}" x2="${cx}" y2="${topY}" class="dash-line"/>
-    <text x="${cx}" y="${topY-12}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">a = ${a} m</text>
-    <text x="${cx}" y="${baseY+24}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">b = ${b} m</text>
-    <text x="${cx+10}" y="${(baseY+topY)/2}" fill="#45D9C7" font-family="var(--font-mono)" font-size="13" font-weight="600">h = ${h} m</text>`;
-  const area=0.5*(a+b)*h;
-  setText('s2-area', area.toFixed(1)+' m²');
-  setText('s2-hectare', (area/10000).toFixed(4)+' ha');
+    <text x="${cx}" y="${topY-12}" fill="#F7C876" font-family="var(--font-display)" font-size="14" font-weight="600" text-anchor="middle">a = ${a} ${m}</text>
+    <text x="${cx}" y="${baseY+24}" fill="#F7C876" font-family="var(--font-display)" font-size="14" font-weight="600" text-anchor="middle">b = ${b} ${m}</text>
+    <text x="${cx+10}" y="${(baseY+topY)/2}" fill="#45D9C7" font-family="var(--font-display)" font-size="13" font-weight="600">h = ${h} ${m}</text>`;
+  const area = 0.5*(a+b)*h;
+  setText('s2-area', area.toFixed(1) + ' ' + sqm);
+  setText('s2-hectare', (area/10000).toFixed(4) + ' ' + ha);
 }
-drawTrap();
 
-/* ---------------- STAGE 3: kite challenge ---------------- */
-let s3Target=96;
+/* ---------------- STAGE 3: KITE CHALLENGE ---------------- */
+let s3Target = 96;
 ['s3-d1','s3-d2'].forEach(id=>{
   document.getElementById(id).addEventListener('input',()=>{
-    setText(id+'-val', document.getElementById(id).value+' m');
+    const unit = (currentLang==='en') ? ' m' : ' मी';
+    setText(id+'-val', document.getElementById(id).value + unit);
     drawKite();
   });
 });
 function drawKite(){
-  const d1=val('s3-d1'), d2=val('s3-d2');
-  const scale=9.5, cx=170, cy=145;
-  const hw=d1*scale/2, hh=d2*scale/2;
-  const top=[cx,cy-hh], right=[cx+hw,cy], bottom=[cx,cy+hh], left=[cx-hw,cy];
-  document.getElementById('shape3-svg').innerHTML=`
+  const d1 = val('s3-d1'), d2 = val('s3-d2');
+  const scale = 9.5, cx = 170, cy = 145;
+  const hw = d1*scale/2, hh = d2*scale/2;
+  const top = [cx, cy - hh], right = [cx + hw, cy], bottom = [cx, cy + hh], left = [cx - hw, cy];
+  const m = (currentLang==='en') ? 'm' : 'मी';
+  const sqm = (currentLang==='en') ? 'm²' : 'चौ.मी.';
+
+  document.getElementById('shape3-svg').innerHTML = `
     <polygon points="${top} ${right} ${bottom} ${left}" class="shape-fill"/>
     <line x1="${left[0]}" y1="${left[1]}" x2="${right[0]}" y2="${right[1]}" class="dash-line"/>
     <line x1="${top[0]}" y1="${top[1]}" x2="${bottom[0]}" y2="${bottom[1]}" class="dash-line"/>
-    <text x="${cx}" y="${cy-hh-12}" fill="#F7C876" font-family="var(--font-mono)" font-size="14" font-weight="600" text-anchor="middle">d₂ = ${d2} m</text>
-    <text x="${cx+hw+10}" y="${cy+5}" fill="#45D9C7" font-family="var(--font-mono)" font-size="13" font-weight="600">d₁ = ${d1} m</text>`;
-  const area=0.5*d1*d2;
-  const err=Math.abs(s3Target-area);
-  setText('s3-area', area.toFixed(1)+' m²');
-  const statusEl=document.getElementById('s3-status');
-  if(err<=3){ statusEl.textContent='⭐ Perfect Match! Area = '+area.toFixed(1)+' m²'; statusEl.classList.add('success'); }
-  else { const pct=Math.max(0,100-(err/s3Target)*100); statusEl.textContent=pct.toFixed(0)+'% match — off by '+err.toFixed(1)+' m²'; statusEl.classList.remove('success'); }
+    <text x="${cx}" y="${cy-hh-12}" fill="#F7C876" font-family="var(--font-display)" font-size="14" font-weight="600" text-anchor="middle">d₂ = ${d2} ${m}</text>
+    <text x="${cx+hw+10}" y="${cy+5}" fill="#45D9C7" font-family="var(--font-display)" font-size="13" font-weight="600">d₁ = ${d1} ${m}</text>`;
+  const area = 0.5*d1*d2;
+  const err = Math.abs(s3Target - area);
+  setText('s3-area', area.toFixed(1) + ' ' + sqm);
+  const statusEl = document.getElementById('s3-status');
+  if(err <= 3){ 
+    statusEl.textContent = (currentLang==='mr') ? `⭐ अचूक जुळले! क्षेत्रफळ = ${area.toFixed(1)} चौ.मी.` : (currentLang==='hi') ? `⭐ सटीक मिलान! क्षेत्रफल = ${area.toFixed(1)} वर्ग मी` : `⭐ Perfect Match! Area = ${area.toFixed(1)} m²`; 
+    statusEl.classList.add('success'); 
+  } else { 
+    const pct = Math.max(0, 100 - (err/s3Target)*100); 
+    statusEl.textContent = (currentLang==='mr') ? `${pct.toFixed(0)}% जुळणी — फरक: ${err.toFixed(1)} चौ.मी.` : (currentLang==='hi') ? `${pct.toFixed(0)}% मिलान — अंतर: ${err.toFixed(1)} वर्ग मी` : `${pct.toFixed(0)}% match — off by ${err.toFixed(1)} m²`; 
+    statusEl.classList.remove('success'); 
+  }
 }
 document.getElementById('s3-random').addEventListener('click',()=>{
-  const rd1=Math.floor(Math.random()*18)+6, rd2=Math.floor(Math.random()*18)+6;
-  s3Target=Math.round(0.5*rd1*rd2);
-  setText('s3-target', s3Target+' m²');
+  const rd1 = Math.floor(Math.random()*18) + 6, rd2 = Math.floor(Math.random()*18) + 6;
+  s3Target = Math.round(0.5*rd1*rd2);
+  const sqm = (currentLang==='en') ? 'm²' : 'चौ.मी.';
+  setText('s3-target', s3Target + ' ' + sqm);
   drawKite();
 });
 document.getElementById('s3-reset').addEventListener('click',()=>{
-  document.getElementById('s3-d1').value=10; document.getElementById('s3-d2').value=10;
-  setText('s3-d1-val','10 m'); setText('s3-d2-val','10 m');
-  s3Target=96; setText('s3-target','96 m²');
+  document.getElementById('s3-d1').value = 10; document.getElementById('s3-d2').value = 10;
+  const unit = (currentLang==='en') ? ' m' : ' मी';
+  const sqm = (currentLang==='en') ? 'm²' : 'चौ.मी.';
+  setText('s3-d1-val','10' + unit); setText('s3-d2-val','10' + unit);
+  s3Target = 96; setText('s3-target','96 ' + sqm);
   drawKite();
 });
-drawKite();
 
-/* ---------------- STAGE 4: solid net unfolder ---------------- */
-let currentShape4='cube';
+/* ---------------- STAGE 4: SOLID NET UNFOLDER ---------------- */
+let currentShape4 = 'cube';
 document.querySelectorAll('.shape-tab[data-shape4]').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.shape-tab[data-shape4]').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    currentShape4=btn.dataset.shape4;
-    document.querySelectorAll('.shape-controls[data-shape4]').forEach(g=>g.hidden=g.dataset.shape4!==currentShape4);
+    currentShape4 = btn.dataset.shape4;
+    document.querySelectorAll('.shape-controls[data-shape4]').forEach(g=>g.hidden = g.dataset.shape4 !== currentShape4);
     drawSolid();
   });
 });
 ['s4-cube-a','s4-cuboid-l','s4-cuboid-b','s4-cuboid-h','s4-cyl-r','s4-cyl-h'].forEach(id=>{
   document.getElementById(id).addEventListener('input',()=>{
-    setText(id+'-val', document.getElementById(id).value+' cm');
+    const unit = (currentLang==='en') ? ' cm' : ' सेमी';
+    setText(id+'-val', document.getElementById(id).value + unit);
     drawSolid();
   });
 });
@@ -1244,8 +2014,8 @@ function cylinderNetSVG(r,h,scale,pad){
   return {svg:s, w:totalW+pad*2, h:circ2Y+circD+pad};
 }
 function drawSolid(){
-  const svg=document.getElementById('shape4-svg');
-  let lsa=0,tsa=0,result;
+  const svg = document.getElementById('shape4-svg');
+  let lsa=0, tsa=0, result;
   if(currentShape4==='cube'){
     const a=val('s4-cube-a');
     result=cuboidNetSVG(a,a,a,18,16);
@@ -1261,15 +2031,16 @@ function drawSolid(){
   }
   svg.setAttribute('viewBox', `0 0 ${result.w} ${result.h}`);
   svg.innerHTML=result.svg;
-  setText('s4-lsa', lsa.toFixed(1)+' cm²');
-  setText('s4-tsa', tsa.toFixed(1)+' cm²');
+  const sqcm = (currentLang==='en') ? 'cm²' : 'चौ.सेमी';
+  setText('s4-lsa', lsa.toFixed(1) + ' ' + sqcm);
+  setText('s4-tsa', tsa.toFixed(1) + ' ' + sqcm);
 }
-drawSolid();
 
-/* ---------------- STAGE 5: container efficiency ---------------- */
+/* ---------------- STAGE 5: CONTAINER EFFICIENCY ---------------- */
 ['s5-budget','s5-r','s5-x'].forEach(id=>{
   document.getElementById(id).addEventListener('input',()=>{
-    setText(id+'-val', document.getElementById(id).value+(id==='s5-budget'?' cm²':' cm'));
+    const unit = id==='s5-budget' ? ((currentLang==='en') ? ' cm²' : ' चौ.सेमी') : ((currentLang==='en') ? ' cm' : ' सेमी');
+    setText(id+'-val', document.getElementById(id).value + unit);
     updateEfficiency();
   });
 });
@@ -1281,18 +2052,24 @@ function updateEfficiency(){
   const hCub=(S-2*x*x)/(4*x);
   const vCub= hCub>0 ? x*x*hCub : 0;
   const maxV=Math.max(vCube,vCyl,vCub,1);
+  const cc = (currentLang==='en') ? 'cm³' : 'सेमी³';
+  const nf = (currentLang==='mr') ? 'शक्य नाही' : (currentLang==='hi') ? 'संभव नहीं' : 'not feasible';
+
   document.getElementById('s5-cube-bar').style.width=(vCube/maxV*100)+'%';
   document.getElementById('s5-cuboid-bar').style.width=(vCub/maxV*100)+'%';
   document.getElementById('s5-cyl-bar').style.width=(vCyl/maxV*100)+'%';
-  setText('s5-cube-val', vCube.toFixed(0)+' cm³');
-  setText('s5-cuboid-val', hCub>0 ? vCub.toFixed(0)+' cm³' : 'not feasible');
-  setText('s5-cyl-val', hCyl>0 ? vCyl.toFixed(0)+' cm³' : 'not feasible');
-  let winner='Cube';
-  if(vCyl>=vCube && vCyl>=vCub) winner='Cylinder';
-  else if(vCub>=vCube && vCub>=vCyl) winner='Cuboid';
+  setText('s5-cube-val', vCube.toFixed(0) + ' ' + cc);
+  setText('s5-cuboid-val', hCub>0 ? vCub.toFixed(0) + ' ' + cc : nf);
+  setText('s5-cyl-val', hCyl>0 ? vCyl.toFixed(0) + ' ' + cc : nf);
+  
+  let winner = (currentLang==='mr') ? 'घन' : (currentLang==='hi') ? 'घन' : 'Cube';
+  if(vCyl>=vCube && vCyl>=vCub) winner = (currentLang==='mr') ? 'वृत्तचिती (दंडगोल)' : (currentLang==='hi') ? 'बेलन' : 'Cylinder';
+  else if(vCub>=vCube && vCub>=vCyl) winner = (currentLang==='mr') ? 'इष्टिकाचिती' : (currentLang==='hi') ? 'घनाभ' : 'Cuboid';
   setText('s5-winner', winner);
 }
-updateEfficiency();
+
+/* ---------------- INITIALIZE ---------------- */
+setLanguage(currentLang);
 </script>
 </body>
 </html>
